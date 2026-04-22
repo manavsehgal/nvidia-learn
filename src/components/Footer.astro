@@ -1,0 +1,20 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '/') || '/';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <p class="footer__disclaimer">
+    A personal learning notebook maintained by Manav Sehgal, written on an NVIDIA DGX Spark.
+    Opinions expressed are the author's own, not those of any employer.
+  </p>
+  <div class="footer__bar">
+    <div class="footer__links">
+      <a href={base}>Home</a>
+      <a href={`${base}stage/foundations/`}>Foundations</a>
+      <a href={`${base}stage/inference/`}>Inference</a>
+      <a href={`${base}stage/agentic/`}>Agentic</a>
+      <a href="https://github.com/manavsehgal/nvidia-learn" rel="noopener">GitHub</a>
+    </div>
+    <span class="footer__copy">© {year} Manav Sehgal</span>
+  </div>
+</footer>

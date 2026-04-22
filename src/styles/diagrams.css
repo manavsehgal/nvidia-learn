@@ -1,14 +1,12 @@
-/* diagrams.css — Field Notes SVG diagram system
- *
- * Shared tokens, keyframes, and primitive classes for inline SVG
- * architecture visualizations embedded directly in article.md.
+/* diagrams.css — SVG diagram system (ported from the old Field Notes pass
+ * to the new ainative-cloned OKLCH tokens). Class names preserved so
+ * existing article markdown (<figure class="fn-diagram">…</figure>) renders
+ * unchanged; only the token references changed.
  *
  * Authoring guide: ~/.claude/skills/tech-writer/references/visualizations.md
  *
- * Design intent — warm, restrained, book-like. Motion is slow and
- * deliberate (ease-in-out on one curve). No neon, no bounce, no rotation.
- * All colour and typography flow through the Field Notes tokens in
- * global.css — no hex values in the SVG itself.
+ * Motion is still slow and deliberate (one ease curve, opacity/position only).
+ * No neon, no bounce, no rotation. All colour flows through --color-* tokens.
  */
 
 :root {
@@ -19,12 +17,7 @@
   --fn-stagger: 120ms;
 }
 
-/* --- Figure wrapper — break out of the 68ch prose column ------------------
- * Matches the .prose img breakout pattern in global.css: width sized against
- * the .article container (80rem - 3rem inline padding = 77rem content width),
- * then `margin-left: 50%; translateX(-50%)` centres it on the page.
- * Surrounding prose stays at 68ch; only the figure widens.
- */
+/* --- Figure wrapper — break out of the prose column to fill .article (80rem)  */
 
 .fn-diagram {
   display: block;
@@ -35,10 +28,10 @@
   margin-bottom: 2.4rem;
   transform: translateX(-50%);
   padding: 0;
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  box-shadow: 0 2px 6px rgba(28, 26, 23, 0.06);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow: 0 2px 6px color-mix(in oklch, var(--color-surface) 40%, transparent);
 }
 
 @media (max-width: 640px) {
@@ -63,47 +56,47 @@
 .fn-diagram > figcaption {
   display: block;
   text-align: center;
-  font-family: var(--font-body);
-  font-size: var(--size-1);
-  font-style: italic;
-  color: var(--ink-muted);
-  max-width: 56ch;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-style: normal;
+  color: var(--color-text-muted);
+  max-width: 60ch;
   margin: 0 auto;
   padding: 0 1rem 1.25rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 /* --- SVG primitive classes ----------------------------------------------- */
 
 .fn-diagram__node {
-  fill: var(--surface-deep);
-  stroke: var(--ink);
+  fill: var(--color-surface-overlay);
+  stroke: var(--color-text-muted);
   stroke-width: 1.25;
   opacity: 0;
   animation: fn-fade-rise var(--fn-dur-med) var(--fn-ease) forwards;
 }
 
 .fn-diagram__node--accent {
-  fill: var(--accent-soft);
-  stroke: var(--accent);
+  fill: color-mix(in oklch, var(--color-primary) 18%, transparent);
+  stroke: var(--color-primary);
   stroke-width: 1.5;
 }
 
 .fn-diagram__node--ink {
-  fill: var(--code-bg);
-  stroke: var(--ink);
+  fill: var(--color-surface);
+  stroke: var(--color-text);
 }
 
 .fn-diagram__node--ghost {
   fill: none;
-  stroke: var(--rule);
+  stroke: var(--color-border);
   stroke-dasharray: 4 3;
 }
 
 /* Edges — use pathLength="100" on every <path> so timing is predictable */
 .fn-diagram__edge {
   fill: none;
-  stroke: var(--ink-muted);
+  stroke: var(--color-text-muted);
   stroke-width: 1.25;
   stroke-linecap: round;
   stroke-dasharray: 100;
@@ -113,7 +106,7 @@
 }
 
 .fn-diagram__edge--accent {
-  stroke: var(--accent);
+  stroke: var(--color-primary);
   stroke-width: 1.5;
 }
 
@@ -125,7 +118,7 @@
 }
 
 .fn-diagram__edge--ghost {
-  stroke: var(--rule);
+  stroke: var(--color-border);
   stroke-width: 1;
   opacity: 0;
   animation: fn-fade-in var(--fn-dur-med) var(--fn-ease) forwards;
@@ -135,13 +128,13 @@
 
 /* Flow particle — circle with <animateMotion>. Appears after edges draw. */
 .fn-diagram__flow {
-  fill: var(--accent);
+  fill: var(--color-primary);
   opacity: 0;
   animation: fn-fade-in var(--fn-dur-short) var(--fn-ease) forwards;
   animation-delay: var(--fn-dur-long);
 }
 
-/* Soft pulse for "active" nodes — slow, single-curve heartbeat */
+/* Soft pulse for "active" nodes */
 .fn-diagram__pulse {
   transform-origin: center;
   transform-box: fill-box;
@@ -149,31 +142,22 @@
   animation-delay: calc(var(--fn-dur-long) + 200ms);
 }
 
-/* Data-point dots (timeline / scatter) */
+/* Data-point dots */
 .fn-diagram__dot {
-  fill: var(--ink-muted);
+  fill: var(--color-text-muted);
   stroke: none;
   opacity: 0;
   animation: fn-fade-in var(--fn-dur-short) var(--fn-ease) forwards;
   animation-delay: var(--fn-dur-long);
 }
 
-.fn-diagram__dot--accent {
-  fill: var(--accent);
-}
+.fn-diagram__dot--accent { fill: var(--color-primary); }
+.fn-diagram__dot--ghost  { fill: var(--color-text-dim); }
 
-.fn-diagram__dot--ghost {
-  fill: var(--ink-faint);
-}
-
-/* Icons — small glyphs inside or beside nodes. Use currentColor semantics
-   so the icon inherits from the label/node context. Animation is opacity-only
-   because the element's positioning uses an inline `transform="translate(...)"`
-   — a CSS transform-based animation would wipe that out and collapse every
-   icon to the SVG origin. */
+/* Icons */
 .fn-diagram__icon {
   fill: none;
-  stroke: var(--ink);
+  stroke: var(--color-text);
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -183,11 +167,11 @@
   pointer-events: none;
 }
 
-.fn-diagram__icon--accent { stroke: var(--accent); }
-.fn-diagram__icon--muted  { stroke: var(--ink-muted); }
-.fn-diagram__icon--ink    { stroke: var(--code-ink); }
+.fn-diagram__icon--accent { stroke: var(--color-primary); }
+.fn-diagram__icon--muted  { stroke: var(--color-text-muted); }
+.fn-diagram__icon--ink    { stroke: var(--color-text); }
 
-/* Fill-reveal for waterfall/bar segments */
+/* Bar segments */
 .fn-diagram__bar {
   transform-origin: left center;
   transform-box: fill-box;
@@ -201,7 +185,7 @@
 .fn-diagram__label {
   font-family: var(--font-body);
   font-size: 14px;
-  fill: var(--ink);
+  fill: var(--color-text);
   opacity: 0;
   animation: fn-fade-rise var(--fn-dur-med) var(--fn-ease) forwards;
   animation-delay: var(--fn-dur-short);
@@ -210,40 +194,37 @@
 .fn-diagram__label--mono {
   font-family: var(--font-mono);
   font-size: 12px;
-  fill: var(--ink-muted);
+  fill: var(--color-text-muted);
 }
 
 .fn-diagram__label--display {
   font-family: var(--font-display);
   font-size: 16px;
-  font-weight: 500;
-  font-variation-settings: "opsz" 20;
-  fill: var(--ink);
+  font-weight: 700;
+  fill: var(--color-text);
 }
 
 .fn-diagram__label--accent {
-  font-family: var(--font-body);
-  fill: var(--accent);
-  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+  fill: var(--color-primary);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
-.fn-diagram__label--muted {
-  fill: var(--ink-faint);
-}
+.fn-diagram__label--muted { fill: var(--color-text-dim); }
 
 .fn-diagram__annotation {
   font-family: var(--font-mono);
   font-size: 11px;
-  fill: var(--ink-faint);
+  fill: var(--color-text-dim);
   opacity: 0;
   animation: fn-fade-rise var(--fn-dur-med) var(--fn-ease) forwards;
   animation-delay: var(--fn-dur-long);
 }
 
-/* --- Stagger (child index) ---------------------------------------------- */
+/* --- Stagger ------------------------------------------------------------- */
 
 .fn-diagram__nodes > :nth-child(1),
 .fn-diagram__edges > :nth-child(1),
@@ -290,7 +271,6 @@
 .fn-diagram__labels > :nth-child(n+9),
 .fn-diagram__annotations > :nth-child(n+9) { animation-delay: calc(var(--fn-stagger) * 8); }
 
-/* Bars stagger differently — widest first, smooth sequence */
 .fn-diagram__bar:nth-of-type(1) { animation-delay: 0ms; }
 .fn-diagram__bar:nth-of-type(2) { animation-delay: calc(var(--fn-dur-long) * 0.35); }
 .fn-diagram__bar:nth-of-type(3) { animation-delay: calc(var(--fn-dur-long) * 0.55); }
@@ -300,14 +280,8 @@
 /* --- Keyframes ---------------------------------------------------------- */
 
 @keyframes fn-fade-rise {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fn-fade-in {
@@ -316,37 +290,25 @@
 }
 
 @keyframes fn-stroke-draw {
-  from {
-    opacity: 0;
-    stroke-dashoffset: 100;
-  }
-  15% { opacity: 1; }
-  to {
-    opacity: 1;
-    stroke-dashoffset: 0;
-  }
+  from { opacity: 0; stroke-dashoffset: 100; }
+  15%  { opacity: 1; }
+  to   { opacity: 1; stroke-dashoffset: 0; }
 }
 
 @keyframes fn-soft-pulse {
   0%, 100% {
     transform: scale(1);
-    filter: drop-shadow(0 0 0 rgba(158, 59, 39, 0));
+    filter: drop-shadow(0 0 0 transparent);
   }
   50% {
     transform: scale(1.04);
-    filter: drop-shadow(0 0 6px rgba(158, 59, 39, 0.28));
+    filter: drop-shadow(0 0 6px color-mix(in oklch, var(--color-primary) 50%, transparent));
   }
 }
 
 @keyframes fn-bar-grow {
-  from {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-  to {
-    opacity: 1;
-    transform: scaleX(1);
-  }
+  from { opacity: 0; transform: scaleX(0); }
+  to   { opacity: 1; transform: scaleX(1); }
 }
 
 /* --- Reduced motion ----------------------------------------------------- */

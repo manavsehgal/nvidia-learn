@@ -1,5 +1,13 @@
 ---
+import '@fontsource/geist-sans/400.css';
+import '@fontsource/geist-sans/500.css';
+import '@fontsource/geist-sans/700.css';
+import '@fontsource-variable/geist-mono';
 import '../styles/global.css';
+
+import ThemeScript from '../components/ThemeScript.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -16,24 +24,16 @@ const desc = description ?? 'Field notes on maximising the NVIDIA DGX Spark as a
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={desc} />
     <meta name="author" content="Manav Sehgal" />
+    <meta name="theme-color" content="#0f141c" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <ThemeScript />
   </head>
   <body>
+    <Nav />
     <main>
       <slot />
     </main>
-    <footer class="colophon">
-      <p>
-        nvidia-learn is a personal learning notebook maintained by <a href="https://github.com/manavsehgal">Manav Sehgal</a>,
-        written on an NVIDIA DGX Spark.
-      </p>
-      <p>
-        Set in Fraunces, Literata, and JetBrains Mono. Built with
-        <a href="https://astro.build">Astro</a>.
-        Source on <a href="https://github.com/manavsehgal/nvidia-learn">GitHub</a>.
-      </p>
-    </footer>
+    <Footer />
   </body>
 </html>

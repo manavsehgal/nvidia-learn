@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import StageFilter from '../../components/StageFilter.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import { STAGES } from '../../content.config.ts';
 
 const STAGE_COPY: Record<string, { title: string; blurb: string }> = {
   foundations: {
@@ -40,8 +40,6 @@ const STAGE_COPY: Record<string, { title: string; blurb: string }> = {
 };
 
 export async function getStaticPaths() {
-  // Build a page for every stage in STAGES, even if empty — the map is part
-  // of the mental model, and the ghost state is informational.
   const all = await getCollection('articles');
   const byDateAsc = [...all].sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
   const ordinalByIdAsc = new Map(byDateAsc.map((article, idx) => [article.id, idx + 1]));
@@ -65,21 +63,19 @@ export async function getStaticPaths() {
 
 const { stage, entries } = Astro.props;
 const copy = STAGE_COPY[stage];
-
-const homeHref = import.meta.env.BASE_URL.replace(/\/+$/, '/') || '/';
 ---
 <BaseLayout title={`${copy.title} — nvidia-learn`} description={copy.blurb}>
-  <a class="back-link" href={homeHref} style="max-width: 68rem; margin: 2rem auto 0; padding: 0 1.5rem; display: block;">← nvidia-learn</a>
-
   <header class="stage-header">
     <p class="stage-header__label">Stage</p>
     <h1 class="stage-header__title">{copy.title}</h1>
     <p class="stage-header__blurb">{copy.blurb}</p>
   </header>
 
-  <section class="stage-list">
+  <StageFilter current={stage} />
+
+  <section class="research-list">
     {entries.length === 0 ? (
-      <p class="stage-plate__empty">No entries yet — planned.</p>
+      <p class="research-list__empty">No entries yet — planned.</p>
     ) : (
       entries.map(({ article, ordinal }) => (
         <ArticleCard article={article} ordinal={ordinal} />

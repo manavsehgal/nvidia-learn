@@ -1,0 +1,67 @@
+---
+// Three-state theme toggle: Light / System / Dark.
+// - "system" clears localStorage and applies the OS preference.
+// - "light"/"dark" write to localStorage and apply data-theme.
+// The server renders with "system" pressed; client init syncs it on mount.
+---
+<div class="theme-toggle" role="group" aria-label="Theme">
+  <button class="theme-toggle__btn" data-theme-set="light" aria-label="Light theme" aria-pressed="false" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </svg>
+  </button>
+  <button class="theme-toggle__btn" data-theme-set="system" aria-label="System theme" aria-pressed="true" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="12" rx="2" />
+      <path d="M8 20h8M12 16v4" />
+    </svg>
+  </button>
+  <button class="theme-toggle__btn" data-theme-set="dark" aria-label="Dark theme" aria-pressed="false" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  </button>
+</div>
+<script>
+  (() => {
+    const root = document.documentElement;
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.theme-toggle__btn');
+
+    const mql = window.matchMedia('(prefers-color-scheme: light)');
+
+    function currentMode(): 'light' | 'system' | 'dark' {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark') return stored;
+      return 'system';
+    }
+
+    function apply(mode: 'light' | 'system' | 'dark') {
+      if (mode === 'system') {
+        localStorage.removeItem('theme');
+        root.dataset.theme = mql.matches ? 'light' : 'dark';
+      } else {
+        localStorage.setItem('theme', mode);
+        root.dataset.theme = mode;
+      }
+      buttons.forEach((b) => {
+        b.setAttribute('aria-pressed', String(b.dataset.themeSet === mode));
+      });
+    }
+
+    buttons.forEach((b) => {
+      b.addEventListener('click', () => {
+        const mode = b.dataset.themeSet as 'light' | 'system' | 'dark';
+        apply(mode);
+      });
+    });
+
+    // sync pressed state on load
+    apply(currentMode());
+
+    // track system changes while in "system" mode
+    mql.addEventListener('change', () => {
+      if (currentMode() === 'system') apply('system');
+    });
+  })();
+</script>

@@ -1,8 +1,9 @@
 import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
 
 // nvidia-learn — Astro config
 // Content sourced from ../articles/<slug>/article.md via content collection
-// defined in src/content.config.ts. Shiki tuned to match the Field Notes palette.
+// defined in src/content.config.ts.
 
 // Production builds go to GitHub Pages at /manavsehgal.github.io/nvidia-learn/,
 // so prod needs `base: '/nvidia-learn'`. In dev that prefix just makes the
@@ -14,6 +15,8 @@ export default defineConfig({
   base: isProd ? '/nvidia-learn' : '/',
   trailingSlash: 'always',
 
+  integrations: [mdx()],
+
   // Dev server binds to all interfaces so Firefox on the laptop/phone can
   // reach the Spark over the LAN or tailnet, not just loopback.
   server: {
@@ -23,7 +26,7 @@ export default defineConfig({
 
   markdown: {
     shikiConfig: {
-      theme: 'vitesse-dark',
+      theme: 'github-dark-dimmed',
       wrap: true,
     },
   },

@@ -17,36 +17,28 @@ const { article, ordinal } = Astro.props;
 const { Content } = await render(article);
 const { title, date, author, product, stage, difficulty, time_required, hardware, summary } = article.data;
 
-const ordinalLabel = `No. ${String(ordinal).padStart(3, '0')}`;
+const ordinalLabel = `№${String(ordinal).padStart(2, '0')}`;
 const dateFmt = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).format(date);
 
 const homeHref = import.meta.env.BASE_URL.replace(/\/+$/, '/') || '/';
 ---
 <BaseLayout title={`${title} — nvidia-learn`} description={summary}>
-  <article class="article">
-    <a class="back-link" href={homeHref}>← nvidia-learn</a>
+  <div class="progress-bar" id="progress-bar"></div>
 
+  <article class="article">
     <header class="article__header">
-      <dl class="article__marginalia">
-        <dt>Entry</dt>
-        <dd>{ordinalLabel}</dd>
-        <dt>Published</dt>
-        <dd>{dateFmt}</dd>
-        <dt>Stage</dt>
-        <dd>{stage}</dd>
-        <dt>Difficulty</dt>
-        <dd>{difficulty}</dd>
-        <dt>Time</dt>
-        <dd>{time_required}</dd>
-        <dt>Hardware</dt>
-        <dd>{hardware}</dd>
-        <dt>Author</dt>
-        <dd>{author}</dd>
-      </dl>
-      <div class="article__header-body">
-        <span class="article__ordinal">{ordinalLabel} · {product}</span>
-        <h1 class="article__title">{title}</h1>
-        <p class="article__summary">{summary}</p>
+      <a class="article__breadcrumb" href={homeHref}>← nvidia-learn</a>
+      <h1 class="article__title">{title}</h1>
+      <p class="article__summary">{summary}</p>
+      <div class="article__meta">
+        <span>{ordinalLabel}</span>
+        <span>{stage}</span>
+        <span>{product}</span>
+        <time datetime={date.toISOString().slice(0, 10)}>{dateFmt}</time>
+        <span>{time_required}</span>
+        <span>{difficulty}</span>
+        <span>{hardware}</span>
+        <span>{author}</span>
       </div>
     </header>
 
@@ -54,4 +46,20 @@ const homeHref = import.meta.env.BASE_URL.replace(/\/+$/, '/') || '/';
       <Content />
     </div>
   </article>
+
+  <script>
+    const bar = document.getElementById('progress-bar');
+    if (bar) {
+      const update = () => {
+        const doc = document.documentElement;
+        const scrolled = window.scrollY;
+        const total = doc.scrollHeight - window.innerHeight;
+        const pct = total > 0 ? Math.min(1, scrolled / total) : 0;
+        bar.style.transform = `scaleX(${pct})`;
+      };
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+    }
+  </script>
 </BaseLayout>

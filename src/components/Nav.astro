@@ -1,0 +1,27 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '/') || '/';
+---
+<nav class="nav" id="site-nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href={base}>nvidia-learn</a>
+    <div class="nav__links">
+      <a href={base}>Home</a>
+      <a href={`${base}stage/inference/`}>Inference</a>
+      <a href={`${base}stage/agentic/`}>Agentic</a>
+      <a href={`${base}stage/foundations/`}>Foundations</a>
+    </div>
+    <ThemeToggle />
+  </div>
+</nav>
+<script>
+  const nav = document.getElementById('site-nav');
+  if (nav) {
+    const onScroll = () => {
+      nav.classList.toggle('nav--scrolled', window.scrollY > 40);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>
