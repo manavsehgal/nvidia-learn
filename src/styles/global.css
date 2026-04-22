@@ -10,6 +10,9 @@
 /* ---------- Fonts ---------- */
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,300..700;1,7..72,300..700&display=swap");
 
+/* ---------- Inline-SVG architecture diagrams ---------- */
+@import "./diagrams.css";
+
 /* ---------- Design tokens ---------- */
 :root {
   /* surfaces */
@@ -196,16 +199,34 @@ main { flex: 1; }
   .prose pre { margin-inline: -1.25rem; border-radius: 0; border-inline: none; }
 }
 
-/* Images */
+/* Images — break out of the prose measure to fill the .article container width.
+   Surrounding paragraphs stay at prose width; only the image (and its caption
+   stays narrow via `.prose p > em:only-child` below) widens.
+   .article is 80rem with 1.5rem inline padding → content area is 77rem. */
 .prose img {
   display: block;
-  max-width: 100%;
+  width: min(calc(100vw - 3rem), calc(80rem - 3rem));
+  max-width: none;
   height: auto;
-  margin: 2.4rem auto 0.6rem;
+  margin-left: 50%;
+  margin-right: 0;
+  margin-top: 2.4rem;
+  margin-bottom: 0.6rem;
+  transform: translateX(-50%);
   border: 1px solid var(--rule);
   border-radius: 3px;
   box-shadow: 0 2px 6px rgba(28,26,23,0.08);
   background: var(--surface);
+}
+@media (max-width: 640px) {
+  .prose img {
+    width: calc(100vw - 2.5rem);
+    margin-left: -1.25rem;
+    margin-right: 0;
+    transform: none;
+    border-radius: 0;
+    border-inline: none;
+  }
 }
 /* Caption pattern: image followed by *em* on its own paragraph */
 .prose p > em:only-child {

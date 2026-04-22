@@ -35,20 +35,52 @@ NemoClaw and OpenClaw are the kind of near-homophones that, combined with shared
 
 Both stacks ultimately call the same Ollama process on the host:
 
-```
-                ┌────────────── DGX Spark ──────────────┐
-                │                                        │
- Host OpenClaw ─┼─► ollama on 127.0.0.1:11434 (host) ◄─┐ │
-                │                                     │ │
-                │  ┌── NemoClaw sandbox ──────────┐   │ │
-                │  │ OpenClaw ─► inference.local  │   │ │
-                │  │           (k3s route)        │   │ │
-                │  │              │               │   │ │
-                │  │              ▼               │   │ │
-                │  │    ollama-auth-proxy :11435 ─┼───┘ │
-                │  └──────────────────────────────┘     │
-                └────────────────────────────────────────┘
-```
+<figure class="fn-diagram" aria-label="Two paths to one Ollama. Host OpenClaw reaches Ollama directly on port 11434. The NemoClaw sandbox (OpenClaw inside a dashed container with a hexagonal k3s gateway offering the inference.local route) reaches the same Ollama by crossing the sandbox boundary and passing through an auth-proxy on port 11435. Both paths converge on the Ollama cylinder, which pulses softly.">
+  <svg viewBox="0 0 900 440" role="img" preserveAspectRatio="xMidYMid meet">
+    <g class="fn-diagram__edges">
+      <path class="fn-diagram__edge" pathLength="100" d="M 270 100 L 690 180" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 240 340 L 285 340" />
+      <path class="fn-diagram__edge fn-diagram__edge--dashed" pathLength="100" d="M 395 340 L 470 340" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 610 340 L 690 280" />
+    </g>
+    <g class="fn-diagram__nodes">
+      <rect class="fn-diagram__node fn-diagram__node--ghost" x="30" y="255" width="410" height="170" rx="10" />
+      <rect class="fn-diagram__node" x="90" y="45" width="180" height="110" rx="8" />
+      <rect class="fn-diagram__node" x="80" y="295" width="160" height="90" rx="8" />
+      <path class="fn-diagram__node" d="M 395 340 L 367.5 292.4 L 312.5 292.4 L 285 340 L 312.5 387.6 L 367.5 387.6 Z" />
+      <rect class="fn-diagram__node" x="470" y="295" width="140" height="90" rx="8" />
+      <path class="fn-diagram__node fn-diagram__node--accent fn-diagram__pulse" d="M 690 170 L 690 290 A 70 18 0 0 0 830 290 L 830 170" />
+      <ellipse class="fn-diagram__node fn-diagram__node--accent" cx="760" cy="170" rx="70" ry="18" />
+    </g>
+    <g class="fn-diagram__labels">
+      <text class="fn-diagram__label fn-diagram__label--accent" x="50" y="245" text-anchor="start">NEMOCLAW SANDBOX</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="180" y="92" text-anchor="middle">HOST · DIRECT</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="180" y="118" text-anchor="middle">OpenClaw</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="180" y="140" text-anchor="middle">→ :11434</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="160" y="345" text-anchor="middle">OpenClaw</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="160" y="365" text-anchor="middle">in container</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="340" y="348" text-anchor="middle">k3s gateway</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="340" y="368" text-anchor="middle">inference.local</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="540" y="345" text-anchor="middle">auth-proxy</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="540" y="365" text-anchor="middle">:11435</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="760" y="205" text-anchor="middle">SHARED BACKEND</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="760" y="232" text-anchor="middle">Ollama</text>
+      <text class="fn-diagram__label fn-diagram__label--mono" x="760" y="256" text-anchor="middle">:11434 · nemotron</text>
+    </g>
+    <g class="fn-diagram__annotations">
+      <text class="fn-diagram__annotation" x="400" y="330" text-anchor="start">sandbox boundary</text>
+      <text class="fn-diagram__annotation" x="760" y="395" text-anchor="middle">one blob, two routes</text>
+    </g>
+    <g class="fn-diagram__symbols">
+      <g class="fn-diagram__icon" transform="translate(168 58)"><path d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/></g>
+      <g class="fn-diagram__icon" transform="translate(148 308)"><path d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/></g>
+      <g class="fn-diagram__icon" transform="translate(328 310)"><path d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25"/></g>
+      <g class="fn-diagram__icon" transform="translate(528 308)"><path d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"/></g>
+      <g class="fn-diagram__icon fn-diagram__icon--accent" transform="translate(748 128)"><path d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3"/></g>
+    </g>
+  </svg>
+  <figcaption>Same backend, different routes; the sandbox's extra hops are what make its requests auditable.</figcaption>
+</figure>
 
 The auth proxy on 11435 is the wiring the NemoClaw captured docs mostly skip over: it injects tokens so the sandbox's requests can be audited and policy-filtered without the sandbox itself knowing about Ollama's (otherwise open) API. It's the "why is this more than just Docker" answer in one process.
 
@@ -149,6 +181,10 @@ filesystem_policy:
 landlock:    compatibility: best_effort
 ```
 
+![NemoClaw dashboard (v2026.4.2) with an active glm-4.7-flash session — the left sidebar exposes every control surface the sandbox owns (Chat, Channels, Instances, Sessions, Usage, Cron Jobs, Agents, Skills, Nodes, Config, Communications, Docs) while the main pane shows a live agent response flowing through the gateway](./screenshots/01-nemoclaw-dashboard.png)
+
+*The dashboard is the visual face of the same policy `clawnav status` prints. A chat session talking to host `local-inference` via the gateway, tool calls bounded by the allowed-egress set, writes bounded to `/sandbox/.openclaw-data` and `/sandbox/.nemoclaw`. Narrow ingress, narrow egress, narrow write surface — rendered.*
+
 The **GPU paradox**: the install wizard said "No GPU detected" — the GB10's unified memory doesn't report VRAM the way the wizard's probe expects. But `nemoclaw status` says `GPU: yes`, because the sandbox sees devices passed through via `--runtime=nvidia`. Two different signals, two different answers, both correct. File that away.
 
 The **version skew**: the sandbox ships OpenClaw v2026.4.2; the host's independently-updated OpenClaw is v2026.4.20. Two weeks of the OpenClaw release cadence. If I later measure a quality difference between the two paths, that gap is a confound.
@@ -186,6 +222,56 @@ The 10-second raw baseline is what Ollama does on its own. The 140-second sandbo
 | Raw Ollama | 26 s | 0 |
 | NemoClaw sandbox | **52 s** | **+26 s (~2× raw)** |
 | Host OpenClaw `--local` | stuck in USER.md bootstrap | n/a |
+
+<figure class="fn-diagram" aria-label="Per-turn wall-clock across the first two turns of interaction. Raw Ollama stays low at 10 and 26 seconds. NemoClaw sandbox drops sharply from 140 seconds at turn 1 to 52 seconds at turn 2, converging toward the raw baseline. The host OpenClaw measures 77 seconds at turn 1 and then stalls in USER.md onboarding, never returning an answer — indicated by a dashed trajectory diverging upward with a warning glyph.">
+  <svg viewBox="0 0 900 440" role="img" preserveAspectRatio="xMidYMid meet">
+    <g class="fn-diagram__edges">
+      <path class="fn-diagram__edge fn-diagram__edge--ghost" d="M 110 360 L 840 360" />
+      <path class="fn-diagram__edge fn-diagram__edge--ghost" d="M 110 280 L 840 280" />
+      <path class="fn-diagram__edge fn-diagram__edge--ghost" d="M 110 200 L 840 200" />
+      <path class="fn-diagram__edge fn-diagram__edge--ghost" d="M 110 120 L 840 120" />
+      <path class="fn-diagram__edge fn-diagram__edge--ghost" d="M 110 40 L 840 40" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 110 40 L 110 360" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 110 360 L 840 360" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 315 344 L 645 318" />
+      <path class="fn-diagram__edge fn-diagram__edge--accent" pathLength="100" d="M 315 136 L 645 276" />
+      <path class="fn-diagram__edge fn-diagram__edge--dashed" d="M 315 236 L 820 52" />
+    </g>
+    <g class="fn-diagram__nodes">
+      <circle class="fn-diagram__dot" cx="315" cy="344" r="5" />
+      <circle class="fn-diagram__dot" cx="645" cy="318" r="5" />
+      <circle class="fn-diagram__dot fn-diagram__dot--accent" cx="315" cy="136" r="7" />
+      <circle class="fn-diagram__dot fn-diagram__dot--accent" cx="645" cy="276" r="7" />
+      <circle class="fn-diagram__dot fn-diagram__dot--ghost" cx="315" cy="236" r="5" />
+    </g>
+    <g class="fn-diagram__labels">
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="100" y="364" text-anchor="end">0</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="100" y="284" text-anchor="end">50</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="100" y="204" text-anchor="end">100</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="100" y="124" text-anchor="end">150</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="100" y="44" text-anchor="end">200</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="315" y="398" text-anchor="middle">TURN 1 · COLD</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="645" y="398" text-anchor="middle">TURN 2 · WARM</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="110" y="26" text-anchor="start">wall-clock (seconds)</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="340" y="130" text-anchor="start">NemoClaw sandbox</text>
+      <text class="fn-diagram__label fn-diagram__label--mono" x="660" y="272" text-anchor="start">52s</text>
+      <text class="fn-diagram__label fn-diagram__label--mono" x="300" y="128" text-anchor="end">140s</text>
+      <text class="fn-diagram__label fn-diagram__label--muted" x="660" y="326" text-anchor="start">raw Ollama</text>
+      <text class="fn-diagram__label fn-diagram__label--mono" x="660" y="342" text-anchor="start">26s</text>
+      <text class="fn-diagram__label fn-diagram__label--muted" x="340" y="232" text-anchor="start">host OpenClaw — 77s, then stuck</text>
+    </g>
+    <g class="fn-diagram__annotations">
+      <text class="fn-diagram__annotation" x="800" y="76" text-anchor="end">never converges</text>
+      <text class="fn-diagram__annotation" x="300" y="156" text-anchor="end">onboarding pre-paid at install (28 min)</text>
+    </g>
+    <g class="fn-diagram__symbols">
+      <g class="fn-diagram__icon fn-diagram__icon--accent" transform="translate(360 110) scale(0.9)"><path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></g>
+      <g class="fn-diagram__icon fn-diagram__icon--muted" transform="translate(660 308) scale(0.8)"><path d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605"/></g>
+      <g class="fn-diagram__icon" transform="translate(810 24) scale(0.9)"><path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z"/></g>
+    </g>
+  </svg>
+  <figcaption>NemoClaw converges on the raw baseline because the wizard absorbed the onboarding; the host can't, because it's still running it.</figcaption>
+</figure>
 
 The NemoClaw second-prompt number drops from 140 s to 52 s — a factor of 2.7 — once Ollama's weights are warm in unified memory and the agent's session is live. That leaves **~26 seconds of steady-state sandbox tax** on top of ~26 seconds of raw inference. A clean 2× per turn.
 

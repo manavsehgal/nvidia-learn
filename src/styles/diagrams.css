@@ -1,0 +1,364 @@
+/* diagrams.css — Field Notes SVG diagram system
+ *
+ * Shared tokens, keyframes, and primitive classes for inline SVG
+ * architecture visualizations embedded directly in article.md.
+ *
+ * Authoring guide: ~/.claude/skills/tech-writer/references/visualizations.md
+ *
+ * Design intent — warm, restrained, book-like. Motion is slow and
+ * deliberate (ease-in-out on one curve). No neon, no bounce, no rotation.
+ * All colour and typography flow through the Field Notes tokens in
+ * global.css — no hex values in the SVG itself.
+ */
+
+:root {
+  --fn-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --fn-dur-short: 600ms;
+  --fn-dur-med: 900ms;
+  --fn-dur-long: 1400ms;
+  --fn-stagger: 120ms;
+}
+
+/* --- Figure wrapper — break out of the 68ch prose column ------------------
+ * Matches the .prose img breakout pattern in global.css: width sized against
+ * the .article container (80rem - 3rem inline padding = 77rem content width),
+ * then `margin-left: 50%; translateX(-50%)` centres it on the page.
+ * Surrounding prose stays at 68ch; only the figure widens.
+ */
+
+.fn-diagram {
+  display: block;
+  width: min(calc(100vw - 3rem), calc(80rem - 3rem));
+  margin-left: 50%;
+  margin-right: 0;
+  margin-top: 3rem;
+  margin-bottom: 2.4rem;
+  transform: translateX(-50%);
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(28, 26, 23, 0.06);
+}
+
+@media (max-width: 640px) {
+  .fn-diagram {
+    width: calc(100vw - 2.5rem);
+    margin-left: -1.25rem;
+    transform: none;
+    border-radius: 0;
+    border-inline: none;
+  }
+}
+
+.fn-diagram > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 1.6rem 1.4rem 1.2rem;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.fn-diagram > figcaption {
+  display: block;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--size-1);
+  font-style: italic;
+  color: var(--ink-muted);
+  max-width: 56ch;
+  margin: 0 auto;
+  padding: 0 1rem 1.25rem;
+  line-height: 1.5;
+}
+
+/* --- SVG primitive classes ----------------------------------------------- */
+
+.fn-diagram__node {
+  fill: var(--surface-deep);
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  opacity: 0;
+  animation: fn-fade-rise var(--fn-dur-med) var(--fn-ease) forwards;
+}
+
+.fn-diagram__node--accent {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.fn-diagram__node--ink {
+  fill: var(--code-bg);
+  stroke: var(--ink);
+}
+
+.fn-diagram__node--ghost {
+  fill: none;
+  stroke: var(--rule);
+  stroke-dasharray: 4 3;
+}
+
+/* Edges — use pathLength="100" on every <path> so timing is predictable */
+.fn-diagram__edge {
+  fill: none;
+  stroke: var(--ink-muted);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  opacity: 0;
+  animation: fn-stroke-draw var(--fn-dur-long) var(--fn-ease) forwards;
+}
+
+.fn-diagram__edge--accent {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.fn-diagram__edge--dashed {
+  stroke-dasharray: 5 4;
+  stroke-dashoffset: 0;
+  opacity: 0;
+  animation: fn-fade-in var(--fn-dur-med) var(--fn-ease) forwards;
+}
+
+.fn-diagram__edge--ghost {
+  stroke: var(--rule);
+  stroke-width: 1;
+  opacity: 0;
+  animation: fn-fade-in var(--fn-dur-med) var(--fn-ease) forwards;
+  stroke-dasharray: 0;
+  stroke-dashoffset: 0;
+}
+
+/* Flow particle — circle with <animateMotion>. Appears after edges draw. */
+.fn-diagram__flow {
+  fill: var(--accent);
+  opacity: 0;
+  animation: fn-fade-in var(--fn-dur-short) var(--fn-ease) forwards;
+  animation-delay: var(--fn-dur-long);
+}
+
+/* Soft pulse for "active" nodes — slow, single-curve heartbeat */
+.fn-diagram__pulse {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: fn-soft-pulse 2800ms var(--fn-ease) infinite;
+  animation-delay: calc(var(--fn-dur-long) + 200ms);
+}
+
+/* Data-point dots (timeline / scatter) */
+.fn-diagram__dot {
+  fill: var(--ink-muted);
+  stroke: none;
+  opacity: 0;
+  animation: fn-fade-in var(--fn-dur-short) var(--fn-ease) forwards;
+  animation-delay: var(--fn-dur-long);
+}
+
+.fn-diagram__dot--accent {
+  fill: var(--accent);
+}
+
+.fn-diagram__dot--ghost {
+  fill: var(--ink-faint);
+}
+
+/* Icons — small glyphs inside or beside nodes. Use currentColor semantics
+   so the icon inherits from the label/node context. Animation is opacity-only
+   because the element's positioning uses an inline `transform="translate(...)"`
+   — a CSS transform-based animation would wipe that out and collapse every
+   icon to the SVG origin. */
+.fn-diagram__icon {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  animation: fn-fade-in var(--fn-dur-med) var(--fn-ease) forwards;
+  animation-delay: var(--fn-dur-med);
+  pointer-events: none;
+}
+
+.fn-diagram__icon--accent { stroke: var(--accent); }
+.fn-diagram__icon--muted  { stroke: var(--ink-muted); }
+.fn-diagram__icon--ink    { stroke: var(--code-ink); }
+
+/* Fill-reveal for waterfall/bar segments */
+.fn-diagram__bar {
+  transform-origin: left center;
+  transform-box: fill-box;
+  transform: scaleX(0);
+  opacity: 0;
+  animation: fn-bar-grow var(--fn-dur-long) var(--fn-ease) forwards;
+}
+
+/* --- Labels -------------------------------------------------------------- */
+
+.fn-diagram__label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  fill: var(--ink);
+  opacity: 0;
+  animation: fn-fade-rise var(--fn-dur-med) var(--fn-ease) forwards;
+  animation-delay: var(--fn-dur-short);
+}
+
+.fn-diagram__label--mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--ink-muted);
+}
+
+.fn-diagram__label--display {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  font-variation-settings: "opsz" 20;
+  fill: var(--ink);
+}
+
+.fn-diagram__label--accent {
+  font-family: var(--font-body);
+  fill: var(--accent);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.fn-diagram__label--muted {
+  fill: var(--ink-faint);
+}
+
+.fn-diagram__annotation {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--ink-faint);
+  opacity: 0;
+  animation: fn-fade-rise var(--fn-dur-med) var(--fn-ease) forwards;
+  animation-delay: var(--fn-dur-long);
+}
+
+/* --- Stagger (child index) ---------------------------------------------- */
+
+.fn-diagram__nodes > :nth-child(1),
+.fn-diagram__edges > :nth-child(1),
+.fn-diagram__labels > :nth-child(1),
+.fn-diagram__annotations > :nth-child(1) { animation-delay: calc(var(--fn-stagger) * 0); }
+
+.fn-diagram__nodes > :nth-child(2),
+.fn-diagram__edges > :nth-child(2),
+.fn-diagram__labels > :nth-child(2),
+.fn-diagram__annotations > :nth-child(2) { animation-delay: calc(var(--fn-stagger) * 1); }
+
+.fn-diagram__nodes > :nth-child(3),
+.fn-diagram__edges > :nth-child(3),
+.fn-diagram__labels > :nth-child(3),
+.fn-diagram__annotations > :nth-child(3) { animation-delay: calc(var(--fn-stagger) * 2); }
+
+.fn-diagram__nodes > :nth-child(4),
+.fn-diagram__edges > :nth-child(4),
+.fn-diagram__labels > :nth-child(4),
+.fn-diagram__annotations > :nth-child(4) { animation-delay: calc(var(--fn-stagger) * 3); }
+
+.fn-diagram__nodes > :nth-child(5),
+.fn-diagram__edges > :nth-child(5),
+.fn-diagram__labels > :nth-child(5),
+.fn-diagram__annotations > :nth-child(5) { animation-delay: calc(var(--fn-stagger) * 4); }
+
+.fn-diagram__nodes > :nth-child(6),
+.fn-diagram__edges > :nth-child(6),
+.fn-diagram__labels > :nth-child(6),
+.fn-diagram__annotations > :nth-child(6) { animation-delay: calc(var(--fn-stagger) * 5); }
+
+.fn-diagram__nodes > :nth-child(7),
+.fn-diagram__edges > :nth-child(7),
+.fn-diagram__labels > :nth-child(7),
+.fn-diagram__annotations > :nth-child(7) { animation-delay: calc(var(--fn-stagger) * 6); }
+
+.fn-diagram__nodes > :nth-child(8),
+.fn-diagram__edges > :nth-child(8),
+.fn-diagram__labels > :nth-child(8),
+.fn-diagram__annotations > :nth-child(8) { animation-delay: calc(var(--fn-stagger) * 7); }
+
+.fn-diagram__nodes > :nth-child(n+9),
+.fn-diagram__edges > :nth-child(n+9),
+.fn-diagram__labels > :nth-child(n+9),
+.fn-diagram__annotations > :nth-child(n+9) { animation-delay: calc(var(--fn-stagger) * 8); }
+
+/* Bars stagger differently — widest first, smooth sequence */
+.fn-diagram__bar:nth-of-type(1) { animation-delay: 0ms; }
+.fn-diagram__bar:nth-of-type(2) { animation-delay: calc(var(--fn-dur-long) * 0.35); }
+.fn-diagram__bar:nth-of-type(3) { animation-delay: calc(var(--fn-dur-long) * 0.55); }
+.fn-diagram__bar:nth-of-type(4) { animation-delay: calc(var(--fn-dur-long) * 0.70); }
+.fn-diagram__bar:nth-of-type(5) { animation-delay: calc(var(--fn-dur-long) * 0.82); }
+
+/* --- Keyframes ---------------------------------------------------------- */
+
+@keyframes fn-fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fn-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fn-stroke-draw {
+  from {
+    opacity: 0;
+    stroke-dashoffset: 100;
+  }
+  15% { opacity: 1; }
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fn-soft-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(158, 59, 39, 0));
+  }
+  50% {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 6px rgba(158, 59, 39, 0.28));
+  }
+}
+
+@keyframes fn-bar-grow {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* --- Reduced motion ----------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .fn-diagram *,
+  .fn-diagram *::before,
+  .fn-diagram *::after {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}

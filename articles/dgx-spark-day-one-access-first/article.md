@@ -31,26 +31,52 @@ The DGX Spark is uniquely well-suited to this posture because it's *one* machine
 
 I'll use "access layer" throughout this piece. What I mean by it, in five roles:
 
-```
-                          ┌─ You ──────────────┐
-                          │                    │
-         Reach            │                    │
-      (anywhere) ─────────┼───► Streaming      │  Sunshine + Moonlight
-                          │                    │
-         Collaborate      │                    │
-      (with AI) ──────────┼───► AI pair on rig │  Claude Code (on the Spark)
-                          │                    │
-         Explore          │                    │
-      (the web) ──────────┼───► Browser tools  │  Playwright-MCP
-                          │                    │
-         Automate         │                    │
-      (safely) ───────────┼───► Sandboxes      │  NemoClaw / OpenClaw
-                          │                    │
-         Publish          │                    │
-      (what you learn) ───┼───► Git + blog     │  nvidia-learn + tech-writer
-                          │                    │
-                          └────────────────────┘
-```
+<figure class="fn-diagram" aria-label="The access layer stack — a hexagonal You hub at centre connects via five spokes to a pentagon of tool chips: Sunshine+Moonlight for reach, Claude Code for collaboration, Playwright-MCP for browser exploration, NemoClaw for safe sandboxed automation, and git+blog for publishing.">
+  <svg viewBox="0 0 900 600" role="img" preserveAspectRatio="xMidYMid meet">
+    <g class="fn-diagram__edges">
+      <path class="fn-diagram__edge fn-diagram__edge--accent" pathLength="100" d="M 450 300 L 450 90" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 450 300 L 650 235" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 450 300 L 573 470" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 450 300 L 327 470" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 450 300 L 250 235" />
+    </g>
+    <g class="fn-diagram__nodes">
+      <path class="fn-diagram__node fn-diagram__node--accent fn-diagram__pulse" d="M 510 300 L 480 248 L 420 248 L 390 300 L 420 352 L 480 352 Z" />
+      <rect class="fn-diagram__node" x="355" y="37" width="190" height="106" rx="8" />
+      <rect class="fn-diagram__node" x="555" y="182" width="190" height="106" rx="8" />
+      <rect class="fn-diagram__node" x="478" y="417" width="190" height="106" rx="8" />
+      <rect class="fn-diagram__node" x="232" y="417" width="190" height="106" rx="8" />
+      <rect class="fn-diagram__node" x="155" y="182" width="190" height="106" rx="8" />
+    </g>
+    <g class="fn-diagram__labels">
+      <text class="fn-diagram__label fn-diagram__label--accent" x="450" y="327" text-anchor="middle">YOU</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="450" y="87" text-anchor="middle">REACH · STREAMING</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="450" y="109" text-anchor="middle">Sunshine + Moonlight</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="450" y="129" text-anchor="middle">anywhere</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="650" y="232" text-anchor="middle">COLLABORATE · AI PAIR</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="650" y="254" text-anchor="middle">Claude Code</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="650" y="274" text-anchor="middle">on the Spark</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="573" y="467" text-anchor="middle">EXPLORE · BROWSER</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="573" y="489" text-anchor="middle">Playwright-MCP</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="573" y="509" text-anchor="middle">the web</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="327" y="467" text-anchor="middle">AUTOMATE · SANDBOX</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="327" y="489" text-anchor="middle">NemoClaw</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="327" y="509" text-anchor="middle">safely</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="250" y="232" text-anchor="middle">PUBLISH · COMPOUND</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="250" y="254" text-anchor="middle">Git + blog</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="250" y="274" text-anchor="middle">what you learn</text>
+    </g>
+    <g class="fn-diagram__symbols">
+      <g class="fn-diagram__icon fn-diagram__icon--accent" transform="translate(434 268) scale(1.33)"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></g>
+      <g class="fn-diagram__icon" transform="translate(438 45)"><path d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788"/></g>
+      <g class="fn-diagram__icon" transform="translate(638 190)"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></g>
+      <g class="fn-diagram__icon" transform="translate(561 425)"><path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582"/></g>
+      <g class="fn-diagram__icon" transform="translate(315 425)"><path d="M9 12.75L11.25 15 15 9.75M12 21.75l-7.5-4.5V7.5L12 3l7.5 4.5v9.75l-7.5 4.5z"/></g>
+      <g class="fn-diagram__icon" transform="translate(238 190)"><path d="M6 12L3.269 3.125A59.769 59.769 0 0121.485 12 59.768 59.768 0 013.27 20.875L5.999 12zm0 0h7.5"/></g>
+    </g>
+  </svg>
+  <figcaption>The tools are interchangeable; the breadth of the surface is what compounds.</figcaption>
+</figure>
 
 Each role corresponds to a decision I made in the first days with the machine. Notably absent from this diagram: any NVIDIA model, inference server, or training framework. Those come next — and they drop into a rig that's ready to receive them.
 
@@ -137,6 +163,51 @@ git branch -m main
 Most setup posts treat publishing as something you do *if you feel like it*. I want every serious session on this rig to produce a learning artifact — partly because that's the only way solo work compounds into a reputation, and partly because having to explain something publicly is the best forcing function for understanding it.
 
 The `tech-writer` skill lives at `~/.claude/skills/tech-writer/`. It has an enforced editorial voice ("deep-dive essay, not cookbook"), a mandatory privacy scrub pass on every commit, and a shell script that blocks commits containing API keys, personal IPs, or other leakage patterns. The article you're reading was produced by it — first draft written by the skill, this polish by me.
+
+<figure class="fn-diagram" aria-label="The publishing pipeline — five horizontal stages transforming a working session into a public learning artifact: session transcript, tech-writer draft, privacy scrub, git commit, public reader. An oxblood particle travels the path continuously, representing the feedback loop closing.">
+  <svg viewBox="0 0 900 240" role="img" preserveAspectRatio="xMidYMid meet">
+    <g class="fn-diagram__edges">
+      <path id="d02-flow-path" class="fn-diagram__edge fn-diagram__edge--accent" pathLength="100" d="M 100 130 L 740 130" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 170 130 L 190 130" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 330 130 L 350 130" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 490 130 L 510 130" />
+      <path class="fn-diagram__edge" pathLength="100" d="M 650 130 L 670 130" />
+    </g>
+    <circle class="fn-diagram__flow" r="7"><animateMotion dur="3.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.4 0 0.2 1" begin="1.6s"><mpath href="#d02-flow-path" /></animateMotion></circle>
+    <g class="fn-diagram__nodes">
+      <rect class="fn-diagram__node" x="30" y="70" width="140" height="120" rx="8" />
+      <rect class="fn-diagram__node" x="190" y="70" width="140" height="120" rx="8" />
+      <rect class="fn-diagram__node" x="350" y="70" width="140" height="120" rx="8" />
+      <rect class="fn-diagram__node" x="510" y="70" width="140" height="120" rx="8" />
+      <rect class="fn-diagram__node fn-diagram__node--accent fn-diagram__pulse" x="670" y="70" width="140" height="120" rx="8" />
+    </g>
+    <g class="fn-diagram__labels">
+      <text class="fn-diagram__label fn-diagram__label--accent" x="100" y="138" text-anchor="middle">SESSION</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="100" y="158" text-anchor="middle">transcript</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="100" y="176" text-anchor="middle">what happened</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="260" y="138" text-anchor="middle">DRAFT</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="260" y="158" text-anchor="middle">tech-writer</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="260" y="176" text-anchor="middle">essay voice</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="420" y="138" text-anchor="middle">SCRUB</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="420" y="158" text-anchor="middle">privacy check</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="420" y="176" text-anchor="middle">keys, PII, paths</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="580" y="138" text-anchor="middle">COMMIT</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="580" y="158" text-anchor="middle">git</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="580" y="176" text-anchor="middle">local only</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="740" y="138" text-anchor="middle">PUBLIC</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="740" y="158" text-anchor="middle">reader</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="740" y="176" text-anchor="middle">compounder</text>
+    </g>
+    <g class="fn-diagram__symbols">
+      <g class="fn-diagram__icon" transform="translate(88 88)"><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/><path d="M10.5 2.25a9 9 0 019 9v.375c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125V3.375c0-.621.504-1.125 1.125-1.125h.375z"/></g>
+      <g class="fn-diagram__icon" transform="translate(248 88)"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></g>
+      <g class="fn-diagram__icon" transform="translate(408 88)"><path d="M9 12.75L11.25 15 15 9.75M12 21.75l-7.5-4.5V7.5L12 3l7.5 4.5v9.75l-7.5 4.5z"/></g>
+      <g class="fn-diagram__icon" transform="translate(568 88)"><path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></g>
+      <g class="fn-diagram__icon fn-diagram__icon--accent" transform="translate(728 88)"><path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582"/></g>
+    </g>
+  </svg>
+  <figcaption>Every serious session closes into an artifact; the loop is the compounder.</figcaption>
+</figure>
 
 ## Verification — what "it's working" feels like on DGX Spark
 
