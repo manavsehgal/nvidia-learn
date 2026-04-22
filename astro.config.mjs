@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import rehypeCaption from './src/lib/rehype-caption.mjs';
 
 // nvidia-learn — Astro config
 // Content sourced from ../articles/<slug>/article.md via content collection
@@ -25,6 +26,7 @@ export default defineConfig({
   },
 
   markdown: {
+    rehypePlugins: [rehypeCaption],
     shikiConfig: {
       theme: 'github-dark-dimmed',
       wrap: true,

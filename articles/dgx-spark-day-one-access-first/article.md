@@ -9,6 +9,7 @@ time_required: "~6 hours spread across a week"
 hardware: "NVIDIA DGX Spark"
 tags: [foundations, interaction-stack, remote-access, agentic, personal-ai, solo-builder]
 summary: "Most DGX Spark walkthroughs open with CUDA and tokens/sec. This one opens with streaming, AI-pair-programming, sandboxed agents, and browser automation — the access layer. For a solo edge builder, that interaction stack is more load-bearing than the model stack."
+signature: AccessLayer
 ---
 
 <!-- Screenshots for this article are pending a future polish pass — Playwright-MCP

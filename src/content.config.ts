@@ -34,6 +34,10 @@ const articles = defineCollection({
     hardware: z.string().default('NVIDIA DGX Spark'),
     tags: z.array(z.string()),
     summary: z.string().max(300),
+    // Name (not path) of a signature figure component under
+    // src/components/svg/. Rendered as the card's thumbnail on the home
+    // and stage-filter pages. Optional — cards without one show no aside.
+    signature: z.string().optional(),
   }),
 });
 

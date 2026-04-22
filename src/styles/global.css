@@ -32,12 +32,38 @@
   /* structure */
   --color-border: oklch(0.22 0.01 250);
 
-  /* SVG accent slots (5 — enough for current fn-diagram, not the full 20 of source) */
-  --color-svg-1: oklch(0.70 0.18 10);    /* red-orange */
-  --color-svg-2: oklch(0.75 0.15 60);    /* amber */
-  --color-svg-3: oklch(0.70 0.18 140);   /* green */
-  --color-svg-4: oklch(0.70 0.18 200);   /* cyan */
-  --color-svg-5: oklch(0.70 0.18 280);   /* violet */
+  /* SVG semantic tokens — structural (card / bg / stroke / text / connector). */
+  --svg-card-fill:        oklch(0.16 0.02 250);
+  --svg-card-stroke:      oklch(0.28 0.03 250);
+  --svg-bg:               oklch(0.19 0.02 250);
+  --svg-bg-inner:         oklch(0.22 0.02 250);
+  --svg-bg-inner-stroke:  oklch(0.30 0.03 250);
+  --svg-stroke:           oklch(0.25 0.02 250);
+  --svg-text-bright:      oklch(0.75 0.05 250);
+  --svg-text-muted:       oklch(0.55 0.02 250);
+  --svg-text-dim:         oklch(0.45 0.02 250);
+  --svg-text-extra-dim:   oklch(0.40 0.02 250);
+  --svg-text-faint:       oklch(0.35 0.02 250);
+  --svg-connector:        oklch(0.50 0.10 250);
+  --svg-connector-label:  oklch(0.50 0.08 250);
+
+  /* SVG accent palette (nine hues, used for chart series, status states, etc.) */
+  --svg-accent-blue:      oklch(0.65 0.18 250);
+  --svg-accent-teal:      oklch(0.70 0.15 195);
+  --svg-accent-green:     oklch(0.65 0.15 170);
+  --svg-accent-green-alt: oklch(0.70 0.18 150);
+  --svg-accent-cyan:      oklch(0.65 0.15 180);
+  --svg-accent-purple:    oklch(0.60 0.15 300);
+  --svg-accent-orange:    oklch(0.70 0.15 75);
+  --svg-accent-red:       oklch(0.65 0.20 25);
+  --svg-accent-pink:      oklch(0.70 0.15 340);
+
+  /* Legacy aliases — keep the original fn-diagram five-slot contract working. */
+  --color-svg-1: var(--svg-accent-red);
+  --color-svg-2: var(--svg-accent-orange);
+  --color-svg-3: var(--svg-accent-green);
+  --color-svg-4: var(--svg-accent-cyan);
+  --color-svg-5: var(--svg-accent-purple);
 
   /* type */
   --font-body:    "Geist Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -70,6 +96,31 @@ html[data-theme="light"] {
   --color-primary-dim:     oklch(0.72 0.08 250);
   --color-primary-glow:    oklch(0.48 0.22 250);
   --color-border:          oklch(0.90 0.005 250);
+
+  /* SVG semantic tokens — light-theme tuning (lighter card, darker text). */
+  --svg-card-fill:        oklch(0.99 0.002 260);
+  --svg-card-stroke:      oklch(0.85 0.02 260);
+  --svg-bg:               oklch(0.96 0.005 260);
+  --svg-bg-inner:         oklch(0.97 0.003 260);
+  --svg-bg-inner-stroke:  oklch(0.88 0.015 260);
+  --svg-stroke:           oklch(0.82 0.02 260);
+  --svg-text-bright:      oklch(0.25 0.05 260);
+  --svg-text-muted:       oklch(0.45 0.03 260);
+  --svg-text-dim:         oklch(0.55 0.03 260);
+  --svg-text-extra-dim:   oklch(0.60 0.02 260);
+  --svg-text-faint:       oklch(0.65 0.02 260);
+  --svg-connector:        oklch(0.55 0.10 260);
+  --svg-connector-label:  oklch(0.50 0.08 260);
+
+  --svg-accent-blue:      oklch(0.50 0.18 250);
+  --svg-accent-teal:      oklch(0.45 0.15 195);
+  --svg-accent-green:     oklch(0.45 0.15 170);
+  --svg-accent-green-alt: oklch(0.45 0.18 150);
+  --svg-accent-cyan:      oklch(0.45 0.15 180);
+  --svg-accent-purple:    oklch(0.45 0.15 300);
+  --svg-accent-orange:    oklch(0.55 0.15 75);
+  --svg-accent-red:       oklch(0.50 0.20 25);
+  --svg-accent-pink:      oklch(0.55 0.15 340);
 }
 
 /* ---------- Base ---------- */
@@ -91,6 +142,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  /* Prevent transient horizontal overflow (long code lines, wide tables)
+   * from widening the layout viewport — otherwise 100vw-based breakout
+   * widths include the scrollbar width and shift visual center. */
+  overflow-x: hidden;
 }
 
 a {
@@ -193,31 +248,37 @@ main { flex: 1; padding-top: 4rem; /* offset for fixed nav */ }
   border-radius: 3px;
 }
 
-/* Code blocks (Shiki wraps output in <pre><code>) */
-.prose pre {
+/* Code blocks (Shiki wraps output in <pre><code>).
+ * Shiki ships a single dark theme (github-dark-dimmed) with foreground colors
+ * tuned for a dark background — readable only when the container stays dark.
+ * We force a dark surface in both themes so Shiki's inline span colors keep
+ * their intended contrast; this matches the source-inspiration pattern. */
+.prose pre,
+.astro-code {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   line-height: 1.6;
-  background: var(--color-surface-raised);
-  border: 1px solid var(--color-border);
+  background: oklch(0.16 0.02 250) !important;
+  border: 1px solid oklch(0.25 0.02 250) !important;
   border-radius: 6px;
   padding: 1.25rem;
   margin: 1.75rem 0;
   overflow-x: auto;
   tab-size: 2;
 }
+.astro-code span { background-color: transparent !important; }
 .prose pre code {
   background: none;
-  color: var(--color-text);
   padding: 0;
   font-size: inherit;
   border-radius: 0;
 }
 @media (max-width: 640px) {
-  .prose pre {
+  .prose pre,
+  .astro-code {
     margin-inline: -1.5rem;
     border-radius: 0;
-    border-inline: none;
+    border-inline: none !important;
   }
 }
 
@@ -266,7 +327,8 @@ main { flex: 1; padding-top: 4rem; /* offset for fixed nav */ }
 }
 
 /* Article image breakout — preserve the 80rem container-width pattern from the old .prose img trick,
-   applied automatically to any bare markdown <p><img></p> inside .prose (matching ainative's .figure--bleed idea). */
+   applied automatically to any bare markdown <p><img></p> inside .prose (matching ainative's .figure--bleed idea).
+   Anchor at the prose-column center, then translate back by half the element's own width so both sides bleed equally. */
 .prose p > img:only-child,
 .prose figure.figure--bleed img {
   width: min(calc(100vw - 3rem), calc(80rem - 3rem));
@@ -306,8 +368,11 @@ main { flex: 1; padding-top: 4rem; /* offset for fixed nav */ }
   margin-inline: auto;
 }
 
-/* Caption-via-em pattern — markdown `*caption*` on its own paragraph directly under an image */
-.prose p > em:only-child {
+/* Caption-via-em pattern — a paragraph whose only meaningful child is a
+ * single <em> gets a "caption" class from the rehype-caption plugin (see
+ * src/lib/rehype-caption.mjs). Inline emphasis mid-sentence is untouched
+ * because the plugin checks for text-node siblings, which CSS cannot see. */
+.prose p.caption {
   display: block;
   text-align: center;
   font-family: var(--font-mono);
@@ -321,41 +386,57 @@ main { flex: 1; padding-top: 4rem; /* offset for fixed nav */ }
 
 /* ---------- Masthead (home) ---------- */
 .masthead {
-  max-width: 80rem;
+  max-width: 72rem;
   margin-inline: auto;
-  padding: 6rem 1.5rem 3rem;
+  padding: 7rem 1.5rem 3rem;
+}
+.masthead__strip,
+.masthead__byline {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.masthead__byline { margin: 2.5rem 0 0; font-size: 0.7rem; letter-spacing: 0.15em; }
+.masthead__count { color: var(--color-text); }
+.masthead__rule {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
 }
 .masthead__title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--size-6);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  margin: 0 0 1rem;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  margin: 2.5rem 0 1.5rem;
   color: var(--color-text);
+  max-width: 16ch;
+}
+.masthead__title em {
+  font-style: italic;
+  color: var(--color-primary);
 }
 .masthead__tagline {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: var(--size-3);
-  line-height: 1.4;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.6;
   color: var(--color-text-muted);
-  max-width: 60ch;
-  margin: 0 0 1rem;
-}
-.masthead__byline {
-  font-family: var(--font-mono);
-  font-size: var(--size-0);
-  color: var(--color-text-dim);
-  letter-spacing: 0.02em;
+  max-width: 58ch;
   margin: 0;
 }
 
 /* ---------- Stage filter chips ---------- */
 .stage-filter {
-  max-width: 80rem;
+  max-width: 72rem;
   margin-inline: auto;
-  padding: 0 1.5rem 1.5rem;
+  padding: 2rem 1.5rem 1.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -386,7 +467,7 @@ main { flex: 1; padding-top: 4rem; /* offset for fixed nav */ }
 
 /* ---------- Research list (home + stage page card grid) ---------- */
 .research-list {
-  max-width: 80rem;
+  max-width: 72rem;
   margin-inline: auto;
   padding: 0 1.5rem;
 }
@@ -397,31 +478,62 @@ main { flex: 1; padding-top: 4rem; /* offset for fixed nav */ }
   padding: 3rem 0;
   text-align: center;
 }
+.research-list__closer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.research-list__closer-glyph { color: var(--color-primary); }
+.research-list__closer-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
 
 .card {
+  position: relative;
   display: grid;
-  grid-template-columns: clamp(4rem, 7vw, 6rem) 1fr;
-  gap: clamp(1.5rem, 3vw, 3rem);
-  padding: 3rem 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding: 4rem 0 3rem;
   border-bottom: 1px solid var(--color-border);
   text-decoration: none;
   color: inherit;
+  overflow: hidden;
+  isolation: isolate;
   transition: background 0.2s;
 }
+.card + .card { padding-top: 5rem; }
 .card:hover { background: color-mix(in oklch, var(--color-primary) 4%, transparent); }
 .card:hover .card__title { color: var(--color-primary); }
 .card:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 4px; }
 
-.card__ordinal {
+/* Oversized ordinal watermark — faint background layer, does not interfere
+ * with text. Matches the research-index source (5% text opacity at 7–16vw). */
+.card__watermark {
+  position: absolute;
+  top: -0.25em;
+  left: -0.05em;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
   font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  font-size: clamp(7rem, 16vw, 12rem);
   line-height: 1;
-  color: var(--color-text-dim);
-  letter-spacing: -0.03em;
-  padding-top: 0.25rem;
+  letter-spacing: -0.05em;
+  color: color-mix(in oklch, var(--color-text) 5%, transparent);
 }
-.card__body { min-width: 0; }
+
+.card__body { min-width: 0; position: relative; z-index: 1; }
 .card__meta {
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -438,15 +550,16 @@ main { flex: 1; padding-top: 4rem; /* offset for fixed nav */ }
   margin-left: 1.1rem;
   color: var(--color-text-dim);
 }
+.card__paper { color: var(--color-primary); }
 .card__title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.4rem, 2.3vw, 1.9rem);
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
   color: var(--color-text);
   margin: 0 0 0.75rem;
-  max-width: 40ch;
+  max-width: 24ch;
   transition: color 0.15s;
 }
 .card__summary {
@@ -458,16 +571,50 @@ main { flex: 1; padding-top: 4rem; /* offset for fixed nav */ }
   margin: 0;
 }
 
-@media (max-width: 640px) {
+/* Signature figure column — right-aligned thumbnail under 18rem wide. */
+.card__signature {
+  width: clamp(14rem, 22vw, 18rem);
+  align-self: start;
+  position: relative;
+  z-index: 1;
+}
+.card__signature-frame {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: color-mix(in oklch, var(--color-surface-raised) 70%, transparent);
+  padding: 1rem 1rem 0.6rem;
+}
+.card__signature-frame > :global(svg) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.card__signature-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin: 0.75rem 0 0;
+}
+
+@media (max-width: 900px) {
   .card {
     grid-template-columns: 1fr;
-    padding: 2rem 0;
-    gap: 0.5rem;
+    gap: 1.75rem;
   }
-  .card__ordinal {
-    font-size: 1.5rem;
-    padding-top: 0;
-    color: var(--color-primary);
+  .card__signature { width: 100%; max-width: 22rem; }
+}
+@media (max-width: 640px) {
+  .card {
+    padding: 3rem 0 2.25rem;
+  }
+  .card + .card { padding-top: 3.5rem; }
+  .card__watermark {
+    font-size: clamp(5rem, 22vw, 8rem);
+    top: -0.2em;
+    left: -0.1em;
   }
 }
 
@@ -692,12 +839,107 @@ main { flex: 1; padding-top: 4rem; /* offset for fixed nav */ }
 .footer__links a:hover { color: var(--color-primary); }
 .footer__copy { color: var(--color-text-dim); }
 
+/* ---------- Scroll-reveal motion system ----------
+ * Applied to any element with [data-animate] (whole-block fade-rise) or
+ * to SVG child elements inside [data-svg-animate] (per-primitive reveal).
+ * An inline IntersectionObserver in BaseLayout flips `.is-visible` /
+ * `.visible` when the container enters the viewport. */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+[data-animate-stagger] > [data-animate]:nth-child(1) { transition-delay:   0ms; }
+[data-animate-stagger] > [data-animate]:nth-child(2) { transition-delay:  80ms; }
+[data-animate-stagger] > [data-animate]:nth-child(3) { transition-delay: 160ms; }
+[data-animate-stagger] > [data-animate]:nth-child(4) { transition-delay: 240ms; }
+[data-animate-stagger] > [data-animate]:nth-child(5) { transition-delay: 320ms; }
+[data-animate-stagger] > [data-animate]:nth-child(6) { transition-delay: 400ms; }
+[data-animate-stagger] > [data-animate]:nth-child(7) { transition-delay: 480ms; }
+
+/* Per-SVG-primitive reveal — opt-in via .svg-reveal and a delay class. */
+.svg-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.svg-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.svg-reveal-d1 { transition-delay: 0.1s; }
+.svg-reveal-d2 { transition-delay: 0.2s; }
+.svg-reveal-d3 { transition-delay: 0.3s; }
+.svg-reveal-d4 { transition-delay: 0.4s; }
+.svg-reveal-d5 { transition-delay: 0.5s; }
+.svg-reveal-d6 { transition-delay: 0.6s; }
+.svg-reveal-d7 { transition-delay: 0.7s; }
+.svg-reveal-d8 { transition-delay: 0.8s; }
+
+/* Stroke-draw for line paths. The SVG sets --path-length to its own
+ * getTotalLength() (the IntersectionObserver handler below writes it). */
+.line-draw {
+  stroke-dasharray: var(--path-length);
+  stroke-dashoffset: var(--path-length);
+  transition: stroke-dashoffset 1s ease;
+}
+.line-draw.visible { stroke-dashoffset: 0; }
+
+/* Bar grow — vertical (from bottom) or horizontal (from left). */
+.bar-grow {
+  transform-origin: bottom;
+  transform: scaleY(0);
+  transition: transform 0.6s ease;
+}
+.bar-grow.visible { transform: scaleY(1); }
+
+.bar-grow-x {
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.6s ease;
+}
+.bar-grow-x.visible { transform: scaleX(1); }
+
+/* Ring/dot primitives — pop-in from center. */
+.ring-expand {
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ring-expand.visible { transform: scale(1); }
+
+.dot-pop {
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dot-pop.visible { transform: scale(1); }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  [data-animate],
+  .svg-reveal,
+  .line-draw,
+  .bar-grow,
+  .bar-grow-x,
+  .ring-expand,
+  .dot-pop {
+    opacity: 1;
+    transform: none;
+    stroke-dashoffset: 0;
   }
 }
 

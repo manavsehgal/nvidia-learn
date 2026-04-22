@@ -9,6 +9,7 @@ time_required: "~2 hours first install, ~2 minutes every restart after"
 hardware: "NVIDIA DGX Spark"
 tags: [nim, ngc, inference, llama, fp8, vllm, first-contact, dgx-spark]
 summary: "First-contact notes on NVIDIA's DGX-Spark-specific Llama 3.1 8B NIM. 9.4 GB image, ~108 s warm-cache cold-start, 24.8 tok/s steady, OpenAI-compatible on :8000 — and a confidently wrong Python one-liner that clarifies what small-model FP8 buys and what it costs."
+signature: NimPipeline
 ---
 
 The first "does it work" test on any new inference stack is almost always a trivial prompt — something you can eyeball the answer to in a second. On a DGX Spark, with NVIDIA's brand-new Spark-specific Llama 3.1 8B NIM, my first prompt was the same one I used a week earlier against Ollama serving a 123B Nemotron: *write a Python one-liner that returns the nth Fibonacci number.* The NIM answered in 8.9 seconds at 24.8 tokens per second — about three times faster than the Nemotron. It also returned a "one-liner" that was not a one-liner, and on a second pass at `temperature=0` emitted invalid Python that would `TypeError` on the first call.

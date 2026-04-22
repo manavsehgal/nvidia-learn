@@ -9,6 +9,7 @@ time_required: "~2 hours after prerequisites"
 hardware: "NVIDIA DGX Spark"
 tags: [agentic, nemoclaw, openclaw, ollama, sandboxing, nemotron, claude-code, personal-ai, solo-builder]
 summary: "I ran NemoClaw's sandboxed agent stack and the host Ollama-OpenClaw CLI side by side on one DGX Spark with the same 123B Nemotron model. The sandbox overhead I went looking for is real but modest (~2× raw inference); the real tax is onboarding, and NemoClaw paid it at install time."
+signature: NemoClawTurns
 ---
 
 The assumption I brought to this experiment was: **sandboxing an agent must cost something measurable**. NemoClaw wraps the same OpenClaw agent you can run directly on the host — but slides it into an OpenShell container, puts Landlock + seccomp + a network namespace around it, fronts it with a k3s gateway, and routes inference through an auth proxy. That's a stack of indirection. What does it buy you, and what does it cost?

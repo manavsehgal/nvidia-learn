@@ -1,23 +1,36 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
+// Signature-figure components live under src/components/svg/ and are bundled
+// in via glob so the name can be looked up dynamically from frontmatter.
+const signatureModules = import.meta.glob('./svg/*.astro', { eager: true });
+const signatureRegistry: Record<string, any> = {};
+for (const [path, mod] of Object.entries(signatureModules)) {
+  const name = path.split('/').pop()!.replace('.astro', '');
+  signatureRegistry[name] = (mod as any).default;
+}
+
 interface Props {
   article: CollectionEntry<'articles'>;
   ordinal: number;
 }
 
 const { article, ordinal } = Astro.props;
-const { title, date, stage, product, time_required, summary } = article.data;
+const { title, date, stage, product, time_required, summary, signature } = article.data;
 
-const ordinalLabel = `№${String(ordinal).padStart(2, '0')}`;
+const ordinalDigits = String(ordinal).padStart(2, '0');
+const ordinalLabel = `№${ordinalDigits}`;
 const dateFmt = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).format(date);
 
 const href = `${import.meta.env.BASE_URL}articles/${article.id}/`.replace(/\/+/g, '/');
+
+const Signature = signature ? signatureRegistry[signature] : null;
 ---
 <a class="card" href={href} aria-label={`${ordinalLabel}: ${title}`}>
-  <span class="card__ordinal" aria-hidden="true">{ordinalLabel}</span>
+  <span class="card__watermark" aria-hidden="true">{ordinalDigits}</span>
   <div class="card__body">
     <div class="card__meta">
+      <span class="card__paper">Paper №{ordinalDigits}</span>
       <span>{stage}</span>
       <span>{product}</span>
       <time datetime={date.toISOString().slice(0, 10)}>{dateFmt}</time>
@@ -26,4 +39,12 @@ const href = `${import.meta.env.BASE_URL}articles/${article.id}/`.replace(/\/+/g
     <h2 class="card__title">{title}</h2>
     <p class="card__summary">{summary}</p>
   </div>
+  {Signature && (
+    <aside class="card__signature" aria-hidden="true">
+      <div class="card__signature-frame">
+        <Signature />
+        <p class="card__signature-label">Signature figure</p>
+      </div>
+    </aside>
+  )}
 </a>

@@ -17,9 +17,11 @@
   --fn-stagger: 120ms;
 }
 
-/* --- Figure wrapper — break out of the prose column to fill .article (80rem)  */
+/* --- Figure wrapper — break out of the prose column to fill .article (80rem).
+ * Selector uses .prose to win specificity against `.prose figure { margin: 2rem 0 }`
+ * in global.css, which would otherwise zero the left margin and shift the figure. */
 
-.fn-diagram {
+.prose .fn-diagram {
   display: block;
   width: min(calc(100vw - 3rem), calc(80rem - 3rem));
   margin-left: 50%;
@@ -35,7 +37,7 @@
 }
 
 @media (max-width: 640px) {
-  .fn-diagram {
+  .prose .fn-diagram {
     width: calc(100vw - 2.5rem);
     margin-left: -1.25rem;
     transform: none;
@@ -77,9 +79,10 @@
 }
 
 .fn-diagram__node--accent {
-  fill: color-mix(in oklch, var(--color-primary) 18%, transparent);
+  fill: color-mix(in oklch, var(--color-primary) 22%, transparent);
   stroke: var(--color-primary);
   stroke-width: 1.5;
+  filter: drop-shadow(0 0 10px color-mix(in oklch, var(--color-primary) 30%, transparent));
 }
 
 .fn-diagram__node--ink {
