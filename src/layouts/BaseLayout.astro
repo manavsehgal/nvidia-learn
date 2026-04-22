@@ -1,0 +1,39 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const desc = description ?? 'Field notes on maximising the NVIDIA DGX Spark as a personal AI power user and edge AI builder.';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={desc} />
+    <meta name="author" content="Manav Sehgal" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    <footer class="colophon">
+      <p>
+        nvidia-learn is a personal learning notebook maintained by <a href="https://github.com/manavsehgal">Manav Sehgal</a>,
+        written on an NVIDIA DGX Spark.
+      </p>
+      <p>
+        Set in Fraunces, Literata, and JetBrains Mono. Built with
+        <a href="https://astro.build">Astro</a>.
+        Source on <a href="https://github.com/manavsehgal/nvidia-learn">GitHub</a>.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StagePlate from '../components/StagePlate.astro';
+import { STAGES } from '../content.config.ts';
+
+// Ordinal assignment: earliest article = No. 001. Monotonic over time since
+// articles only gain newer dates. We display newest-first per stage but
+// compute ordinal from ascending-date order so "No. 001" stays attached to
+// the first piece ever published.
+const all = await getCollection('articles');
+const byDateAsc = [...all].sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+const ordinalByIdAsc = new Map(byDateAsc.map((article, idx) => [article.id, idx + 1]));
+
+const STAGE_COPY: Record<string, { title: string; blurb: string }> = {
+  foundations: {
+    title: 'Foundations',
+    blurb: 'Setup, access, environment — the interaction stack that makes the rest feasible. What a personal AI box actually needs before any model runs on it.',
+  },
+  training: {
+    title: 'Training',
+    blurb: 'When the Spark trains from scratch or continues pre-training — and when it should not. On-device training economics for an individual.',
+  },
+  'fine-tuning': {
+    title: 'Fine-tuning',
+    blurb: 'Adapting open-weight models to your own data on a single machine. NeMo, LoRA, full-parameter — what each is for and what each demands.',
+  },
+  inference: {
+    title: 'Inference',
+    blurb: 'Serving models locally. NIM, Triton, TensorRT-LLM — what each replaces in your API bill, what each costs in cold-start and memory.',
+  },
+  deployment: {
+    title: 'Deployment',
+    blurb: 'From experiment to something that runs for you reliably. Containers, services, updates, graceful degradation on one machine.',
+  },
+  agentic: {
+    title: 'Agentic',
+    blurb: 'Multi-agent orchestration without a cluster. Sandboxing, tool use, long horizons — what is and is not possible on a single Spark.',
+  },
+  observability: {
+    title: 'Observability',
+    blurb: 'Knowing what is actually happening on your GPUs. Latency, memory, throughput — instrumentation for a rig you cannot stare at all day.',
+  },
+  'dev-tools': {
+    title: 'Dev-tools',
+    blurb: 'Nsight, CUDA tooling, editor integrations. The things that shorten the distance between an idea and its first running version.',
+  },
+};
+
+// Group: newest-first inside each stage
+const byStage = new Map<string, Array<{ article: typeof all[number]; ordinal: number }>>();
+for (const stage of STAGES) byStage.set(stage, []);
+for (const article of [...all].sort((a, b) => b.data.date.getTime() - a.data.date.getTime())) {
+  byStage.get(article.data.stage)!.push({
+    article,
+    ordinal: ordinalByIdAsc.get(article.id)!,
+  });
+}
+---
+<BaseLayout title="nvidia-learn — field notes on the DGX Spark">
+  <header class="masthead">
+    <h1 class="masthead__title">nvidia-learn</h1>
+    <p class="masthead__tagline">
+      Field notes from one builder maximising the DGX Spark as a personal AI power user and edge AI rig.
+    </p>
+    <p class="masthead__byline">by Manav Sehgal · on an NVIDIA DGX Spark</p>
+  </header>
+
+  {STAGES.map((stage) => {
+    const entries = byStage.get(stage)!;
+    // Cap each stage plate at three most-recent entries on the home page
+    const shown = entries.slice(0, 3);
+    const copy = STAGE_COPY[stage];
+    return (
+      <StagePlate stage={stage} title={copy.title} blurb={copy.blurb} entries={shown} />
+    );
+  })}
+</BaseLayout>
