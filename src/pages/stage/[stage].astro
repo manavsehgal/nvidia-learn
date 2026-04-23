@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StageFilter from '../../components/StageFilter.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import { publishOrdinals } from '../../lib/article-order.mjs';
 
 const STAGE_COPY: Record<string, { title: string; blurb: string }> = {
   foundations: {
@@ -41,8 +42,7 @@ const STAGE_COPY: Record<string, { title: string; blurb: string }> = {
 
 export async function getStaticPaths() {
   const all = await getCollection('articles');
-  const byDateAsc = [...all].sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
-  const ordinalByIdAsc = new Map(byDateAsc.map((article, idx) => [article.id, idx + 1]));
+  const ordinalById = publishOrdinals(all, process.cwd());
 
   const STAGES_LOCAL = [
     'foundations', 'training', 'fine-tuning', 'inference',
@@ -52,8 +52,8 @@ export async function getStaticPaths() {
   return STAGES_LOCAL.map((stage) => {
     const entries = all
       .filter((a) => a.data.stage === stage)
-      .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-      .map((article) => ({ article, ordinal: ordinalByIdAsc.get(article.id)! }));
+      .sort((a, b) => ordinalById.get(b.id)! - ordinalById.get(a.id)!)
+      .map((article) => ({ article, ordinal: ordinalById.get(article.id)! }));
     return {
       params: { stage },
       props: { stage, entries },
