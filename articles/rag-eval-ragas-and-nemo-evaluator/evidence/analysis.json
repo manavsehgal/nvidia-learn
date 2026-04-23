@@ -1,0 +1,99 @@
+{
+  "table": {
+    "lora_only": {
+      "n": 44,
+      "correctness_mean": 1.705,
+      "correctness_ge_4": 9,
+      "correctness_eq_5": 3,
+      "correctness_dist": {
+        "0": 3,
+        "1": 30,
+        "2": 0,
+        "3": 2,
+        "4": 6,
+        "5": 3
+      },
+      "relevance_mean": 0.455,
+      "faithfulness_mean": null,
+      "refusal_rate": 0.0,
+      "wall_s_mean": 0.439,
+      "tokens_mean": 9,
+      "chunk_hit_at_3": null,
+      "slug_hit_at_3": null,
+      "gold_rank_when_hit_mean": null
+    },
+    "naive_8b": {
+      "n": 44,
+      "correctness_mean": 3.295,
+      "correctness_ge_4": 29,
+      "correctness_eq_5": 20,
+      "correctness_dist": {
+        "0": 7,
+        "1": 7,
+        "2": 1,
+        "3": 0,
+        "4": 9,
+        "5": 20
+      },
+      "relevance_mean": 0.67,
+      "faithfulness_mean": 0.432,
+      "refusal_rate": 0.182,
+      "wall_s_mean": 2.75,
+      "tokens_mean": 49.4,
+      "chunk_hit_at_3": 0.659,
+      "slug_hit_at_3": 0.864,
+      "gold_rank_when_hit_mean": 1.138
+    },
+    "rerank_8b": {
+      "n": 44,
+      "correctness_mean": 4.273,
+      "correctness_ge_4": 39,
+      "correctness_eq_5": 25,
+      "correctness_dist": {
+        "0": 0,
+        "1": 4,
+        "2": 0,
+        "3": 1,
+        "4": 14,
+        "5": 25
+      },
+      "relevance_mean": 0.739,
+      "faithfulness_mean": 0.477,
+      "refusal_rate": 0.0,
+      "wall_s_mean": 2.959,
+      "tokens_mean": 55.8,
+      "chunk_hit_at_3": 0.955,
+      "slug_hit_at_3": 0.977,
+      "gold_rank_when_hit_mean": 0.238
+    },
+    "rag_lora": {
+      "n": 44,
+      "correctness_mean": 3.386,
+      "correctness_ge_4": 28,
+      "correctness_eq_5": 21,
+      "correctness_dist": {
+        "0": 2,
+        "1": 13,
+        "2": 0,
+        "3": 1,
+        "4": 7,
+        "5": 21
+      },
+      "relevance_mean": 0.398,
+      "faithfulness_mean": 0.314,
+      "refusal_rate": 0.0,
+      "wall_s_mean": 2.073,
+      "tokens_mean": 7.1,
+      "chunk_hit_at_3": 0.568,
+      "slug_hit_at_3": 0.75,
+      "gold_rank_when_hit_mean": 0.68
+    }
+  },
+  "faithfulness_vs_correctness_pearson": {
+    "naive_8b": 0.44,
+    "rerank_8b": 0.146,
+    "rag_lora": 0.103
+  },
+  "n_questions_all_variants_scored_ge_4": 6,
+  "n_questions_all_variants_scored_le_1": 3
+}
