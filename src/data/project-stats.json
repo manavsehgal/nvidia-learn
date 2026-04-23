@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T16:00:39Z",
+  "generated_at": "2026-04-23T16:02:04Z",
   "articles": {
     "total": 10,
     "published": 10,
@@ -81,13 +81,13 @@
   ],
   "products": [
     {
-      "id": "nim",
-      "label": "NVIDIA NIM",
+      "id": "dgx-spark",
+      "label": "DGX Spark",
       "articles": 10
     },
     {
-      "id": "dgx-spark",
-      "label": "DGX Spark",
+      "id": "nim",
+      "label": "NVIDIA NIM",
       "articles": 10
     },
     {
@@ -140,22 +140,22 @@
     "latency": [
       {
         "label": "streams the first token in",
-        "value": "80 milliseconds",
+        "value": "80 ms",
         "article_slug": "naive-rag-on-spark"
       },
       {
         "label": "pgvector returns the top-5 in",
-        "value": "70 milliseconds",
+        "value": "70 ms",
         "article_slug": "naive-rag-on-spark"
       },
       {
         "label": "on the task one call",
-        "value": "40 milliseconds",
+        "value": "40 ms",
         "article_slug": "naive-rag-on-spark"
       },
       {
         "label": "works embedding a query costs",
-        "value": "40 milliseconds",
+        "value": "40 ms",
         "article_slug": "naive-rag-on-spark"
       }
     ],
@@ -184,7 +184,7 @@
     "throughput": [
       {
         "label": "fp8 engine runs at roughly",
-        "value": "25 tokens per second",
+        "value": "25 tok/s",
         "article_slug": "naive-rag-on-spark"
       },
       {
@@ -199,7 +199,7 @@
       },
       {
         "label": "in 8 9 seconds at",
-        "value": "24.8 tokens per second",
+        "value": "24.8 tok/s",
         "article_slug": "nim-first-inference-dgx-spark"
       }
     ]
