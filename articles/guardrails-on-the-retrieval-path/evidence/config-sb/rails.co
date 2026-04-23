@@ -1,0 +1,14 @@
+define bot refuse pii
+  "I can't process content that contains personal identifiers (email, phone, SSN, credit card). Redact or paraphrase and try again."
+
+define flow check pii input
+  $violation = execute check_input_pii(text=$user_message)
+  if $violation
+    bot refuse pii
+    stop
+
+define flow check pii output
+  $violation = execute check_output_pii(text=$bot_message)
+  if $violation
+    bot refuse pii
+    stop

@@ -1,0 +1,18 @@
+models:
+  - type: main
+    engine: openai
+    model: meta/llama-3.1-8b-instruct
+    parameters:
+      openai_api_base: http://localhost:8000/v1
+      openai_api_key: nim-local
+      temperature: 0.0
+
+rails:
+  input:
+    flows:
+      - check exec intent
+  output:
+    flows:
+      - check dangerous code
+
+prompts: []

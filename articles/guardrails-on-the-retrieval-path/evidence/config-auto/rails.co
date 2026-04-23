@@ -1,0 +1,17 @@
+define bot refuse exec intent
+  "Request blocked: the planner step asks for an exfiltration or credential-reading operation that the code-safety policy forbids."
+
+define bot refuse dangerous code
+  "Proposed shell step blocked: it matches a known-dangerous pattern (recursive delete, curl-pipe-to-shell, or hook bypass)."
+
+define flow check exec intent
+  $violation = execute check_input_exec(text=$user_message)
+  if $violation
+    bot refuse exec intent
+    stop
+
+define flow check dangerous code
+  $violation = execute check_output_code(text=$bot_message)
+  if $violation
+    bot refuse dangerous code
+    stop
