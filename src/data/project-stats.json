@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T22:20:33Z",
+  "generated_at": "2026-04-23T22:26:48Z",
   "articles": {
     "total": 14,
     "published": 14,
@@ -7,8 +7,8 @@
     "drafts": 0
   },
   "words": {
-    "total": 36550,
-    "mean_per_article": 2610,
+    "total": 36561,
+    "mean_per_article": 2611,
     "longest": {
       "slug": "nim-first-inference-dgx-spark",
       "title": "Your First NIM on a DGX Spark \u2014 What 24.8 Tokens Per Second Doesn't Tell You",

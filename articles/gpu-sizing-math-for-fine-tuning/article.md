@@ -1,5 +1,5 @@
 ---
-title: "How Many GPUs to Fine-Tune a 100B Nemotron — the Memory Math the Spark Teaches You"
+title: "Looking Beyond Spark — Fine-Tuning a 100B Nemotron"
 date: 2026-04-23
 author: Manav Sehgal
 product: Foundation
@@ -197,4 +197,4 @@ Three things you can do this week with this math in your head.
 
 The DGX Spark is a 128 GB memory budget. Every article in this series eventually walks back to that number, because it's the envelope within which a personal AI power user makes decisions. The Spark will not fine-tune a 100B Nemotron — but it teaches you the arithmetic in a form small enough to run on your desk, measure in `nvidia-smi`, and extrapolate to any scale you will ever need to rent. The 20 GB from the 3B LoRA and the 1.6 TB from the 100B full-FT are the same four terms with different coefficients. One fits in a personal machine and one fits in a DGX H100 SuperPOD. The math is fixed; the hardware is negotiable.
 
-Next up in the foundations thread: **KV-cache arithmetic at inference time** — the memory story flips again when you leave the training loop and start serving. Same four bills; different weights. Different hardware ask. Same Spark, teaching a different lesson.
+Next in this *Looking Beyond Spark* series: **KV-cache arithmetic at inference time** — the memory story flips again when you leave the training loop and start serving a 100B model to real traffic. Same four bills; different weights. Different hardware ask. Same Spark, teaching a different lesson on a different day.
