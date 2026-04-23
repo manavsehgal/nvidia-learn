@@ -1,0 +1,11 @@
+COPY 1000
+loaded 1000 rows from corpus.jsonl
+  embedded 128/1000  (56.9 docs/s)
+  embedded 256/1000  (63.0 docs/s)
+  embedded 384/1000  (74.9 docs/s)
+  embedded 512/1000  (84.6 docs/s)
+  embedded 640/1000  (91.6 docs/s)
+  embedded 768/1000  (94.0 docs/s)
+  embedded 896/1000  (97.2 docs/s)
+  embedded 1000/1000  (99.5 docs/s)
+done: 1000 rows ingested in 10.1s (99.4 docs/s end-to-end)

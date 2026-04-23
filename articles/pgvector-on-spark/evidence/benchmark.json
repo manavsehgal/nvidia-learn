@@ -1,0 +1,107 @@
+{
+  "configs": [
+    {
+      "name": "exact (seq scan)",
+      "p50_ms": 2.71,
+      "p95_ms": 3.47,
+      "recall_at_10": 1.0,
+      "topic_precision": {
+        "Sports": 0.9,
+        "World": 0.7,
+        "Business": 0.8,
+        "Sci/Tech": 0.66
+      }
+    },
+    {
+      "name": "ivfflat  lists=32  probes=1  ",
+      "p50_ms": 0.27,
+      "p95_ms": 0.39,
+      "recall_at_10": 0.63,
+      "topic_precision": {
+        "Sports": 0.94,
+        "World": 0.82,
+        "Business": 0.8,
+        "Sci/Tech": 0.66
+      }
+    },
+    {
+      "name": "ivfflat  lists=32  probes=4  ",
+      "p50_ms": 0.48,
+      "p95_ms": 0.56,
+      "recall_at_10": 0.86,
+      "topic_precision": {
+        "Sports": 0.96,
+        "World": 0.76,
+        "Business": 0.78,
+        "Sci/Tech": 0.64
+      }
+    },
+    {
+      "name": "ivfflat  lists=32  probes=10 ",
+      "p50_ms": 0.72,
+      "p95_ms": 0.8,
+      "recall_at_10": 0.97,
+      "topic_precision": {
+        "Sports": 0.9,
+        "World": 0.68,
+        "Business": 0.8,
+        "Sci/Tech": 0.66
+      }
+    },
+    {
+      "name": "ivfflat  lists=32  probes=32 ",
+      "p50_ms": 1.53,
+      "p95_ms": 1.62,
+      "recall_at_10": 1.0,
+      "topic_precision": {
+        "Sports": 0.9,
+        "World": 0.7,
+        "Business": 0.8,
+        "Sci/Tech": 0.66
+      }
+    },
+    {
+      "name": "hnsw     m=16  ef_search=10 ",
+      "p50_ms": 0.57,
+      "p95_ms": 0.73,
+      "recall_at_10": 0.95,
+      "topic_precision": {
+        "Sports": 0.96,
+        "World": 0.7,
+        "Business": 0.8,
+        "Sci/Tech": 0.68
+      }
+    },
+    {
+      "name": "hnsw     m=16  ef_search=40 ",
+      "p50_ms": 0.91,
+      "p95_ms": 1.29,
+      "recall_at_10": 0.98,
+      "topic_precision": {
+        "Sports": 0.96,
+        "World": 0.72,
+        "Business": 0.8,
+        "Sci/Tech": 0.66
+      }
+    },
+    {
+      "name": "hnsw     m=16  ef_search=100",
+      "p50_ms": 1.4,
+      "p95_ms": 1.59,
+      "recall_at_10": 1.0,
+      "topic_precision": {
+        "Sports": 0.9,
+        "World": 0.7,
+        "Business": 0.8,
+        "Sci/Tech": 0.66
+      }
+    }
+  ],
+  "ivfflat_build_s": 0.12,
+  "hnsw_build_s": 0.28,
+  "index_sizes": {
+    "chunks_pkey": "48 kB",
+    "chunks_label_idx": "16 kB",
+    "chunks_hnsw": "8008 kB"
+  }
+}

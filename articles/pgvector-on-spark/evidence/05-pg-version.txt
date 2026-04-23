@@ -1,0 +1,10 @@
+                                                              version                                                               
+------------------------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 16.13 (Debian 16.13-1.pgdg12+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+(1 row)
+
+ extname | extversion 
+---------+------------
+ vector  | 0.8.2
+(1 row)
+

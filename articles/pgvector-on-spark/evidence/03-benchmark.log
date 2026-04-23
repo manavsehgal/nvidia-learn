@@ -1,0 +1,18 @@
+exact (seq scan)                          p50=  2.71ms  p95=  3.47ms  recall@10=1.000
+
+[building ivfflat index: lists=32 ...]
+  built in 0.12s
+ivfflat  lists=32  probes=1               p50=  0.27ms  p95=  0.39ms  recall@10=0.630
+ivfflat  lists=32  probes=4               p50=  0.48ms  p95=  0.56ms  recall@10=0.860
+ivfflat  lists=32  probes=10              p50=  0.72ms  p95=  0.80ms  recall@10=0.970
+ivfflat  lists=32  probes=32              p50=  1.53ms  p95=  1.62ms  recall@10=1.000
+
+[building hnsw index: m=16, ef_construction=64 ...]
+  built in 0.28s
+hnsw     m=16  ef_search=10               p50=  0.57ms  p95=  0.73ms  recall@10=0.950
+hnsw     m=16  ef_search=40               p50=  0.91ms  p95=  1.29ms  recall@10=0.980
+hnsw     m=16  ef_search=100              p50=  1.40ms  p95=  1.59ms  recall@10=1.000
+
+index sizes: {'chunks_pkey': '48 kB', 'chunks_label_idx': '16 kB', 'chunks_hnsw': '8008 kB'}
+
+wrote benchmark.json

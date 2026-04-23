@@ -1,0 +1,2 @@
+sha256:7d400e340efb42f4d8c9c12c6427adb253f726881a9985d2a471bf0eed824dff  POSTGRES_PASSWORD=spark POSTGRES_DB=vectors POSTGRES_USER=spark PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/16/bin GOSU_VERSION=1.19 LANG=en_US.utf8 PG_MAJOR=16 PG_VERSION=16.13-1.pgdg12+1 PGDATA=/var/lib/postgresql/data 
+arm64 linux size=154011521

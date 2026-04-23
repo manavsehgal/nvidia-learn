@@ -1,0 +1,34 @@
+# EXPLAIN plans: why ivfflat only wins in a narrow probes window (query: 'tennis tournament')
+
+## probes=1
+SET
+Limit  (cost=98.11..98.13 rows=10 width=16)
+  ->  Sort  (cost=98.11..100.61 rows=1000 width=16)
+        Sort Key: ((embedding <=> '[...1024 floats...]'::vector))
+        ->  Seq Scan on chunks  (cost=0.00..76.50 rows=1000 width=16)
+
+## probes=4
+SET
+Limit  (cost=64.94..92.87 rows=10 width=16)
+  ->  Index Scan using chunks_ivfflat on chunks  (cost=64.94..2858.50 rows=1000 width=16)
+        Order By: (embedding <=> '[...1024 floats...]'::vector)
+
+## probes=10
+SET
+Limit  (cost=66.34..94.27 rows=10 width=16)
+  ->  Index Scan using chunks_ivfflat on chunks  (cost=66.34..2858.50 rows=1000 width=16)
+        Order By: (embedding <=> '[...1024 floats...]'::vector)
+
+## probes=32
+SET
+Limit  (cost=98.11..98.13 rows=10 width=16)
+  ->  Sort  (cost=98.11..100.61 rows=1000 width=16)
+        Sort Key: ((embedding <=> '[...1024 floats...]'::vector))
+        ->  Seq Scan on chunks  (cost=0.00..76.50 rows=1000 width=16)
+
+## hnsw ef_search=40
+SET
+Limit  (cost=98.11..98.13 rows=10 width=16)
+  ->  Sort  (cost=98.11..100.61 rows=1000 width=16)
+        Sort Key: ((embedding <=> '[...1024 floats...]'::vector))
+        ->  Seq Scan on chunks  (cost=0.00..76.50 rows=1000 width=16)
