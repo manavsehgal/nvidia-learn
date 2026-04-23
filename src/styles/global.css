@@ -807,7 +807,8 @@ main { flex: 1; padding-top: 4rem; /* offset for fixed nav */ }
 
 .card--upcoming .card__title,
 .card--upcoming .card__summary { color: var(--color-text-muted); }
-.card--upcoming .card__watermark { color: var(--color-text-dim); opacity: 0.35; }
+/* Upcoming watermark matches the published ordinal watermark exactly —
+   same 5% text mix, no extra opacity. */
 .card--upcoming .card__article {
   color: var(--color-text-dim);
   border: 1px solid var(--color-border);
