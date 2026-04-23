@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # publishOrdinals() needs full history for each article's first-add time
 
       - uses: actions/setup-node@v4
         with:
