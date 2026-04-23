@@ -1,0 +1,289 @@
+{
+  "summary": {
+    "n": 6,
+    "embed_ms": {
+      "mean": 42.69,
+      "median": 45.48,
+      "min": 35.46,
+      "max": 46.16
+    },
+    "retrieve_ms": {
+      "mean": 70.44,
+      "median": 73.12,
+      "min": 63.03,
+      "max": 77.98
+    },
+    "generate_first_token_ms": {
+      "mean": 79.41,
+      "median": 82.5,
+      "min": 67.31,
+      "max": 85.36
+    },
+    "generate_total_ms": {
+      "mean": 656.13,
+      "median": 451.63,
+      "min": 424.63,
+      "max": 1700.85
+    },
+    "end_to_end_ms": {
+      "mean": 769.25,
+      "median": 569.55,
+      "min": 525.54,
+      "max": 1814.29
+    }
+  },
+  "queries": [
+    {
+      "question": "Who won the 2004 US presidential election?",
+      "k": 5,
+      "retrieved": [
+        {
+          "id": 502,
+          "label": "World",
+          "distance": 0.6256
+        },
+        {
+          "id": 1004,
+          "label": "World",
+          "distance": 0.7282
+        },
+        {
+          "id": 41,
+          "label": "Business",
+          "distance": 0.7444
+        },
+        {
+          "id": 831,
+          "label": "World",
+          "distance": 0.7525
+        },
+        {
+          "id": 1007,
+          "label": "Business",
+          "distance": 0.7534
+        }
+      ],
+      "answer": "The provided context does not contain the answer.",
+      "timings_ms": {
+        "embed": 45.48,
+        "retrieve": 73.12,
+        "generate_first_token": 82.5,
+        "generate_total": 450.95,
+        "end_to_end": 569.55
+      },
+      "completion_tokens": 9,
+      "kind": "in_corpus",
+      "wall_seconds": 0.62
+    },
+    {
+      "question": "What happened at the 2004 Athens Olympics in swimming?",
+      "k": 5,
+      "retrieved": [
+        {
+          "id": 1038,
+          "label": "Sports",
+          "distance": 0.5191
+        },
+        {
+          "id": 1154,
+          "label": "Sports",
+          "distance": 0.5499
+        },
+        {
+          "id": 1111,
+          "label": "Sports",
+          "distance": 0.577
+        },
+        {
+          "id": 1023,
+          "label": "Sports",
+          "distance": 0.5814
+        },
+        {
+          "id": 1587,
+          "label": "Sports",
+          "distance": 0.5826
+        }
+      ],
+      "answer": "Ian Thorpe won the gold medal in the men's 200 meters freestyle, dubbed the \"race of the century.\" Sources: [1038, 1154, 1023]",
+      "timings_ms": {
+        "embed": 35.46,
+        "retrieve": 77.98,
+        "generate_first_token": 85.36,
+        "generate_total": 1700.85,
+        "end_to_end": 1814.29
+      },
+      "completion_tokens": 39,
+      "kind": "in_corpus",
+      "wall_seconds": 1.86
+    },
+    {
+      "question": "What did Google do in 2004 related to going public?",
+      "k": 5,
+      "retrieved": [
+        {
+          "id": 71,
+          "label": "Business",
+          "distance": 0.511
+        },
+        {
+          "id": 20,
+          "label": "Business",
+          "distance": 0.5663
+        },
+        {
+          "id": 36,
+          "label": "Business",
+          "distance": 0.5824
+        },
+        {
+          "id": 220,
+          "label": "Sci/Tech",
+          "distance": 0.6005
+        },
+        {
+          "id": 1091,
+          "label": "Business",
+          "distance": 0.6088
+        }
+      ],
+      "answer": "The provided context does not contain the answer.",
+      "timings_ms": {
+        "embed": 46.16,
+        "retrieve": 76.35,
+        "generate_first_token": 83.57,
+        "generate_total": 457.79,
+        "end_to_end": 580.3
+      },
+      "completion_tokens": 9,
+      "kind": "in_corpus",
+      "wall_seconds": 0.61
+    },
+    {
+      "question": "Who won the 2020 US presidential election?",
+      "k": 5,
+      "retrieved": [
+        {
+          "id": 502,
+          "label": "World",
+          "distance": 0.6957
+        },
+        {
+          "id": 1003,
+          "label": "World",
+          "distance": 0.7616
+        },
+        {
+          "id": 879,
+          "label": "World",
+          "distance": 0.7653
+        },
+        {
+          "id": 867,
+          "label": "World",
+          "distance": 0.7774
+        },
+        {
+          "id": 1007,
+          "label": "Business",
+          "distance": 0.7901
+        }
+      ],
+      "answer": "The provided context does not contain the answer.",
+      "timings_ms": {
+        "embed": 37.88,
+        "retrieve": 63.03,
+        "generate_first_token": 67.31,
+        "generate_total": 424.63,
+        "end_to_end": 525.54
+      },
+      "completion_tokens": 9,
+      "kind": "out_of_corpus",
+      "wall_seconds": 0.57
+    },
+    {
+      "question": "What is NVIDIA DGX Spark?",
+      "k": 5,
+      "retrieved": [
+        {
+          "id": 109,
+          "label": "Sci/Tech",
+          "distance": 0.8618
+        },
+        {
+          "id": 69,
+          "label": "Business",
+          "distance": 0.8726
+        },
+        {
+          "id": 316,
+          "label": "Sci/Tech",
+          "distance": 0.8734
+        },
+        {
+          "id": 102,
+          "label": "Sci/Tech",
+          "distance": 0.8758
+        },
+        {
+          "id": 280,
+          "label": "Sci/Tech",
+          "distance": 0.8822
+        }
+      ],
+      "answer": "The provided context does not contain the answer.",
+      "timings_ms": {
+        "embed": 45.27,
+        "retrieve": 65.34,
+        "generate_first_token": 82.07,
+        "generate_total": 450.92,
+        "end_to_end": 561.53
+      },
+      "completion_tokens": 9,
+      "kind": "out_of_corpus",
+      "wall_seconds": 0.61
+    },
+    {
+      "question": "When was Claude 4 Opus released?",
+      "k": 5,
+      "retrieved": [
+        {
+          "id": 85,
+          "label": "Sci/Tech",
+          "distance": 0.8821
+        },
+        {
+          "id": 1255,
+          "label": "Sports",
+          "distance": 0.8864
+        },
+        {
+          "id": 620,
+          "label": "Business",
+          "distance": 0.8918
+        },
+        {
+          "id": 753,
+          "label": "World",
+          "distance": 0.8922
+        },
+        {
+          "id": 1256,
+          "label": "Sports",
+          "distance": 0.8986
+        }
+      ],
+      "answer": "The provided context does not contain the answer.",
+      "timings_ms": {
+        "embed": 45.86,
+        "retrieve": 66.82,
+        "generate_first_token": 75.67,
+        "generate_total": 451.63,
+        "end_to_end": 564.31
+      },
+      "completion_tokens": 9,
+      "kind": "out_of_corpus",
+      "wall_seconds": 0.6
+    }
+  ]
+}

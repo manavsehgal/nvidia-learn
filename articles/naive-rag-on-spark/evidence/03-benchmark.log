@@ -1,0 +1,41 @@
+[in_corpus     ] embed  45.5  retrieve  73.1  ttft   82.5  gen  450.9  | The provided context does not contain the answer.
+[in_corpus     ] embed  35.5  retrieve  78.0  ttft   85.4  gen 1700.8  | Ian Thorpe won the gold medal in the men's 200 meters freestyle, dubbed the "race of the century." Sources: [1038, 1154,
+[in_corpus     ] embed  46.2  retrieve  76.3  ttft   83.6  gen  457.8  | The provided context does not contain the answer.
+[out_of_corpus ] embed  37.9  retrieve  63.0  ttft   67.3  gen  424.6  | The provided context does not contain the answer.
+[out_of_corpus ] embed  45.3  retrieve  65.3  ttft   82.1  gen  450.9  | The provided context does not contain the answer.
+[out_of_corpus ] embed  45.9  retrieve  66.8  ttft   75.7  gen  451.6  | The provided context does not contain the answer.
+
+Wrote benchmark.json — 6 queries
+{
+  "n": 6,
+  "embed_ms": {
+    "mean": 42.69,
+    "median": 45.48,
+    "min": 35.46,
+    "max": 46.16
+  },
+  "retrieve_ms": {
+    "mean": 70.44,
+    "median": 73.12,
+    "min": 63.03,
+    "max": 77.98
+  },
+  "generate_first_token_ms": {
+    "mean": 79.41,
+    "median": 82.5,
+    "min": 67.31,
+    "max": 85.36
+  },
+  "generate_total_ms": {
+    "mean": 656.13,
+    "median": 451.63,
+    "min": 424.63,
+    "max": 1700.85
+  },
+  "end_to_end_ms": {
+    "mean": 769.25,
+    "median": 569.55,
+    "min": 525.54,
+    "max": 1814.29
+  }
+}

@@ -1,0 +1,31 @@
+=== Probe: retrieval is not the bottleneck ===
+
+Query: 'Did Google have an IPO in 2004?'
+Top-5 retrieved (by cosine distance):
+  id  |  label   |                                                   substring                                                    
+------+----------+----------------------------------------------------------------------------------------------------------------
+   13 | Business | Google IPO Auction Off to Rocky Start  WASHINGTON/NEW YORK (Reuters) - The auction for Google  Inc.'s highly a
+   20 | Business | Google IPO faces Playboy slip-up The bidding gets underway for Google's public offering, despite last-minute w
+   36 | Business | Google IPO: Type in 'confusing,' 'secrecy' I've submitted my bid to buy shares of Google Inc. in the computer 
+   71 | Business | Play Boys: Google IPO a Go Anyway Even though Google's two founders gave an interview to Playboy magazine in t
+ 1136 | Business | Google IPO statement ready to go Google's planned flotation moves another step closer after the company and it
+(5 rows)
+
+
+ANSWER: The provided context does not contain the answer.
+
+=== Same corpus, narrower question ===
+
+Query: 'What was the Playboy controversy around the Google IPO?'
+Top-5 retrieved:
+ id  |  label   |                                                   substring                                                    
+-----+----------+----------------------------------------------------------------------------------------------------------------
+  20 | Business | Google IPO faces Playboy slip-up The bidding gets underway for Google's public offering, despite last-minute w
+  71 | Business | Play Boys: Google IPO a Go Anyway Even though Google's two founders gave an interview to Playboy magazine in t
+  72 | Business | More Big Boobs in Playboy An interview with Google's co-founders due out in the current issue of Playboy may d
+ 215 | Sci/Tech | Google Starts Auction Company launched the biggest electronic auction of stock in Wall Street history Friday b
+ 220 | Sci/Tech | Google: Now Playboy's Latest Bunny Investors in the company that's trying to come off as cute as a bunny could
+(5 rows)
+
+
+ANSWER: The Google co-founders gave an interview to Playboy magazine in the midst of their IPO filing, which raised concerns about Securities regulations restricting what executives can say while preparing to sell stock for the first time. Sources: [72, 71]
