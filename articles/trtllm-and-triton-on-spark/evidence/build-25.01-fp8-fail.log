@@ -1,0 +1,148 @@
+
+=============================
+== Triton Inference Server ==
+=============================
+
+NVIDIA Release 25.01 (build 138762432)
+Triton Server Version 2.54.0
+
+Copyright (c) 2018-2024, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+WARNING: Detected NVIDIA GB10 GPU, which may not yet be supported in this version of the container
+
+[TensorRT-LLM] TensorRT-LLM version: 0.17.0.post1
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set bert_attention_plugin to auto.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set gpt_attention_plugin to auto.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set gemm_plugin to fp8.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set gemm_swiglu_plugin to None.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set fp8_rowwise_gemm_plugin to None.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set nccl_plugin to auto.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set lora_plugin to None.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set moe_plugin to auto.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set mamba_conv1d_plugin to auto.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set low_latency_gemm_plugin to None.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set low_latency_gemm_swiglu_plugin to None.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set context_fmha to True.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set bert_context_fmha_fp32_acc to False.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set remove_input_padding to True.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set reduce_fusion to False.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set user_buffer to False.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set tokens_per_block to 64.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set use_paged_context_fmha to True.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set use_fp8_context_fmha to True.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set multiple_profiles to False.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set paged_state to True.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set streamingllm to False.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set use_fused_mlp to True.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set pp_reduce_scatter to False.
+[04/23/2026-17:14:20] [TRT-LLM] [W] Implicitly setting LLaMAConfig.fc_after_embed = False
+[04/23/2026-17:14:20] [TRT-LLM] [W] Implicitly setting LLaMAConfig.use_input_layernorm_in_first_layer = True
+[04/23/2026-17:14:20] [TRT-LLM] [W] Implicitly setting LLaMAConfig.use_last_layernorm = True
+[04/23/2026-17:14:20] [TRT-LLM] [W] Implicitly setting LLaMAConfig.layer_idx_offset = 0
+[04/23/2026-17:14:20] [TRT-LLM] [W] Implicitly setting LLaMAConfig.tie_word_embeddings = False
+[04/23/2026-17:14:20] [TRT-LLM] [I] Compute capability: (12, 1)
+[04/23/2026-17:14:20] [TRT-LLM] [I] SM count: 48
+[04/23/2026-17:14:20] [TRT-LLM] [I] SM clock: 3003 MHz
+[04/23/2026-17:14:20] [TRT-LLM] [I] int4 TFLOPS: 0
+[04/23/2026-17:14:20] [TRT-LLM] [I] int8 TFLOPS: 0
+[04/23/2026-17:14:20] [TRT-LLM] [I] fp8 TFLOPS: 0
+[04/23/2026-17:14:20] [TRT-LLM] [I] float16 TFLOPS: 0
+[04/23/2026-17:14:20] [TRT-LLM] [I] bfloat16 TFLOPS: 0
+[04/23/2026-17:14:20] [TRT-LLM] [I] float32 TFLOPS: 0
+[04/23/2026-17:14:20] [TRT-LLM] [W] Failed to infer cluster info for NVIDIA GB10, treat it as a L40 node with 121 GB memory. This setting makes no effect if you do not use auto parallel.
+[04/23/2026-17:14:20] [TRT-LLM] [W] Provided but not required tensors: {'embed_positions', 'embed_positions_for_gpt_attention', 'rotary_inv_freq'}
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set dtype to bfloat16.
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set paged_kv_cache to True.
+[04/23/2026-17:14:20] [TRT-LLM] [W] Overriding paged_state to False
+[04/23/2026-17:14:20] [TRT-LLM] [I] Set paged_state to False.
+[04/23/2026-17:14:20] [TRT-LLM] [W] remove_input_padding is enabled, while opt_num_tokens is not set, setting to max_batch_size*max_beam_width. 
+
+[04/23/2026-17:14:20] [TRT-LLM] [W] padding removal and fMHA are both enabled, max_input_len is not required and will be ignored
+[04/23/2026-17:14:34] [TRT] [I] [MemUsageChange] Init CUDA: CPU -2, GPU +0, now: CPU 3852, GPU 121534 (MiB)
+[04/23/2026-17:14:35] [TRT] [I] [MemUsageChange] Init builder kernel library: CPU +0, GPU +22, now: CPU 4009, GPU 121821 (MiB)
+[04/23/2026-17:14:35] [TRT-LLM] [I] Set nccl_plugin to None.
+terminate called after throwing an instance of 'tensorrt_llm::common::TllmException'
+  what():  [TensorRT-LLM][ERROR] Assertion failed: FP8 FMHA cannot be enabled except on Ada or Hopper or Blackwell Arch. (/workspace/tensorrt_llm/cpp/tensorrt_llm/common/attentionOp.cpp:2109)
+1       0xe82a18b9fb38 tensorrt_llm::common::throwRuntimeError(char const*, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) + 120
+2       0xe82a18cb38c4 tensorrt_llm::common::op::AttentionOp::initialize() + 3796
+3       0xe826edd10b4c tensorrt_llm::plugins::GPTAttentionPlugin* tensorrt_llm::plugins::GPTAttentionPluginCommon::cloneImpl<tensorrt_llm::plugins::GPTAttentionPlugin>() const + 844
+4       0xe82b498c2ac4 /usr/local/tensorrt/lib/libnvinfer.so.10(+0x1552ac4) [0xe82b498c2ac4]
+5       0xe82b4980fe98 /usr/local/tensorrt/lib/libnvinfer.so.10(+0x149fe98) [0xe82b4980fe98]
+6       0xe82b6dd8f904 /usr/local/lib/python3.12/dist-packages/tensorrt/tensorrt.so(+0xff904) [0xe82b6dd8f904]
+7       0xe82b6dcc5428 /usr/local/lib/python3.12/dist-packages/tensorrt/tensorrt.so(+0x35428) [0xe82b6dcc5428]
+8             0x5041c4 /usr/bin/python3() [0x5041c4]
+9             0x4c2da8 _PyObject_MakeTpCall + 120
+10            0x564bb4 _PyEval_EvalFrameDefault + 2208
+11            0x4c6fb8 /usr/bin/python3() [0x4c6fb8]
+12            0x4c5338 PyObject_Call + 280
+13            0x56800c _PyEval_EvalFrameDefault + 15608
+14            0x4c4974 _PyObject_Call_Prepend + 436
+15            0x529790 /usr/bin/python3() [0x529790]
+16            0x4c2e60 _PyObject_MakeTpCall + 304
+17            0x564bb4 _PyEval_EvalFrameDefault + 2208
+18            0x4c6fb8 /usr/bin/python3() [0x4c6fb8]
+19            0x4c5338 PyObject_Call + 280
+20            0x56800c _PyEval_EvalFrameDefault + 15608
+21            0x4c4974 _PyObject_Call_Prepend + 436
+22            0x529790 /usr/bin/python3() [0x529790]
+23            0x4c528c PyObject_Call + 108
+24            0x56800c _PyEval_EvalFrameDefault + 15608
+25            0x4c6fb8 /usr/bin/python3() [0x4c6fb8]
+26            0x4c5338 PyObject_Call + 280
+27            0x56800c _PyEval_EvalFrameDefault + 15608
+28            0x4c6fb8 /usr/bin/python3() [0x4c6fb8]
+29            0x4c5338 PyObject_Call + 280
+30            0x56800c _PyEval_EvalFrameDefault + 15608
+31            0x4c4974 _PyObject_Call_Prepend + 436
+32            0x529790 /usr/bin/python3() [0x529790]
+33            0x4c528c PyObject_Call + 108
+34            0x56800c _PyEval_EvalFrameDefault + 15608
+35            0x562f04 PyEval_EvalCode + 304
+36            0x59c0e4 /usr/bin/python3() [0x59c0e4]
+37            0x680ac4 /usr/bin/python3() [0x680ac4]
+38            0x680698 _PyRun_SimpleFileObject + 404
+39            0x680464 _PyRun_AnyFileObject + 84
+40            0x68b46c Py_RunMain + 732
+41            0x68b028 Py_BytesMain + 40
+42      0xe82ba14b84c4 /usr/lib/aarch64-linux-gnu/libc.so.6(+0x284c4) [0xe82ba14b84c4]
+43      0xe82ba14b8598 __libc_start_main + 152
+44            0x5f6d30 _start + 48
+[a60e0b91944f:00001] *** Process received signal ***
+[a60e0b91944f:00001] Signal: Aborted (6)
+[a60e0b91944f:00001] Signal code:  (-6)
+[a60e0b91944f:00001] [ 0] linux-vdso.so.1(__kernel_rt_sigreturn+0x0)[0xe82ba17c0a60]
+[a60e0b91944f:00001] [ 1] /usr/lib/aarch64-linux-gnu/libc.so.6(+0x87628)[0xe82ba1517628]
+[a60e0b91944f:00001] [ 2] /usr/lib/aarch64-linux-gnu/libc.so.6(gsignal+0x1c)[0xe82ba14ccb3c]
+[a60e0b91944f:00001] [ 3] /usr/lib/aarch64-linux-gnu/libc.so.6(abort+0xf4)[0xe82ba14b7e00]
+[a60e0b91944f:00001] [ 4] /usr/lib/aarch64-linux-gnu/libstdc++.so.6(_ZN9__gnu_cxx27__verbose_terminate_handlerEv+0x1d8)[0xe82b4495d4d8]
+[a60e0b91944f:00001] [ 5] /usr/lib/aarch64-linux-gnu/libstdc++.so.6(+0xaa570)[0xe82b4495a570]
+[a60e0b91944f:00001] [ 6] /usr/lib/aarch64-linux-gnu/libstdc++.so.6(__cxa_call_terminate+0x44)[0xe82b44950dec]
+[a60e0b91944f:00001] [ 7] /usr/lib/aarch64-linux-gnu/libstdc++.so.6(__gxx_personality_v0+0xa4)[0xe82b44959964]
+[a60e0b91944f:00001] [ 8] /usr/lib/aarch64-linux-gnu/libgcc_s.so.1(+0x17354)[0xe82ba11b7354]
+[a60e0b91944f:00001] [ 9] /usr/lib/aarch64-linux-gnu/libgcc_s.so.1(_Unwind_RaiseException+0x160)[0xe82ba11b7748]
+[a60e0b91944f:00001] [10] /usr/lib/aarch64-linux-gnu/libstdc++.so.6(__cxa_throw+0x5c)[0xe82b4495a8fc]
+[a60e0b91944f:00001] [11] /usr/local/lib/python3.12/dist-packages/tensorrt_llm/libs/libtensorrt_llm.so(_ZN12tensorrt_llm6common17throwRuntimeErrorEPKciRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE+0xac)[0xe82a18b9fb6c]
+[a60e0b91944f:00001] [12] /usr/local/lib/python3.12/dist-packages/tensorrt_llm/libs/libtensorrt_llm.so(_ZN12tensorrt_llm6common2op11AttentionOp10initializeEv+0xed4)[0xe82a18cb38c4]
+[a60e0b91944f:00001] [13] /usr/local/lib/python3.12/dist-packages/tensorrt_llm/libs/libnvinfer_plugin_tensorrt_llm.so(_ZNK12tensorrt_llm7plugins24GPTAttentionPluginCommon9cloneImplINS0_18GPTAttentionPluginEEEPT_v+0x34c)[0xe826edd10b4c]
+[a60e0b91944f:00001] [14] /usr/local/tensorrt/lib/libnvinfer.so.10(+0x1552ac4)[0xe82b498c2ac4]
+[a60e0b91944f:00001] [15] /usr/local/tensorrt/lib/libnvinfer.so.10(+0x149fe98)[0xe82b4980fe98]
+[a60e0b91944f:00001] [16] /usr/local/lib/python3.12/dist-packages/tensorrt/tensorrt.so(+0xff904)[0xe82b6dd8f904]
+[a60e0b91944f:00001] [17] /usr/local/lib/python3.12/dist-packages/tensorrt/tensorrt.so(+0x35428)[0xe82b6dcc5428]
+[a60e0b91944f:00001] [18] /usr/bin/python3[0x5041c4]
+[a60e0b91944f:00001] [19] /usr/bin/python3(_PyObject_MakeTpCall+0x78)[0x4c2da8]
+[a60e0b91944f:00001] [20] /usr/bin/python3(_PyEval_EvalFrameDefault+0x8a0)[0x564bb4]
+[a60e0b91944f:00001] [21] /usr/bin/python3[0x4c6fb8]
+[a60e0b91944f:00001] [22] /usr/bin/python3(PyObject_Call+0x118)[0x4c5338]
+[a60e0b91944f:00001] [23] /usr/bin/python3(_PyEval_EvalFrameDefault+0x3cf8)[0x56800c]
+[a60e0b91944f:00001] [24] /usr/bin/python3(_PyObject_Call_Prepend+0x1b4)[0x4c4974]
+[a60e0b91944f:00001] [25] /usr/bin/python3[0x529790]
+[a60e0b91944f:00001] [26] /usr/bin/python3(_PyObject_MakeTpCall+0x130)[0x4c2e60]
+[a60e0b91944f:00001] [27] /usr/bin/python3(_PyEval_EvalFrameDefault+0x8a0)[0x564bb4]
+[a60e0b91944f:00001] [28] /usr/bin/python3[0x4c6fb8]
+[a60e0b91944f:00001] [29] /usr/bin/python3(PyObject_Call+0x118)[0x4c5338]
+[a60e0b91944f:00001] *** End of error message ***

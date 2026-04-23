@@ -1,0 +1,33 @@
+{
+  "NIM-vLLM-FP8": {
+    "serial": {
+      "name": "NIM-vLLM-FP8",
+      "ttft_ms_p50": 54.04365799995503,
+      "ttft_ms_p95": 68.71018699985143,
+      "decode_tok_s": 22.05649912902545,
+      "wall_s_p50": 7.558407802000147
+    },
+    "concurrency": [
+      {
+        "concurrency": 1,
+        "aggregate_tok_s": 21.920647485346198,
+        "per_req_p50_s": 7.572317277000366
+      },
+      {
+        "concurrency": 2,
+        "aggregate_tok_s": 44.98319297770689,
+        "per_req_p50_s": 7.35785385999975
+      },
+      {
+        "concurrency": 4,
+        "aggregate_tok_s": 89.58895315965302,
+        "per_req_p50_s": 7.367255217000093
+      },
+      {
+        "concurrency": 8,
+        "aggregate_tok_s": 175.22012751702943,
+        "per_req_p50_s": 7.486075765500118
+      }
+    ]
+  }
+}

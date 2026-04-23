@@ -1,0 +1,33 @@
+{
+  "TRT-LLM-FP8": {
+    "serial": {
+      "name": "TRT-LLM-FP8",
+      "ttft_ms_p50": 46.058781999818166,
+      "ttft_ms_p95": 77.2012960005668,
+      "decode_tok_s": 24.57099813110884,
+      "wall_s_p50": 6.001436476999515
+    },
+    "concurrency": [
+      {
+        "concurrency": 1,
+        "aggregate_tok_s": 26.879316671862725,
+        "per_req_p50_s": 5.989363975000742
+      },
+      {
+        "concurrency": 2,
+        "aggregate_tok_s": 52.83688981757034,
+        "per_req_p50_s": 5.930073256000014
+      },
+      {
+        "concurrency": 4,
+        "aggregate_tok_s": 107.61000339457088,
+        "per_req_p50_s": 6.253039741500288
+      },
+      {
+        "concurrency": 8,
+        "aggregate_tok_s": 193.52483154393926,
+        "per_req_p50_s": 6.127195050500177
+      }
+    ]
+  }
+}

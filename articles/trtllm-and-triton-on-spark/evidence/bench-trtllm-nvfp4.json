@@ -1,0 +1,33 @@
+{
+  "TRT-LLM-NVFP4": {
+    "serial": {
+      "name": "TRT-LLM-NVFP4",
+      "ttft_ms_p50": 30.813523000688292,
+      "ttft_ms_p95": 47.62768300042808,
+      "decode_tok_s": 38.81691327440198,
+      "wall_s_p50": 5.108843355000317
+    },
+    "concurrency": [
+      {
+        "concurrency": 1,
+        "aggregate_tok_s": 36.29974034454972,
+        "per_req_p50_s": 5.4266377780004404
+      },
+      {
+        "concurrency": 2,
+        "aggregate_tok_s": 69.24720507575486,
+        "per_req_p50_s": 4.641576848499881
+      },
+      {
+        "concurrency": 4,
+        "aggregate_tok_s": 135.18004041592042,
+        "per_req_p50_s": 4.5224843935002355
+      },
+      {
+        "concurrency": 8,
+        "aggregate_tok_s": 264.7320992859864,
+        "per_req_p50_s": 4.580558148999444
+      }
+    ]
+  }
+}

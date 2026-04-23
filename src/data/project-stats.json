@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-23T16:41:48Z",
+  "generated_at": "2026-04-23T17:34:08Z",
   "articles": {
-    "total": 10,
-    "published": 10,
-    "upcoming": 5,
+    "total": 11,
+    "published": 11,
+    "upcoming": 4,
     "drafts": 0
   },
   "words": {
-    "total": 25520,
-    "mean_per_article": 2552,
+    "total": 28433,
+    "mean_per_article": 2584,
     "longest": {
       "slug": "nim-first-inference-dgx-spark",
       "title": "Your First NIM on a DGX Spark \u2014 What 24.8 Tokens Per Second Doesn't Tell You",
@@ -16,19 +16,19 @@
     }
   },
   "code": {
-    "evidence_loc": 1795,
-    "src_loc": 3742,
-    "total_loc": 5537,
+    "evidence_loc": 1910,
+    "src_loc": 3839,
+    "total_loc": 5749,
     "by_language": {
-      "astro": 1977,
-      "python": 1780,
+      "astro": 2074,
+      "python": 1895,
       "css": 1649,
       "javascript": 66,
       "typescript": 50,
       "sql": 15
     },
     "data_lines": {
-      "json": 7343,
+      "json": 7442,
       "yaml": 45
     }
   },
@@ -37,7 +37,7 @@
     "training": 0,
     "fine-tuning": 0,
     "inference": 7,
-    "deployment": 0,
+    "deployment": 1,
     "agentic": 1,
     "observability": 0,
     "dev-tools": 1
@@ -47,7 +47,7 @@
     "training": 1,
     "fine-tuning": 1,
     "inference": 0,
-    "deployment": 1,
+    "deployment": 0,
     "agentic": 0,
     "observability": 1,
     "dev-tools": 1
@@ -56,7 +56,12 @@
     {
       "id": "llama-3.1-8b-instruct",
       "label": "Llama 3.1 8B Instruct",
-      "articles": 8
+      "articles": 9
+    },
+    {
+      "id": "nemotron-super-49b",
+      "label": "Nemotron Super 49B",
+      "articles": 4
     },
     {
       "id": "nemotron-reranker-1b",
@@ -64,31 +69,26 @@
       "articles": 4
     },
     {
-      "id": "nemotron-super-49b",
-      "label": "Nemotron Super 49B",
-      "articles": 3
+      "id": "llama-3.3-70b-instruct",
+      "label": "Llama 3.3 70B Instruct",
+      "articles": 2
     },
     {
       "id": "nemotron-embed-1b-v2",
       "label": "Nemotron Embed 1B v2",
       "articles": 2
-    },
-    {
-      "id": "llama-3.3-70b-instruct",
-      "label": "Llama 3.3 70B Instruct",
-      "articles": 1
     }
   ],
   "products": [
     {
       "id": "nim",
       "label": "NVIDIA NIM",
-      "articles": 10
+      "articles": 11
     },
     {
       "id": "dgx-spark",
       "label": "DGX Spark",
-      "articles": 10
+      "articles": 11
     },
     {
       "id": "nemo-retriever",
@@ -96,13 +96,13 @@
       "articles": 7
     },
     {
-      "id": "nemo",
-      "label": "NeMo Framework",
-      "articles": 6
-    },
-    {
       "id": "pgvector",
       "label": "pgvector",
+      "articles": 7
+    },
+    {
+      "id": "nemo",
+      "label": "NeMo Framework",
       "articles": 6
     },
     {
@@ -113,12 +113,12 @@
     {
       "id": "tensorrt-llm",
       "label": "TensorRT-LLM",
-      "articles": 4
+      "articles": 5
     },
     {
       "id": "triton",
       "label": "Triton Inference Server",
-      "articles": 3
+      "articles": 4
     },
     {
       "id": "ollama",
@@ -188,6 +188,11 @@
         "article_slug": "naive-rag-on-spark"
       },
       {
+        "label": "the nim number scales from",
+        "value": "22 tok/s",
+        "article_slug": "trtllm-and-triton-on-spark"
+      },
+      {
         "label": "clawnav is pinned to nemotron",
         "value": "22 tok/s",
         "article_slug": "nemoclaw-vs-openclaw-dgx-spark"
@@ -195,11 +200,6 @@
       {
         "label": "throughput per token is within",
         "value": "0.2 tok/s",
-        "article_slug": "nim-first-inference-dgx-spark"
-      },
-      {
-        "label": "in 8 9 seconds at",
-        "value": "24.8 tok/s",
         "article_slug": "nim-first-inference-dgx-spark"
       }
     ]
