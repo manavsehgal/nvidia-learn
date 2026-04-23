@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Article-6 benchmark: sweep the 30-query qrels set across multiple
-generators under a fixed retrieval mode (rerank from article #5).
+generators under a fixed retrieval mode (rerank from article #7).
 
 Records per-query: retrieved ids, answer text, refusal boolean,
 recall@5/10 (retrieval — same across generators, sanity check),

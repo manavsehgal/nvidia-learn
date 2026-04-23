@@ -5,18 +5,18 @@ author: Manav Sehgal
 product: NeMo Guardrails
 stage: inference
 difficulty: intermediate
-time_required: "~90 minutes on top of the article #5/#6 chain"
+time_required: "~90 minutes on top of the article #7/#8 chain"
 hardware: "NVIDIA DGX Spark"
 tags: [guardrails, nemo, rag, rails, colang, policy, pii, second-brain, llm-wiki, autoresearch, dgx-spark]
 summary: "NeMo Guardrails drops a policy gate between retrieval and generation. One install, three per-arc configs — PII for Second Brain, style for LLM Wiki, code-safety for Autoresearch — and a 15-query benchmark: 100% block recall, 100% clean pass. Rails are scaffolding; detectors are the content."
 signature: RetrievalGuardrails
 ---
 
-Article #6 closed with a finding and a queue: bigger generators over-refuse on perfect retrieval, and the next rung is the *policy* gate — the one that fires between "we have an answer" and "we hand it to the user or the agent." That's the rung where a Second Brain has to scrub personal identifiers out of a draft before it goes back to the user; where an LLM Wiki has to enforce house style on every page it writes; where an Autoresearch agent has to refuse to run `rm -rf` even when its planner confidently suggested it.
+Article #8 closed with a finding and a queue: bigger generators over-refuse on perfect retrieval, and the next rung is the *policy* gate — the one that fires between "we have an answer" and "we hand it to the user or the agent." That's the rung where a Second Brain has to scrub personal identifiers out of a draft before it goes back to the user; where an LLM Wiki has to enforce house style on every page it writes; where an Autoresearch agent has to refuse to run `rm -rf` even when its planner confidently suggested it.
 
-One product covers all three on the NVIDIA stack: **NeMo Guardrails**. It is deliberately positioned as scaffolding — an input-rail, retrieval-rail, output-rail framework — not a detector. You bring the detectors; the rail runs them. That shape is exactly what the shared-substrate arc has been asking for: **one rail, three policies, same retrieval chain from article #5**.
+One product covers all three on the NVIDIA stack: **NeMo Guardrails**. It is deliberately positioned as scaffolding — an input-rail, retrieval-rail, output-rail framework — not a detector. You bring the detectors; the rail runs them. That shape is exactly what the shared-substrate arc has been asking for: **one rail, three policies, same retrieval chain from article #7**.
 
-This article installs Guardrails once, writes three minimal configs (`config-sb`, `config-wiki`, `config-auto`), wraps the article-#6 hybrid-ask pipeline, and benchmarks fifteen synthetic queries (five per arc, three violating, two clean). Every query lands the expected verdict: block recall 1.0, clean pass rate 1.0, zero crossed wires between arcs. That number is a demo, not a proof — but the *architecture* the number demonstrates is what unlocks the three arcs forking apart in article #8.
+This article installs Guardrails once, writes three minimal configs (`config-sb`, `config-wiki`, `config-auto`), wraps the article-#8 hybrid-ask pipeline, and benchmarks fifteen synthetic queries (five per arc, three violating, two clean). Every query lands the expected verdict: block recall 1.0, clean pass rate 1.0, zero crossed wires between arcs. That number is a demo, not a proof — but the *architecture* the number demonstrates is what unlocks the three arcs forking apart in article #10.
 
 ## Why the rail is a personal-AI concern
 
@@ -26,7 +26,7 @@ It also changes the *economics* of the rail. Cloud guardrail services meter by r
 
 ## Where the rail sits in the chain
 
-<figure class="fn-diagram" aria-label="One NeMo Guardrails install compiled three ways — PII scrub for Second Brain, wiki style for LLM Wiki, code safety for Autoresearch. Each arc loads its own config-<arc>/ directory with its own Colang rails and its own Python detector actions, wrapping the same retrieval+generator chain from article #5. Fifteen synthetic queries, 100% block recall on violating queries, 100% pass rate on clean queries, zero cross-arc contamination.">
+<figure class="fn-diagram" aria-label="One NeMo Guardrails install compiled three ways — PII scrub for Second Brain, wiki style for LLM Wiki, code safety for Autoresearch. Each arc loads its own config-<arc>/ directory with its own Colang rails and its own Python detector actions, wrapping the same retrieval+generator chain from article #7. Fifteen synthetic queries, 100% block recall on violating queries, 100% pass rate on clean queries, zero cross-arc contamination.">
   <svg viewBox="0 0 900 440" role="img" aria-label="NeMo Guardrails hub with three arc-specialized configs — SB PII, Wiki Style, Auto Code — each scoring 3-of-3 blocked and 2-of-2 passed on a 5-query synthetic test" preserveAspectRatio="xMidYMid meet">
     <defs>
       <linearGradient id="d07-hub-grad" x1="0" y1="0" x2="0" y2="1">
@@ -98,7 +98,7 @@ It also changes the *economics* of the rail. Cloud guardrail services meter by r
   <figcaption>One install compiled three ways — SB scrubs identifiers out of the retrieval lane, Wiki enforces house style on the write-path, Auto refuses to execute known-dangerous shell patterns. Fifteen synthetic queries total; zero false passes, zero false blocks, zero cross-arc contamination.</figcaption>
 </figure>
 
-Guardrails sits on the host, not inside a NIM container. It's a Python package that wraps any OpenAI-compatible chat endpoint — the local Llama 3.1 8B NIM at `:8000` qualifies, and so does any hosted NVIDIA API endpoint. For each call it runs the configured *input rails* against the user message, then forwards to the LLM, then runs the configured *output rails* against the answer. The retrieval chain from articles #2-#5 stays untouched; we inject retrieved chunks into the user message before handing off to the rail, same as before.
+Guardrails sits on the host, not inside a NIM container. It's a Python package that wraps any OpenAI-compatible chat endpoint — the local Llama 3.1 8B NIM at `:8000` qualifies, and so does any hosted NVIDIA API endpoint. For each call it runs the configured *input rails* against the user message, then forwards to the LLM, then runs the configured *output rails* against the answer. The retrieval chain from articles #4-#7 stays untouched; we inject retrieved chunks into the user message before handing off to the rail, same as before.
 
 ## The install is boring, which is the point
 
@@ -203,14 +203,14 @@ async def check_input_pii(text: str):
 
 Four regexes. Deterministic, zero extra LLM calls, microseconds of latency. The narrative question isn't "can a regex detect PII?" — it can, imperfectly — but "is the rail the right *shape* for the job?" The rail gives you a scaffolded place to put whatever detector you want: the regex above, a call to Microsoft Presidio, an NVIDIA Nemotron-Aegis classifier, a fine-tuned DistilBERT. The rail doesn't care. It gives you *where*, not *what*.
 
-The same pattern holds for the Autoresearch rails — regexes for `rm -rf /`, `curl ... | bash`, `--no-verify`, `cat ~/.ssh/*`, `AWS_SECRET_*`. And for the Wiki rails — regex tests for hedging phrases (`"as an AI"`, `"I think"`, `"probably"`) plus a check that the answer contains a literal `"Sources:"` trailer, since the strict-context prompt from article #4 already instructs the generator to cite. Fifteen lines of Python per arc, three arcs, ninety lines total. Everything else is Colang glue.
+The same pattern holds for the Autoresearch rails — regexes for `rm -rf /`, `curl ... | bash`, `--no-verify`, `cat ~/.ssh/*`, `AWS_SECRET_*`. And for the Wiki rails — regex tests for hedging phrases (`"as an AI"`, `"I think"`, `"probably"`) plus a check that the answer contains a literal `"Sources:"` trailer, since the strict-context prompt from article #6 already instructs the generator to cite. Fifteen lines of Python per arc, three arcs, ninety lines total. Everything else is Colang glue.
 
-### The wrapper reuses the article-#6 chain
+### The wrapper reuses the article-#8 chain
 
-The retrieval pipeline is imported directly from article #6 — no fork, no copy-paste. The wrapper's `ask()` function runs `hybrid_ask.retrieve()` to get the top-5 reranked chunks, builds the same strict-context user message, and hands it to Guardrails:
+The retrieval pipeline is imported directly from article #8 — no fork, no copy-paste. The wrapper's `ask()` function runs `hybrid_ask.retrieve()` to get the top-5 reranked chunks, builds the same strict-context user message, and hands it to Guardrails:
 
 ```python
-import hybrid_ask                               # article #6, unchanged
+import hybrid_ask                               # article #8, unchanged
 from nemoguardrails import LLMRails, RailsConfig
 
 def ask(question, arc, mode="rerank", k=5):

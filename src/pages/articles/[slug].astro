@@ -1,15 +1,15 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { publishOrdinals } from '../../lib/article-order.mjs';
 
 export async function getStaticPaths() {
   const all = await getCollection('articles');
-  const byDateAsc = [...all].sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
-  const ordinalByIdAsc = new Map(byDateAsc.map((article, idx) => [article.id, idx + 1]));
+  const ordinalById = publishOrdinals(all, process.cwd());
 
   return all.map((article) => ({
     params: { slug: article.id },
-    props: { article, ordinal: ordinalByIdAsc.get(article.id)! },
+    props: { article, ordinal: ordinalById.get(article.id)! },
   }));
 }
 

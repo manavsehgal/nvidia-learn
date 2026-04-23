@@ -1,7 +1,7 @@
 ---
 // Signature figure for "bigger-generator-grounding-on-spark".
 // Three generators — 8B local, 49B Nemotron-Super hosted, 70B Llama 3.3
-// hosted — all fed the same top-5 chunks from the article-#5 retrieval
+// hosted — all fed the same top-5 chunks from the article-#7 retrieval
 // chain. The refusal rate on perfect retrieval (recall@5 = 1.0) is shown
 // under each chip. 8B at 9.1%, 49B at 18.2% (the surprise — tuned for
 // grounding, over-refuses MORE than the baseline), 70B at 13.6%.
@@ -64,7 +64,7 @@ const cy = 100;
           fill="none" stroke="var(--svg-accent-teal)" stroke-width="1.5"/>
   </g>
 
-  <!-- Stage 0: retrieval chain (rerank from article #5) -->
+  <!-- Stage 0: retrieval chain (rerank from article #7) -->
   <g class="svg-reveal svg-reveal-d2">
     <rect x="14" y={cy - 14} width="50" height="28" rx="5"
           fill="var(--svg-bg-inner)" stroke="var(--svg-accent-teal)" stroke-width="1"/>
@@ -76,7 +76,7 @@ const cy = 100;
           font-size="7">top-5 chunks</text>
     <text x="39" y={cy - 22} text-anchor="middle"
           fill="var(--svg-accent-teal)" font-family="var(--font-mono)"
-          font-size="7" letter-spacing="0.2em" font-weight="600">ARTICLE #5</text>
+          font-size="7" letter-spacing="0.2em" font-weight="600">ARTICLE #7</text>
   </g>
 
   <!-- Top: 8B local (teal) -->

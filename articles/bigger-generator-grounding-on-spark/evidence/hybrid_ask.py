@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Hybrid retrieval + rerank + (selectable) generator on a DGX Spark.
 
-Forked from article #5 (rerank-fusion-retrieval-on-spark) with the single
+Forked from article #7 (rerank-fusion-retrieval-on-spark) with the single
 addition of a --generator flag. The retrieval path is untouched; only the
-LLM dispatch changes. Same strict grounding scaffold from articles #4 / #5.
+LLM dispatch changes. Same strict grounding scaffold from articles #6 / #7.
 
 Four generator targets:
 
@@ -12,7 +12,7 @@ Four generator targets:
     nemotron-super-49b-hosted: integrate.api.nvidia.com (fallback)
     llama33-70b-hosted       : integrate.api.nvidia.com (ceiling)
 
-stdlib only. Same ethos as articles #2-5.
+stdlib only. Same ethos as articles #4-5.
 
 Usage:
     python3 hybrid_ask.py --mode rerank --generator llama31-8b         "Did Google have an IPO in 2004?"

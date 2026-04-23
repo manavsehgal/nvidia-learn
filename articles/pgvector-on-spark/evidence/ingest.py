@@ -8,7 +8,7 @@ Design notes:
   INSERTs at this row count and also saves us a pip install.
 - The embedder is 2048-d by default; we pass `dimensions=1024` to exploit
   Nemotron's Matryoshka layout and match the pgvector column type.
-- Batch size 32 follows the article #2 benchmark sweet spot (~28 docs/s).
+- Batch size 32 follows the article #4 benchmark sweet spot (~28 docs/s).
 """
 import json
 import os

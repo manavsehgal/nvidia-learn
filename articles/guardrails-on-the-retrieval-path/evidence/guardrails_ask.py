@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Same retrieval + generator chain as article #6, now with NeMo Guardrails.
+"""Same retrieval + generator chain as article #8, now with NeMo Guardrails.
 
 Reuses the hybrid_ask.retrieve() pipeline (dense + BM25 + RRF + reranker)
 and the Llama 3.1 8B local NIM as the generator. The only new thing is a
@@ -28,7 +28,7 @@ HERE = Path(__file__).resolve().parent
 ARTICLE6_EVIDENCE = HERE.parent.parent / "bigger-generator-grounding-on-spark" / "evidence"
 sys.path.insert(0, str(ARTICLE6_EVIDENCE))
 
-import hybrid_ask  # noqa: E402 — reused retrieval pipeline from article #6
+import hybrid_ask  # noqa: E402 — reused retrieval pipeline from article #8
 
 from nemoguardrails import LLMRails, RailsConfig  # noqa: E402
 from nemoguardrails.actions import action  # noqa: E402

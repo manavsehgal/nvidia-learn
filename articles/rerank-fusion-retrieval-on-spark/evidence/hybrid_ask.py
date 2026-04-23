@@ -13,7 +13,7 @@ GB10 — its TRT plans are compiled for RTX6000 Blackwell and its ONNX
 fallback hits a missing CUDA symbol. We call NVIDIA's hosted NVCF endpoint
 for that single stage and document the gap.
 
-stdlib only. Same ethos as articles #2-4.
+stdlib only. Same ethos as articles #4-4.
 
 Usage:
     python3 hybrid_ask.py --mode rrf    "Did Google have an IPO in 2004?"

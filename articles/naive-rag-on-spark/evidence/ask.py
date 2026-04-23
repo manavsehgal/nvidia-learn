@@ -2,7 +2,7 @@
 """Naive RAG on a DGX Spark: embed-query → pgvector top-K → strict-context
 prompt → streaming chat/completions against a local Llama 3.1 8B NIM.
 
-No third-party packages. stdlib only, matching the article #2 and #3 ethos.
+No third-party packages. stdlib only, matching the article #4 and #5 ethos.
 
 Usage:
     python3 ask.py "What happened in the 2004 Athens Olympics?"
