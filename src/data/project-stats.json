@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T18:20:47Z",
+  "generated_at": "2026-04-23T19:45:34Z",
   "articles": {
     "total": 12,
     "published": 12,
@@ -7,8 +7,8 @@
     "drafts": 0
   },
   "words": {
-    "total": 31409,
-    "mean_per_article": 2617,
+    "total": 31417,
+    "mean_per_article": 2618,
     "longest": {
       "slug": "nim-first-inference-dgx-spark",
       "title": "Your First NIM on a DGX Spark \u2014 What 24.8 Tokens Per Second Doesn't Tell You",
@@ -77,17 +77,22 @@
       "id": "nemotron-embed-1b-v2",
       "label": "Nemotron Embed 1B v2",
       "articles": 2
+    },
+    {
+      "id": "qwen-2.5-3b-instruct",
+      "label": "Qwen2.5 3B Instruct",
+      "articles": 1
     }
   ],
   "products": [
     {
-      "id": "nim",
-      "label": "NVIDIA NIM",
+      "id": "dgx-spark",
+      "label": "DGX Spark",
       "articles": 12
     },
     {
-      "id": "dgx-spark",
-      "label": "DGX Spark",
+      "id": "nim",
+      "label": "NVIDIA NIM",
       "articles": 12
     },
     {

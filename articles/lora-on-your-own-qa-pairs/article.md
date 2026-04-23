@@ -32,6 +32,63 @@ The adapter collapses that hedging completely. Zero answers in the held-out set 
 
 That is the finding. The rest of this article is what it means, how the experiment was shaped, and why the result should reshape how you think about combining fine-tuning with the RAG stack the earlier Second Brain articles built.
 
+## Where the adapter sits — four layers, one thesis
+
+<figure class="fn-diagram" aria-label="The Second Brain stack on a DGX Spark, viewed as four layers. Bottom: the frozen Qwen2.5-3B base, bf16. Middle accent layer: the rank-16 LoRA adapter trained on 231 own-voice Q&A pairs — 120 MB of deltas, the voice layer. Above: the RAG retrieval chain that brings facts in via the prompt context window. Top: the Second Brain assistant endpoint. The claim: LoRA is the voice layer; RAG is the knowledge layer; they stack rather than compete.">
+  <svg viewBox="0 0 900 440" role="img" aria-label="Four-layer view of the Second Brain on DGX Spark — frozen base, LoRA voice layer (accent), RAG knowledge layer, and assistant endpoint. Each layer is labelled with what it owns. The LoRA row is the thesis: it teaches voice, not facts." preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="lvt-inline-band-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="var(--svg-accent-green)" stop-opacity="0.02"/>
+        <stop offset="50%"  stop-color="var(--svg-accent-green)" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="var(--svg-accent-green)" stop-opacity="0.02"/>
+      </linearGradient>
+      <radialGradient id="lvt-inline-halo-grad" cx="0.5" cy="0.5" r="0.6">
+        <stop offset="0%"   stop-color="var(--svg-accent-green)" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="var(--svg-accent-green)" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="lvt-inline-accent-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="var(--svg-accent-green)" stop-opacity="0.30"/>
+        <stop offset="100%" stop-color="var(--svg-accent-green)" stop-opacity="0.08"/>
+      </linearGradient>
+    </defs>
+    <rect x="80" y="20" width="740" height="400" rx="10" fill="url(#lvt-inline-band-grad)" stroke="none"/>
+    <rect x="120" y="208" width="660" height="76" rx="10" fill="url(#lvt-inline-halo-grad)" stroke="none"/>
+    <g class="fn-diagram__edges"></g>
+    <g class="fn-diagram__nodes">
+      <rect class="fn-diagram__node fn-diagram__node--ghost" x="120" y="40" width="660" height="56" rx="8" />
+      <rect class="fn-diagram__node" x="120" y="112" width="660" height="56" rx="8" />
+      <rect class="fn-diagram__node fn-diagram__node--accent fn-diagram__pulse" x="120" y="208" width="660" height="76" rx="10" style="fill: url(#lvt-inline-accent-grad)" />
+      <rect class="fn-diagram__node" x="120" y="300" width="660" height="56" rx="8" />
+      <rect class="fn-diagram__node fn-diagram__node--ghost" x="120" y="372" width="660" height="48" rx="8" />
+    </g>
+    <g class="fn-diagram__labels">
+      <text class="fn-diagram__label fn-diagram__label--muted" x="180" y="62" text-anchor="start">ASSISTANT</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="180" y="84" text-anchor="start">Second Brain endpoint</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="720" y="74" text-anchor="end">chat · search · cite</text>
+      <text class="fn-diagram__label fn-diagram__label--muted" x="180" y="134" text-anchor="start">KNOWLEDGE · RAG</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="180" y="156" text-anchor="start">pgvector · embed · rerank</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="720" y="146" text-anchor="end">facts arrive via context window</text>
+      <text class="fn-diagram__label fn-diagram__label--accent" x="180" y="230" text-anchor="start">VOICE · LoRA ADAPTER</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="180" y="254" text-anchor="start">r=16 · 120 MB · 231 own pairs</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="180" y="272" text-anchor="start">refusal 61% → 0% · judge mean 1.23 → 2.00</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="720" y="248" text-anchor="end">29.93M trainable · 69 s train</text>
+      <text class="fn-diagram__label fn-diagram__label--muted" x="180" y="322" text-anchor="start">BASE LLM · FROZEN</text>
+      <text class="fn-diagram__label fn-diagram__label--display" x="180" y="344" text-anchor="start">Qwen2.5-3B-Instruct · bf16</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="720" y="334" text-anchor="end">3.09B params · 5.8 GB on disk</text>
+      <text class="fn-diagram__label fn-diagram__label--muted" x="180" y="392" text-anchor="start">HARDWARE</text>
+      <text class="fn-diagram__label fn-diagram__label--mono fn-diagram__label--muted" x="720" y="404" text-anchor="end">DGX Spark · GB10 · 128 GB unified</text>
+    </g>
+    <g class="fn-diagram__symbols">
+      <g class="fn-diagram__icon" transform="translate(136 48)"><path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></g>
+      <g class="fn-diagram__icon" transform="translate(136 120)"><path d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-1.5a1.125 1.125 0 01-1.125-1.125V17.25m8.25-7.5v6.375c0 .621-.504 1.125-1.125 1.125h-1.5a1.125 1.125 0 01-1.125-1.125V9.75"/></g>
+      <g class="fn-diagram__icon fn-diagram__icon--accent" transform="translate(136 220)"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/></g>
+      <g class="fn-diagram__icon" transform="translate(136 308)"><path d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375"/></g>
+      <g class="fn-diagram__icon" transform="translate(136 380)"><path d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.25 2.25 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875C3.839 7.5 3 8.34 3 9.375v9c0 1.036.84 1.875 1.875 1.875h3"/></g>
+    </g>
+  </svg>
+  <figcaption>LoRA is the middle band — 120 MB of deltas trained on your own Q&amp;A pairs, attached at inference time on top of a frozen base. It teaches voice, not facts. The facts arrive through the RAG layer above; the accuracy lives there, not in the adapter.</figcaption>
+</figure>
+
 ## Why Qwen2.5-3B and not the 8B base NIM is serving
 
 The natural impulse is to fine-tune *the* model the rest of your stack uses. On this box, that means the Spark-specific FP8 quantization of `meta-llama/Llama-3.1-8B-Instruct` that [NIM serves on port 8000](/articles/nim-first-inference-dgx-spark/). That impulse runs into two problems and one small insight.
