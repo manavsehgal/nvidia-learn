@@ -70,7 +70,7 @@ export async function getStaticPaths() {
 const { stage, entries } = Astro.props;
 const copy = STAGE_COPY[stage];
 ---
-<BaseLayout title={`${copy.title} — nvidia-learn`} description={copy.blurb}>
+<BaseLayout title={`${copy.title} — ai-field-notes`} description={copy.blurb}>
   <header class="stage-header">
     <p class="stage-header__label">Stage</p>
     <h1 class="stage-header__title">{copy.title}</h1>

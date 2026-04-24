@@ -1,4 +1,4 @@
-# nvidia-learn
+# ai-field-notes
 
 Personal learning portfolio: deep-dive essays on maximising the NVIDIA DGX Spark
 as a personal AI power user and edge AI builder.
@@ -9,8 +9,8 @@ as a personal AI power user and edge AI builder.
 npm install        # one-time
 npm run dev        # dev server: http://localhost:4321/
                    #              http://<spark-lan-ip>:4321/
-npm run build      # static build to dist/ (uses /nvidia-learn/ base)
-npm run preview    # preview the production build at http://localhost:4321/nvidia-learn/
+npm run build      # static build to dist/ (uses /ai-field-notes/ base)
+npm run preview    # preview the production build at http://localhost:4321/ai-field-notes/
 ```
 
 The dev server binds to all interfaces (`server.host: true` in `astro.config.mjs`),

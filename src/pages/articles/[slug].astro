@@ -23,12 +23,12 @@ const dateFmt = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short
 
 const homeHref = import.meta.env.BASE_URL.replace(/\/+$/, '/') || '/';
 ---
-<BaseLayout title={`${title} — nvidia-learn`} description={summary}>
+<BaseLayout title={`${title} — ai-field-notes`} description={summary}>
   <div class="progress-bar" id="progress-bar"></div>
 
   <article class="article">
     <header class="article__header">
-      <a class="article__breadcrumb" href={homeHref}>← nvidia-learn</a>
+      <a class="article__breadcrumb" href={homeHref}>← ai-field-notes</a>
       {isUpcoming && (
         <p class="article__upcoming-banner">Upcoming — this is a proposed abstract, not a published piece.</p>
       )}

@@ -21,12 +21,12 @@ const countPadded = String(published.length).padStart(2, '0');
 const volLabel = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' }).format(new Date());
 const rigImage = `${import.meta.env.BASE_URL}dgx-rig.jpg`.replace(/\/+/g, '/');
 ---
-<BaseLayout title="nvidia-learn — field notes on the DGX Spark">
+<BaseLayout title="ai-field-notes — field notes on the DGX Spark">
   <header class="masthead">
     <div class="masthead__strip" aria-hidden="true">
       <span>Vol. 01</span>
       <span class="masthead__rule"></span>
-      <span>nvidia-learn</span>
+      <span>ai-field-notes</span>
       <span class="masthead__rule"></span>
       <span>{volLabel}</span>
     </div>
