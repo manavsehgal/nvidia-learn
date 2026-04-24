@@ -1,9 +1,11 @@
 import { execSync } from 'node:child_process';
 
-// Map article id → ordinal (1 = oldest publish, N = newest), using each
-// file's first-add commit time as the publish moment. Date frontmatter is
-// not granular enough — multiple articles often share a publish day, which
-// makes a date-only sort unstable.
+// Map article id → ordinal. Published articles are numbered 1..N by first-add
+// commit time (oldest = №01). Upcoming placeholders get ordinal 0 — they
+// render as "Upcoming" in the UI, not as a number, so they must not consume
+// ordinals or the published sequence grows gaps (e.g. №10 → №15).
+// Date frontmatter alone isn't granular enough — multiple articles often
+// share a publish day, making a date-only sort unstable.
 export function publishOrdinals(articles, projectRoot) {
   const firstAddTs = new Map();
   try {
@@ -24,10 +26,20 @@ export function publishOrdinals(articles, projectRoot) {
     // Not a git checkout (e.g. tarball build). Fall back to date-only order.
   }
 
-  const decorated = articles.map((a) => ({
-    article: a,
-    ts: firstAddTs.get(`articles/${a.id}/article.md`) ?? a.data.date.getTime() / 1000,
-  }));
-  decorated.sort((x, y) => x.ts - y.ts || x.article.id.localeCompare(y.article.id));
-  return new Map(decorated.map((d, i) => [d.article.id, i + 1]));
+  const result = new Map();
+  const published = articles
+    .filter((a) => a.data.status !== 'upcoming')
+    .map((a) => ({
+      article: a,
+      ts: firstAddTs.get(`articles/${a.id}/article.md`) ?? a.data.date.getTime() / 1000,
+    }));
+  published.sort((x, y) => x.ts - y.ts || x.article.id.localeCompare(y.article.id));
+  published.forEach((d, i) => result.set(d.article.id, i + 1));
+
+  // Upcoming placeholders: ordinal 0. Display paths branch on `isUpcoming`
+  // before reading the number, so this is never rendered.
+  for (const a of articles) {
+    if (a.data.status === 'upcoming') result.set(a.id, 0);
+  }
+  return result;
 }
