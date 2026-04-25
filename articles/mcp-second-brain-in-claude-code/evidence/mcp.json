@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "second-brain": {
+      "command": "/home/nvidia/second-brain-mcp/launch.sh",
+      "args": [],
+      "env": {}
+    }
+  }
+}
