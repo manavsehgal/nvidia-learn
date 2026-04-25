@@ -1,0 +1,18 @@
+{
+  "framework": "nemo_megatron_core",
+  "params_m": 354.6,
+  "n_layer": 24,
+  "d_model": 1024,
+  "seq_len": 1024,
+  "batch_size": 4,
+  "steps": 100,
+  "warmup_steps_excluded_from_mean": 10,
+  "mean_step_ms": 324.41,
+  "tokens_per_s": 12626.1,
+  "loss_first": 11.015,
+  "loss_last": 0.044,
+  "peak_gpu_mem_gib": 7.94,
+  "peak_gpu_reserved_gib": 10.54,
+  "torch_version": "2.11.0a0+eb65b36914.nv26.02",
+  "cuda_device": "NVIDIA GB10"
+}

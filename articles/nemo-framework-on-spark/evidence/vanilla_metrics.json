@@ -1,0 +1,18 @@
+{
+  "framework": "vanilla_pytorch",
+  "params_m": 354.6,
+  "n_layer": 24,
+  "d_model": 1024,
+  "seq_len": 1024,
+  "batch_size": 4,
+  "steps": 100,
+  "warmup_steps_excluded_from_mean": 10,
+  "mean_step_ms": 337.98,
+  "tokens_per_s": 12119.2,
+  "loss_first": 585.553,
+  "loss_last": 49.639,
+  "peak_gpu_mem_gib": 11.28,
+  "peak_gpu_reserved_gib": 12.98,
+  "torch_version": "2.10.0a0+b558c986e8.nv25.11",
+  "cuda_device": "NVIDIA GB10"
+}

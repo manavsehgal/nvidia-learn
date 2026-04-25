@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-25T15:22:02Z",
+  "generated_at": "2026-04-25T16:00:51Z",
   "articles": {
-    "total": 15,
-    "published": 15,
+    "total": 16,
+    "published": 16,
     "upcoming": 4,
     "drafts": 0
   },
   "words": {
-    "total": 39499,
-    "mean_per_article": 2633,
+    "total": 42402,
+    "mean_per_article": 2650,
     "longest": {
       "slug": "nim-first-inference-dgx-spark",
       "title": "Your First NIM on a DGX Spark \u2014 What 24.8 Tokens Per Second Doesn't Tell You",
@@ -16,12 +16,12 @@
     }
   },
   "code": {
-    "evidence_loc": 3594,
-    "src_loc": 4586,
-    "total_loc": 8180,
+    "evidence_loc": 3931,
+    "src_loc": 4713,
+    "total_loc": 8644,
     "by_language": {
-      "python": 3566,
-      "astro": 2648,
+      "python": 3903,
+      "astro": 2775,
       "css": 1776,
       "javascript": 112,
       "typescript": 50,
@@ -29,13 +29,13 @@
       "shell": 13
     },
     "data_lines": {
-      "json": 7716,
+      "json": 7752,
       "yaml": 143
     }
   },
   "stages": {
-    "foundations": 3,
-    "training": 0,
+    "foundations": 4,
+    "training": 1,
     "fine-tuning": 3,
     "inference": 9,
     "deployment": 1,
@@ -87,24 +87,24 @@
   ],
   "products": [
     {
-      "id": "nim",
-      "label": "NVIDIA NIM",
-      "articles": 15
-    },
-    {
       "id": "dgx-spark",
       "label": "DGX Spark",
-      "articles": 15
+      "articles": 16
+    },
+    {
+      "id": "nim",
+      "label": "NVIDIA NIM",
+      "articles": 16
     },
     {
       "id": "nemo",
       "label": "NeMo Framework",
-      "articles": 10
+      "articles": 11
     },
     {
       "id": "pgvector",
       "label": "pgvector",
-      "articles": 10
+      "articles": 11
     },
     {
       "id": "nemo-retriever",
@@ -114,17 +114,17 @@
     {
       "id": "tensorrt-llm",
       "label": "TensorRT-LLM",
-      "articles": 8
+      "articles": 9
+    },
+    {
+      "id": "nemoclaw",
+      "label": "NemoClaw",
+      "articles": 7
     },
     {
       "id": "triton",
       "label": "Triton Inference Server",
       "articles": 7
-    },
-    {
-      "id": "nemoclaw",
-      "label": "NemoClaw",
-      "articles": 6
     },
     {
       "id": "nemo-guardrails",

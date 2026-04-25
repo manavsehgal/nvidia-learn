@@ -18,7 +18,7 @@
 
 > One builder maximising the NVIDIA DGX Spark as a personal AI power user and edge AI rig. Every article is a session transcript turned into a deep-dive essay.
 
-<sub><b>15 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
+<sub><b>16 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
 
 ---
 
@@ -26,14 +26,14 @@
 
 | Articles | Words | Lines of code | Models | NVIDIA products |
 |:-:|:-:|:-:|:-:|:-:|
-| **15** *(+4 upcoming)* | **39,499** | **7,952** | **6** | **11** |
+| **16** *(+4 upcoming)* | **42,402** | **8,644** | **6** | **11** |
 
 ### Stages
 
 | Stage | Published | Upcoming |
 |---|:-:|:-:|
-| [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 3 | — |
-| [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | — | 1 |
+| [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 4 | — |
+| [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | 1 | 1 |
 | [Fine-tuning](https://manavsehgal.github.io/ai-field-notes/stage/fine-tuning/) | 3 | 1 |
 | [Inference](https://manavsehgal.github.io/ai-field-notes/stage/inference/) | 9 | — |
 | [Deployment](https://manavsehgal.github.io/ai-field-notes/stage/deployment/) | 1 | — |
@@ -45,14 +45,14 @@
 
 | Product | Articles |
 |---|:-:|
-| DGX Spark | 15 |
-| NVIDIA NIM | 15 |
-| NeMo Framework | 10 |
-| pgvector | 10 |
+| DGX Spark | 16 |
+| NVIDIA NIM | 16 |
+| NeMo Framework | 11 |
+| pgvector | 11 |
 | NeMo Retriever | 9 |
-| TensorRT-LLM | 8 |
+| TensorRT-LLM | 9 |
+| NemoClaw | 7 |
 | Triton Inference Server | 7 |
-| NemoClaw | 6 |
 | NeMo Guardrails | 3 |
 | Ollama | 3 |
 | OpenClaw | 2 |
@@ -82,6 +82,7 @@ Each article is a deep-dive essay grown from a single session transcript on the 
 
 ### Training
 
+- **[NeMo Framework on the Spark — What It Earns Over a Hand-Rolled train.py](https://manavsehgal.github.io/ai-field-notes/articles/nemo-framework-on-spark/)** — Same 354M GPT, same 100 steps, same random tokens — once in a hand-rolled train.py against vanilla PyTorch, once via Megatron-Core inside the NeMo Framework container. Same hardware (GB10, 128 GB unified). The framework earns +5.8% throughput and 30% less GPU memory.
 - 🔜 **[Continued Pre-training on a DGX Spark — NeMo Framework Without a Cluster](https://manavsehgal.github.io/ai-field-notes/articles/nemo-framework-continued-pretraining-on-spark/)** *(planned 2026-05-07)* — When does it make sense to continue pre-training on a single GB10 box, and when is it a category error? A planned run that pushes NeMo Framework, Megatron-LM parallelism, and BF16 mixed precision against the 128 GB unified-memory wall with a small domain corpus.
 
 ### Fine-tuning
