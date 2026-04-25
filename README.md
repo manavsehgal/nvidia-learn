@@ -18,7 +18,7 @@
 
 > One builder maximising the NVIDIA DGX Spark as a personal AI power user and edge AI rig. Every article is a session transcript turned into a deep-dive essay.
 
-<sub><b>20 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
+<sub><b>21 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
 
 ---
 
@@ -26,18 +26,18 @@
 
 | Articles | Words | Lines of code | Models | NVIDIA products |
 |:-:|:-:|:-:|:-:|:-:|
-| **20** *(+4 upcoming)* | **51,347** | **11,270** | **6** | **11** |
+| **21** *(+4 upcoming)* | **53,415** | **11,363** | **7** | **11** |
 
 ### Stages
 
 | Stage | Published | Upcoming |
 |---|:-:|:-:|
-| [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 8 | — |
-| [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | 4 | 1 |
+| [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 9 | — |
+| [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | 5 | 1 |
 | [Fine-tuning](https://manavsehgal.github.io/ai-field-notes/stage/fine-tuning/) | 3 | 1 |
 | [Inference](https://manavsehgal.github.io/ai-field-notes/stage/inference/) | 9 | — |
 | [Deployment](https://manavsehgal.github.io/ai-field-notes/stage/deployment/) | 1 | — |
-| [Agentic](https://manavsehgal.github.io/ai-field-notes/stage/agentic/) | 4 | — |
+| [Agentic](https://manavsehgal.github.io/ai-field-notes/stage/agentic/) | 5 | — |
 | [Observability](https://manavsehgal.github.io/ai-field-notes/stage/observability/) | 1 | 1 |
 | [Dev-tools](https://manavsehgal.github.io/ai-field-notes/stage/dev-tools/) | 2 | 1 |
 
@@ -45,28 +45,29 @@
 
 | Product | Articles |
 |---|:-:|
-| NVIDIA NIM | 20 |
-| DGX Spark | 20 |
-| NeMo Framework | 15 |
-| pgvector | 11 |
+| NVIDIA NIM | 21 |
+| DGX Spark | 21 |
+| NeMo Framework | 16 |
+| pgvector | 12 |
 | TensorRT-LLM | 10 |
-| NeMo Retriever | 9 |
+| NeMo Retriever | 10 |
 | Triton Inference Server | 8 |
-| NemoClaw | 7 |
+| NemoClaw | 8 |
 | NeMo Guardrails | 4 |
+| OpenClaw | 3 |
 | Ollama | 3 |
-| OpenClaw | 2 |
 
 ### Models
 
 | Model | Articles |
 |---|:-:|
-| Llama 3.1 8B Instruct | 13 |
+| Llama 3.1 8B Instruct | 14 |
 | Nemotron Reranker 1B | 6 |
 | Nemotron Super 49B | 4 |
 | Nemotron Embed 1B v2 | 4 |
 | Llama 3.3 70B Instruct | 3 |
 | Qwen2.5 3B Instruct | 2 |
+| Qwen2.5 7B Instruct | 1 |
 
 ---
 
@@ -76,6 +77,7 @@ Each article is a deep-dive essay grown from a single session transcript on the 
 
 ### Foundations
 
+- **[What the Agent Actually Built — Five Articles in Plain English, and Why You Probably Don't Want to Train From Scratch](https://manavsehgal.github.io/ai-field-notes/articles/what-the-agent-actually-built/)** — Five technical articles in one day built an unattended AI research loop on a desk for $0.02 of electricity. The plain-English readout: what the agent built (not a usable model), what it changes for one person, and a four-tier roadmap from LoRA in minutes to from-scratch in weeks.
 - **[Looking Beyond Spark — Fine-Tuning a 100B Nemotron](https://manavsehgal.github.io/ai-field-notes/articles/gpu-sizing-math-for-fine-tuning/)** — A working answer to: how many GPUs to fine-tune a 100B Nemotron? Three methods, three memory footprints — full FT ≈ 1.6 TB needs 24× H100; LoRA ≈ 250 GB fits 8× H100; QLoRA ≈ 65 GB fits 1× H200. The Spark's 3B LoRA teaches the math.
 - **[One Substrate, Three Apps — Where the Foundation Forks](https://manavsehgal.github.io/ai-field-notes/articles/one-substrate-three-apps/)** — Seven articles installed one stack on the Spark — NIM, Embed, pgvector, RAG glue, reranker, generator A/B, Guardrails. This bridge retells that install as three different answers to one question — corpus plus 128 GB — and walks readers to the top of three tracks.
 - **[Access First, Models Second — How I Set Up My DGX Spark for Solo AI Work](https://manavsehgal.github.io/ai-field-notes/articles/dgx-spark-day-one-access-first/)** — Most DGX Spark walkthroughs open with CUDA and tokens/sec. This one opens with streaming, AI-pair-programming, sandboxed agents, and browser automation — the access layer. For a solo edge builder, that interaction stack is more load-bearing than the model stack.

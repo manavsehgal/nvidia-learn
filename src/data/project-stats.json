@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-25T19:25:14Z",
+  "generated_at": "2026-04-25T20:19:04Z",
   "articles": {
-    "total": 20,
-    "published": 20,
+    "total": 21,
+    "published": 21,
     "upcoming": 4,
     "drafts": 0
   },
   "words": {
-    "total": 51347,
-    "mean_per_article": 2567,
+    "total": 53415,
+    "mean_per_article": 2543,
     "longest": {
       "slug": "nim-first-inference-dgx-spark",
       "title": "Your First NIM on a DGX Spark \u2014 What 24.8 Tokens Per Second Doesn't Tell You",
@@ -17,11 +17,11 @@
   },
   "code": {
     "evidence_loc": 6006,
-    "src_loc": 5264,
-    "total_loc": 11270,
+    "src_loc": 5357,
+    "total_loc": 11363,
     "by_language": {
       "python": 5978,
-      "astro": 3326,
+      "astro": 3419,
       "css": 1776,
       "javascript": 112,
       "typescript": 50,
@@ -34,12 +34,12 @@
     }
   },
   "stages": {
-    "foundations": 8,
-    "training": 4,
+    "foundations": 9,
+    "training": 5,
     "fine-tuning": 3,
     "inference": 9,
     "deployment": 1,
-    "agentic": 4,
+    "agentic": 5,
     "observability": 1,
     "dev-tools": 2
   },
@@ -57,7 +57,7 @@
     {
       "id": "llama-3.1-8b-instruct",
       "label": "Llama 3.1 8B Instruct",
-      "articles": 13
+      "articles": 14
     },
     {
       "id": "nemotron-reranker-1b",
@@ -83,28 +83,33 @@
       "id": "qwen-2.5-3b-instruct",
       "label": "Qwen2.5 3B Instruct",
       "articles": 2
+    },
+    {
+      "id": "qwen-2.5-7b-instruct",
+      "label": "Qwen2.5 7B Instruct",
+      "articles": 1
     }
   ],
   "products": [
     {
       "id": "nim",
       "label": "NVIDIA NIM",
-      "articles": 20
+      "articles": 21
     },
     {
       "id": "dgx-spark",
       "label": "DGX Spark",
-      "articles": 20
+      "articles": 21
     },
     {
       "id": "nemo",
       "label": "NeMo Framework",
-      "articles": 15
+      "articles": 16
     },
     {
       "id": "pgvector",
       "label": "pgvector",
-      "articles": 11
+      "articles": 12
     },
     {
       "id": "tensorrt-llm",
@@ -114,7 +119,7 @@
     {
       "id": "nemo-retriever",
       "label": "NeMo Retriever",
-      "articles": 9
+      "articles": 10
     },
     {
       "id": "triton",
@@ -124,7 +129,7 @@
     {
       "id": "nemoclaw",
       "label": "NemoClaw",
-      "articles": 7
+      "articles": 8
     },
     {
       "id": "nemo-guardrails",
@@ -132,14 +137,14 @@
       "articles": 4
     },
     {
-      "id": "ollama",
-      "label": "Ollama",
+      "id": "openclaw",
+      "label": "OpenClaw",
       "articles": 3
     },
     {
-      "id": "openclaw",
-      "label": "OpenClaw",
-      "articles": 2
+      "id": "ollama",
+      "label": "Ollama",
+      "articles": 3
     }
   ],
   "metrics": {
