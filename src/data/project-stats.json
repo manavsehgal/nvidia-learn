@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-25T17:49:58Z",
+  "generated_at": "2026-04-25T19:25:14Z",
   "articles": {
-    "total": 19,
-    "published": 19,
+    "total": 20,
+    "published": 20,
     "upcoming": 4,
     "drafts": 0
   },
   "words": {
-    "total": 48956,
-    "mean_per_article": 2576,
+    "total": 51347,
+    "mean_per_article": 2567,
     "longest": {
       "slug": "nim-first-inference-dgx-spark",
       "title": "Your First NIM on a DGX Spark \u2014 What 24.8 Tokens Per Second Doesn't Tell You",
@@ -16,12 +16,12 @@
     }
   },
   "code": {
-    "evidence_loc": 5091,
-    "src_loc": 5099,
-    "total_loc": 10190,
+    "evidence_loc": 6006,
+    "src_loc": 5264,
+    "total_loc": 11270,
     "by_language": {
-      "python": 5063,
-      "astro": 3161,
+      "python": 5978,
+      "astro": 3326,
       "css": 1776,
       "javascript": 112,
       "typescript": 50,
@@ -29,17 +29,17 @@
       "shell": 13
     },
     "data_lines": {
-      "json": 8682,
+      "json": 9191,
       "yaml": 165
     }
   },
   "stages": {
-    "foundations": 7,
-    "training": 3,
+    "foundations": 8,
+    "training": 4,
     "fine-tuning": 3,
     "inference": 9,
     "deployment": 1,
-    "agentic": 3,
+    "agentic": 4,
     "observability": 1,
     "dev-tools": 2
   },
@@ -57,7 +57,7 @@
     {
       "id": "llama-3.1-8b-instruct",
       "label": "Llama 3.1 8B Instruct",
-      "articles": 12
+      "articles": 13
     },
     {
       "id": "nemotron-reranker-1b",
@@ -82,24 +82,24 @@
     {
       "id": "qwen-2.5-3b-instruct",
       "label": "Qwen2.5 3B Instruct",
-      "articles": 1
+      "articles": 2
     }
   ],
   "products": [
     {
-      "id": "dgx-spark",
-      "label": "DGX Spark",
-      "articles": 19
-    },
-    {
       "id": "nim",
       "label": "NVIDIA NIM",
-      "articles": 19
+      "articles": 20
+    },
+    {
+      "id": "dgx-spark",
+      "label": "DGX Spark",
+      "articles": 20
     },
     {
       "id": "nemo",
       "label": "NeMo Framework",
-      "articles": 14
+      "articles": 15
     },
     {
       "id": "pgvector",
@@ -107,23 +107,23 @@
       "articles": 11
     },
     {
+      "id": "tensorrt-llm",
+      "label": "TensorRT-LLM",
+      "articles": 10
+    },
+    {
       "id": "nemo-retriever",
       "label": "NeMo Retriever",
       "articles": 9
     },
     {
-      "id": "tensorrt-llm",
-      "label": "TensorRT-LLM",
-      "articles": 9
+      "id": "triton",
+      "label": "Triton Inference Server",
+      "articles": 8
     },
     {
       "id": "nemoclaw",
       "label": "NemoClaw",
-      "articles": 7
-    },
-    {
-      "id": "triton",
-      "label": "Triton Inference Server",
       "articles": 7
     },
     {

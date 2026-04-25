@@ -18,7 +18,7 @@
 
 > One builder maximising the NVIDIA DGX Spark as a personal AI power user and edge AI rig. Every article is a session transcript turned into a deep-dive essay.
 
-<sub><b>19 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
+<sub><b>20 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
 
 ---
 
@@ -26,18 +26,18 @@
 
 | Articles | Words | Lines of code | Models | NVIDIA products |
 |:-:|:-:|:-:|:-:|:-:|
-| **19** *(+4 upcoming)* | **48,956** | **10,190** | **6** | **11** |
+| **20** *(+4 upcoming)* | **51,347** | **11,270** | **6** | **11** |
 
 ### Stages
 
 | Stage | Published | Upcoming |
 |---|:-:|:-:|
-| [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 7 | — |
-| [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | 3 | 1 |
+| [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 8 | — |
+| [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | 4 | 1 |
 | [Fine-tuning](https://manavsehgal.github.io/ai-field-notes/stage/fine-tuning/) | 3 | 1 |
 | [Inference](https://manavsehgal.github.io/ai-field-notes/stage/inference/) | 9 | — |
 | [Deployment](https://manavsehgal.github.io/ai-field-notes/stage/deployment/) | 1 | — |
-| [Agentic](https://manavsehgal.github.io/ai-field-notes/stage/agentic/) | 3 | — |
+| [Agentic](https://manavsehgal.github.io/ai-field-notes/stage/agentic/) | 4 | — |
 | [Observability](https://manavsehgal.github.io/ai-field-notes/stage/observability/) | 1 | 1 |
 | [Dev-tools](https://manavsehgal.github.io/ai-field-notes/stage/dev-tools/) | 2 | 1 |
 
@@ -45,14 +45,14 @@
 
 | Product | Articles |
 |---|:-:|
-| DGX Spark | 19 |
-| NVIDIA NIM | 19 |
-| NeMo Framework | 14 |
+| NVIDIA NIM | 20 |
+| DGX Spark | 20 |
+| NeMo Framework | 15 |
 | pgvector | 11 |
+| TensorRT-LLM | 10 |
 | NeMo Retriever | 9 |
-| TensorRT-LLM | 9 |
+| Triton Inference Server | 8 |
 | NemoClaw | 7 |
-| Triton Inference Server | 7 |
 | NeMo Guardrails | 4 |
 | Ollama | 3 |
 | OpenClaw | 2 |
@@ -61,12 +61,12 @@
 
 | Model | Articles |
 |---|:-:|
-| Llama 3.1 8B Instruct | 12 |
+| Llama 3.1 8B Instruct | 13 |
 | Nemotron Reranker 1B | 6 |
 | Nemotron Super 49B | 4 |
 | Nemotron Embed 1B v2 | 4 |
 | Llama 3.3 70B Instruct | 3 |
-| Qwen2.5 3B Instruct | 1 |
+| Qwen2.5 3B Instruct | 2 |
 
 ---
 
@@ -109,6 +109,7 @@ Each article is a deep-dive essay grown from a single session transcript on the 
 ### Agentic
 
 - **[Guardrails Before the Agent Edits — Code-Edit Policy as a Programmatic Funnel](https://manavsehgal.github.io/ai-field-notes/articles/guardrails-for-code-generation/)** — Five programmatic rails between the Autoresearch agent's proposal and any mutation of train.py — schema, menu, range, cross-constraint, diff lint. 27 adversarial test cases: block recall 1.0, clean pass 1.0, every rail attribution correct. Zero LLM-as-judge calls.
+- **[The Autoresearch Loop — 50 Iterations of an LLM Editing Its Own Trainer Overnight](https://manavsehgal.github.io/ai-field-notes/articles/autoresearch-agent-loop/)** — NIM Llama 3.1 8B drives a structured-perturbation agent loop against a 354M GPT pretrain. 50 iterations, 73.4 min wall, 0.07 kWh of electricity. 8 keeps, 42 reverts, 0 rail blocks, 0 crashes. Best result: val_bpb 10.8534, +0.93% over baseline at d_model=768.
 - **[Second Brain as a Tool — Wrapping the RAG Stack in MCP for Claude Code](https://manavsehgal.github.io/ai-field-notes/articles/mcp-second-brain-in-claude-code/)** — Closing the Second Brain arc. Four MCP tools wrap the RAG chain — embed, retrieve, optionally rerank, generate — and any Claude Code session anywhere on the box becomes a grounded research client. 200 lines of Python, one launcher, one .mcp.json entry.
 - **[The Sandbox Tax That Wasn't — NemoClaw vs OpenClaw on One DGX Spark](https://manavsehgal.github.io/ai-field-notes/articles/nemoclaw-vs-openclaw-dgx-spark/)** — I ran NemoClaw's sandboxed agent stack and the host Ollama-OpenClaw CLI side by side on one DGX Spark with the same 123B Nemotron model. The sandbox overhead I went looking for is real but modest (~2× raw inference); the real tax is onboarding, and NemoClaw paid it at install time.
 

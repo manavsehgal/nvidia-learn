@@ -1,0 +1,340 @@
+{
+  "trajectory_path": "/home/nvidia/ai-field-notes/articles/autoresearch-agent-loop/evidence/trajectory.jsonl",
+  "iterations_total": 50,
+  "iterations_evaluated": 50,
+  "iterations_blocked": 0,
+  "iterations_nim_error": 0,
+  "iterations_eval_failed": 0,
+  "decisions_keep": 8,
+  "decisions_revert": 42,
+  "block_by_rail": {},
+  "knob_distribution": {
+    "n_head": 15,
+    "d_model": 24,
+    "d_ff": 5,
+    "lr": 3,
+    "beta1": 1,
+    "beta2": 2
+  },
+  "knob_diversity_unique": 6,
+  "knob_diversity_total_proposals": 50,
+  "repeat_proposals": [
+    {
+      "iter": 5,
+      "knob": "d_model",
+      "new_value": 768,
+      "n_seen": 2
+    },
+    {
+      "iter": 6,
+      "knob": "d_model",
+      "new_value": 768,
+      "n_seen": 3
+    },
+    {
+      "iter": 7,
+      "knob": "n_head",
+      "new_value": 8,
+      "n_seen": 2
+    },
+    {
+      "iter": 8,
+      "knob": "n_head",
+      "new_value": 32,
+      "n_seen": 2
+    },
+    {
+      "iter": 9,
+      "knob": "d_model",
+      "new_value": 1536,
+      "n_seen": 2
+    },
+    {
+      "iter": 11,
+      "knob": "d_model",
+      "new_value": 1536,
+      "n_seen": 3
+    },
+    {
+      "iter": 15,
+      "knob": "lr",
+      "new_value": 0.0002,
+      "n_seen": 2
+    },
+    {
+      "iter": 16,
+      "knob": "n_head",
+      "new_value": 32,
+      "n_seen": 3
+    },
+    {
+      "iter": 18,
+      "knob": "n_head",
+      "new_value": 8,
+      "n_seen": 3
+    },
+    {
+      "iter": 19,
+      "knob": "d_model",
+      "new_value": 1536,
+      "n_seen": 4
+    },
+    {
+      "iter": 22,
+      "knob": "n_head",
+      "new_value": 32,
+      "n_seen": 4
+    },
+    {
+      "iter": 23,
+      "knob": "d_model",
+      "new_value": 768,
+      "n_seen": 4
+    },
+    {
+      "iter": 24,
+      "knob": "d_model",
+      "new_value": 2048,
+      "n_seen": 2
+    },
+    {
+      "iter": 26,
+      "knob": "d_model",
+      "new_value": 1536,
+      "n_seen": 5
+    },
+    {
+      "iter": 27,
+      "knob": "d_model",
+      "new_value": 1536,
+      "n_seen": 6
+    },
+    {
+      "iter": 28,
+      "knob": "n_head",
+      "new_value": 8,
+      "n_seen": 4
+    },
+    {
+      "iter": 29,
+      "knob": "d_model",
+      "new_value": 1536,
+      "n_seen": 7
+    },
+    {
+      "iter": 30,
+      "knob": "d_model",
+      "new_value": 2048,
+      "n_seen": 3
+    },
+    {
+      "iter": 31,
+      "knob": "d_model",
+      "new_value": 768,
+      "n_seen": 5
+    },
+    {
+      "iter": 32,
+      "knob": "d_model",
+      "new_value": 2048,
+      "n_seen": 4
+    },
+    {
+      "iter": 33,
+      "knob": "d_model",
+      "new_value": 768,
+      "n_seen": 6
+    },
+    {
+      "iter": 34,
+      "knob": "d_model",
+      "new_value": 1536,
+      "n_seen": 8
+    },
+    {
+      "iter": 35,
+      "knob": "n_head",
+      "new_value": 8,
+      "n_seen": 5
+    },
+    {
+      "iter": 36,
+      "knob": "d_model",
+      "new_value": 1536,
+      "n_seen": 9
+    },
+    {
+      "iter": 37,
+      "knob": "n_head",
+      "new_value": 32,
+      "n_seen": 5
+    },
+    {
+      "iter": 39,
+      "knob": "n_head",
+      "new_value": 4,
+      "n_seen": 2
+    },
+    {
+      "iter": 40,
+      "knob": "n_head",
+      "new_value": 4,
+      "n_seen": 3
+    },
+    {
+      "iter": 41,
+      "knob": "d_model",
+      "new_value": 2048,
+      "n_seen": 5
+    },
+    {
+      "iter": 42,
+      "knob": "lr",
+      "new_value": 0.0002,
+      "n_seen": 3
+    },
+    {
+      "iter": 43,
+      "knob": "d_ff",
+      "new_value": 6144,
+      "n_seen": 2
+    },
+    {
+      "iter": 44,
+      "knob": "d_model",
+      "new_value": 1536,
+      "n_seen": 10
+    },
+    {
+      "iter": 45,
+      "knob": "d_model",
+      "new_value": 768,
+      "n_seen": 7
+    },
+    {
+      "iter": 46,
+      "knob": "d_ff",
+      "new_value": 8192,
+      "n_seen": 2
+    },
+    {
+      "iter": 47,
+      "knob": "n_head",
+      "new_value": 32,
+      "n_seen": 6
+    },
+    {
+      "iter": 49,
+      "knob": "d_model",
+      "new_value": 2048,
+      "n_seen": 6
+    },
+    {
+      "iter": 50,
+      "knob": "n_head",
+      "new_value": 8,
+      "n_seen": 6
+    }
+  ],
+  "top5_by_improvement": [
+    {
+      "iter": 45,
+      "knob": "d_model",
+      "new_value": 768,
+      "val_bpb": 10.8534,
+      "improvement_pct": 0.93,
+      "decision": "keep",
+      "reason": "smaller hidden dimension may help"
+    },
+    {
+      "iter": 23,
+      "knob": "d_model",
+      "new_value": 768,
+      "val_bpb": 10.8575,
+      "improvement_pct": 0.89,
+      "decision": "keep",
+      "reason": "smaller hidden dim may reduce overfitting"
+    },
+    {
+      "iter": 33,
+      "knob": "d_model",
+      "new_value": 768,
+      "val_bpb": 10.8692,
+      "improvement_pct": 0.79,
+      "decision": "keep",
+      "reason": "smaller hidden dim for better generalization"
+    },
+    {
+      "iter": 6,
+      "knob": "d_model",
+      "new_value": 768,
+      "val_bpb": 10.8713,
+      "improvement_pct": 0.77,
+      "decision": "keep",
+      "reason": "previous iteration improved with this value"
+    },
+    {
+      "iter": 4,
+      "knob": "d_model",
+      "new_value": 768,
+      "val_bpb": 10.8722,
+      "improvement_pct": 0.76,
+      "decision": "keep",
+      "reason": "reducing hidden dim may help"
+    }
+  ],
+  "bottom3_by_improvement": [
+    {
+      "iter": 42,
+      "knob": "lr",
+      "new_value": 0.0002,
+      "val_bpb": 11.1193,
+      "improvement_pct": -1.5,
+      "decision": "revert",
+      "reason": "slightly reduce peak learning rate"
+    },
+    {
+      "iter": 15,
+      "knob": "lr",
+      "new_value": 0.0002,
+      "val_bpb": 11.1329,
+      "improvement_pct": -1.62,
+      "decision": "revert",
+      "reason": "slightly lower learning rate to reduce overshooting"
+    },
+    {
+      "iter": 38,
+      "knob": "d_model",
+      "new_value": 256,
+      "val_bpb": 13.7575,
+      "improvement_pct": -25.58,
+      "decision": "revert",
+      "reason": "Reducing hidden dim may help with overfitting"
+    }
+  ],
+  "timing": {
+    "iter_wall_s_mean": 88.1,
+    "iter_wall_s_median": 80.3,
+    "nim_latency_s_mean": 1.23,
+    "train_wall_s_mean": 85.8
+  },
+  "baseline_val_bpb": 10.9554,
+  "summary_record": {
+    "stage": "loop_complete",
+    "iters_requested": 50,
+    "accept_count": 8,
+    "revert_count": 42,
+    "block_count": 0,
+    "eval_fail_count": 0,
+    "loop_wall_s": 4406.4,
+    "loop_wall_min": 73.4,
+    "baseline_val_bpb": 10.9554,
+    "best_val_bpb": 10.8534,
+    "best_proposal": {
+      "knob": "d_model",
+      "new_value": 768,
+      "reason": "smaller hidden dimension may help"
+    },
+    "best_improvement_frac": 0.0093
+  }
+}

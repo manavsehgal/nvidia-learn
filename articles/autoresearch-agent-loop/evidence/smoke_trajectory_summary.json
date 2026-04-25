@@ -1,0 +1,101 @@
+{
+  "trajectory_path": "/home/nvidia/ai-field-notes/articles/autoresearch-agent-loop/evidence/smoke_trajectory.jsonl",
+  "iterations_total": 3,
+  "iterations_evaluated": 3,
+  "iterations_blocked": 0,
+  "iterations_nim_error": 0,
+  "iterations_eval_failed": 0,
+  "decisions_keep": 1,
+  "decisions_revert": 2,
+  "block_by_rail": {},
+  "knob_distribution": {
+    "n_head": 1,
+    "d_model": 2
+  },
+  "knob_diversity_unique": 2,
+  "knob_diversity_total_proposals": 3,
+  "repeat_proposals": [],
+  "top5_by_improvement": [
+    {
+      "iter": 3,
+      "knob": "d_model",
+      "new_value": 768,
+      "val_bpb": 10.887,
+      "improvement_pct": 0.63,
+      "decision": "keep",
+      "reason": "lowering d_model to 768 may help with overfitting"
+    },
+    {
+      "iter": 2,
+      "knob": "d_model",
+      "new_value": 1536,
+      "val_bpb": 10.9188,
+      "improvement_pct": 0.34,
+      "decision": "revert",
+      "reason": "Increase model capacity"
+    },
+    {
+      "iter": 1,
+      "knob": "n_head",
+      "new_value": 8,
+      "val_bpb": 10.9527,
+      "improvement_pct": 0.03,
+      "decision": "revert",
+      "reason": "Reducing attention heads to 8 may help with overfitting."
+    }
+  ],
+  "bottom3_by_improvement": [
+    {
+      "iter": 3,
+      "knob": "d_model",
+      "new_value": 768,
+      "val_bpb": 10.887,
+      "improvement_pct": 0.63,
+      "decision": "keep",
+      "reason": "lowering d_model to 768 may help with overfitting"
+    },
+    {
+      "iter": 2,
+      "knob": "d_model",
+      "new_value": 1536,
+      "val_bpb": 10.9188,
+      "improvement_pct": 0.34,
+      "decision": "revert",
+      "reason": "Increase model capacity"
+    },
+    {
+      "iter": 1,
+      "knob": "n_head",
+      "new_value": 8,
+      "val_bpb": 10.9527,
+      "improvement_pct": 0.03,
+      "decision": "revert",
+      "reason": "Reducing attention heads to 8 may help with overfitting."
+    }
+  ],
+  "timing": {
+    "iter_wall_s_mean": 80.4,
+    "iter_wall_s_median": 74.7,
+    "nim_latency_s_mean": 1.26,
+    "train_wall_s_mean": 77.9
+  },
+  "baseline_val_bpb": 10.9558,
+  "summary_record": {
+    "stage": "loop_complete",
+    "iters_requested": 3,
+    "accept_count": 1,
+    "revert_count": 2,
+    "block_count": 0,
+    "eval_fail_count": 0,
+    "loop_wall_s": 241.2,
+    "loop_wall_min": 4.0,
+    "baseline_val_bpb": 10.9558,
+    "best_val_bpb": 10.887,
+    "best_proposal": {
+      "knob": "d_model",
+      "new_value": 768,
+      "reason": "lowering d_model to 768 may help with overfitting"
+    },
+    "best_improvement_frac": 0.0063
+  }
+}

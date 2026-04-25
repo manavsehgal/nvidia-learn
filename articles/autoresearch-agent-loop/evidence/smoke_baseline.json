@@ -1,0 +1,34 @@
+{
+  "baseline_cfg": {
+    "n_layer": 24,
+    "n_head": 16,
+    "d_model": 1024,
+    "d_ff": 4096,
+    "lr": 0.0003,
+    "lr_warmup": 5,
+    "grad_clip": 1.0,
+    "weight_decay": 0.0,
+    "beta1": 0.9,
+    "beta2": 0.95,
+    "batch_size": 16,
+    "seq_len": 1024,
+    "precision": "fp8",
+    "vocab_size": 50257,
+    "steps": 60,
+    "val_chunk_tokens": 16384,
+    "seed": 0
+  },
+  "baseline_metrics": {
+    "ok": true,
+    "params_m": 354.6,
+    "train_steps": 60,
+    "train_loss_first": 11.012,
+    "train_loss_last": 7.44,
+    "val_bpb": 10.9558,
+    "val_n_batches": 1,
+    "mean_step_ms": 1287.83,
+    "train_wall_s": 77.3,
+    "val_wall_s": 0.62,
+    "peak_gpu_mem_gib": 24.32
+  }
+}

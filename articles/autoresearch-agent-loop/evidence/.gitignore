@@ -1,0 +1,6 @@
+__pycache__/
+# Stray symlinks from early container experimentation (owned by root,
+# so can't remove without sudo). Ignored from git, harmless on disk.
+.deps/
+# Pause flag — created at runtime to request a clean pause; never committed.
+pause.flag
