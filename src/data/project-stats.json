@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-05-01T01:48:57Z",
+  "generated_at": "2026-05-01T02:27:26Z",
   "articles": {
-    "total": 23,
-    "published": 23,
+    "total": 24,
+    "published": 24,
     "upcoming": 4,
     "drafts": 0
   },
   "words": {
-    "total": 58667,
-    "mean_per_article": 2550,
+    "total": 60576,
+    "mean_per_article": 2524,
     "longest": {
       "slug": "nim-first-inference-dgx-spark",
       "title": "Your First NIM on a DGX Spark \u2014 What 24.8 Tokens Per Second Doesn't Tell You",
@@ -16,20 +16,20 @@
     }
   },
   "code": {
-    "evidence_loc": 6752,
-    "src_loc": 5904,
-    "total_loc": 12656,
+    "evidence_loc": 6970,
+    "src_loc": 6111,
+    "total_loc": 13081,
     "by_language": {
-      "python": 6724,
-      "astro": 3818,
-      "css": 1896,
+      "python": 6942,
+      "astro": 4014,
+      "css": 1907,
       "javascript": 112,
       "typescript": 78,
       "sql": 15,
       "shell": 13
     },
     "data_lines": {
-      "json": 9611,
+      "json": 9753,
       "yaml": 165
     }
   },
@@ -39,8 +39,8 @@
     "fine-tuning": 4,
     "inference": 9,
     "deployment": 1,
-    "agentic": 7,
-    "observability": 1,
+    "agentic": 8,
+    "observability": 2,
     "dev-tools": 2
   },
   "stages_upcoming": {
@@ -57,12 +57,17 @@
     {
       "id": "llama-3.1-8b-instruct",
       "label": "Llama 3.1 8B Instruct",
-      "articles": 14
+      "articles": 15
     },
     {
       "id": "nemotron-reranker-1b",
       "label": "Nemotron Reranker 1B",
       "articles": 6
+    },
+    {
+      "id": "qwen-2.5-3b-instruct",
+      "label": "Qwen2.5 3B Instruct",
+      "articles": 4
     },
     {
       "id": "nemotron-super-49b",
@@ -73,11 +78,6 @@
       "id": "nemotron-embed-1b-v2",
       "label": "Nemotron Embed 1B v2",
       "articles": 4
-    },
-    {
-      "id": "qwen-2.5-3b-instruct",
-      "label": "Qwen2.5 3B Instruct",
-      "articles": 3
     },
     {
       "id": "llama-3.3-70b-instruct",
@@ -92,14 +92,14 @@
   ],
   "products": [
     {
-      "id": "dgx-spark",
-      "label": "DGX Spark",
+      "id": "nim",
+      "label": "NVIDIA NIM",
       "articles": 23
     },
     {
-      "id": "nim",
-      "label": "NVIDIA NIM",
-      "articles": 22
+      "id": "dgx-spark",
+      "label": "DGX Spark",
+      "articles": 23
     },
     {
       "id": "nemo",

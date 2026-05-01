@@ -1,0 +1,142 @@
+{
+  "trajectory_iters": 50,
+  "knobs_total": 13,
+  "knobs_touched": 6,
+  "knobs_touched_pct": 46.2,
+  "knobs_untouched": [
+    "n_layer",
+    "lr_warmup",
+    "grad_clip",
+    "weight_decay",
+    "batch_size",
+    "seq_len",
+    "precision"
+  ],
+  "knob_count": {
+    "d_model": 24,
+    "n_head": 15,
+    "d_ff": 5,
+    "lr": 3,
+    "beta2": 2,
+    "beta1": 1
+  },
+  "repeat_count": 36,
+  "repeat_rate": 0.72,
+  "unique_pairs": 14,
+  "top_pairs": [
+    {
+      "knob": "d_model",
+      "value": 1536,
+      "n": 10
+    },
+    {
+      "knob": "d_model",
+      "value": 768,
+      "n": 7
+    },
+    {
+      "knob": "n_head",
+      "value": 8,
+      "n": 6
+    },
+    {
+      "knob": "n_head",
+      "value": 32,
+      "n": 6
+    },
+    {
+      "knob": "d_model",
+      "value": 2048,
+      "n": 6
+    },
+    {
+      "knob": "n_head",
+      "value": 4,
+      "n": 3
+    },
+    {
+      "knob": "lr",
+      "value": 0.0002,
+      "n": 3
+    },
+    {
+      "knob": "d_ff",
+      "value": 6144,
+      "n": 2
+    }
+  ],
+  "keep_count": 8,
+  "keep_iters": [
+    4,
+    6,
+    23,
+    31,
+    33,
+    43,
+    45,
+    46
+  ],
+  "keep_pair_counts": [
+    {
+      "knob": "d_model",
+      "value": 768,
+      "n": 6
+    },
+    {
+      "knob": "d_ff",
+      "value": 6144,
+      "n": 1
+    },
+    {
+      "knob": "d_ff",
+      "value": 8192,
+      "n": 1
+    }
+  ],
+  "first_keep_iter": 4,
+  "best_iter": 45,
+  "best_val_bpb": 10.8534,
+  "best_pair": {
+    "knob": "d_model",
+    "value": 768
+  },
+  "baseline_val_bpb": 10.9554,
+  "improvement_pct": 0.93,
+  "windows_repeat_rate": [
+    {
+      "first": 1,
+      "last": 10,
+      "rate": 0.5
+    },
+    {
+      "first": 11,
+      "last": 20,
+      "rate": 0.5
+    },
+    {
+      "first": 21,
+      "last": 30,
+      "rate": 0.8
+    },
+    {
+      "first": 31,
+      "last": 40,
+      "rate": 0.9
+    },
+    {
+      "first": 41,
+      "last": 50,
+      "rate": 0.9
+    }
+  ],
+  "train_keep_count": 5,
+  "test_keep_count": 3,
+  "train_keep_modes": [
+    {
+      "knob": "d_model",
+      "value": 768,
+      "n": 5
+    }
+  ],
+  "history_window_k": 5
+}
