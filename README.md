@@ -12,13 +12,13 @@
   <a href="#run-locally">Run locally</a>
 </p>
 
-<sub>Vol. 01 &nbsp;·&nbsp; ai-field-notes &nbsp;·&nbsp; Apr 2026</sub>
+<sub>Vol. 01 &nbsp;·&nbsp; ai-field-notes &nbsp;·&nbsp; May 2026</sub>
 
 # Field notes on the *DGX Spark*.
 
 > One builder maximising the NVIDIA DGX Spark as a personal AI power user and edge AI rig. Every article is a session transcript turned into a deep-dive essay.
 
-<sub><b>21 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
+<sub><b>22 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
 
 ---
 
@@ -26,18 +26,18 @@
 
 | Articles | Words | Lines of code | Models | NVIDIA products |
 |:-:|:-:|:-:|:-:|:-:|
-| **21** *(+4 upcoming)* | **53,415** | **11,363** | **7** | **11** |
+| **22** *(+4 upcoming)* | **56,342** | **11,712** | **7** | **11** |
 
 ### Stages
 
 | Stage | Published | Upcoming |
 |---|:-:|:-:|
-| [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 9 | — |
-| [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | 5 | 1 |
+| [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 10 | — |
+| [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | 6 | 1 |
 | [Fine-tuning](https://manavsehgal.github.io/ai-field-notes/stage/fine-tuning/) | 3 | 1 |
 | [Inference](https://manavsehgal.github.io/ai-field-notes/stage/inference/) | 9 | — |
 | [Deployment](https://manavsehgal.github.io/ai-field-notes/stage/deployment/) | 1 | — |
-| [Agentic](https://manavsehgal.github.io/ai-field-notes/stage/agentic/) | 5 | — |
+| [Agentic](https://manavsehgal.github.io/ai-field-notes/stage/agentic/) | 6 | — |
 | [Observability](https://manavsehgal.github.io/ai-field-notes/stage/observability/) | 1 | 1 |
 | [Dev-tools](https://manavsehgal.github.io/ai-field-notes/stage/dev-tools/) | 2 | 1 |
 
@@ -45,9 +45,9 @@
 
 | Product | Articles |
 |---|:-:|
+| DGX Spark | 22 |
 | NVIDIA NIM | 21 |
-| DGX Spark | 21 |
-| NeMo Framework | 16 |
+| NeMo Framework | 17 |
 | pgvector | 12 |
 | TensorRT-LLM | 10 |
 | NeMo Retriever | 10 |
@@ -84,6 +84,7 @@ Each article is a deep-dive essay grown from a single session transcript on the 
 
 ### Training
 
+- **[Derisking the Cloud Pretrain — How a $5K Spark Saves $50K on H100 Rentals](https://manavsehgal.github.io/ai-field-notes/articles/derisk-cloud-pretraining-on-the-spark/)** — The Spark is too small for a serious pretrain — but it's the right size for the recipe-search that precedes one. Cull 100 candidate architectures down to 3 on one Spark for ~$1 of electricity, then book the cloud node knowing what to train. The expected savings per campaign run into the thousands.
 - **[NeMo Framework on the Spark — What It Earns Over a Hand-Rolled train.py](https://manavsehgal.github.io/ai-field-notes/articles/nemo-framework-on-spark/)** — Same 354M GPT, same 100 steps, same random tokens — once in a hand-rolled train.py against vanilla PyTorch, once via Megatron-Core inside the NeMo Framework container. Same hardware (GB10, 128 GB unified). The framework earns +5.8% throughput and 30% less GPU memory.
 - **[The Data-Path Envelope — When Real Tokens Beat Random Tokens at Pretrain Throughput](https://manavsehgal.github.io/ai-field-notes/articles/nemo-curator-training-data-prep/)** — Curator-cleaned wikitext-103 (109M tokens, 417 MiB packed) feeding the same 354M GPT pretrain loop from A2. Eight configs swept; data-path overhead is 0.01–0.04% across all of them. New peak: 14,980 tok/s — slightly above A2's random-token ceiling.
 - **[The GB10 Pretrain Envelope — Sweeping Batch, Sequence, and Precision on One Spark](https://manavsehgal.github.io/ai-field-notes/articles/baseline-training-loop-on-spark/)** — Same 354M GPT, same training loop, swept across micro-batch (2,4,8,16), sequence length (1024,2048), and precision (bf16,fp8). 16 configurations, 30 steps each. Peak: 14,266 tokens/sec at batch=16, seq=1024, fp8 — 18% above the hand-rolled PyTorch baseline.

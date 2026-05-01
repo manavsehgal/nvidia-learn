@@ -1,0 +1,47 @@
+{
+  "rates": {
+    "h100_hourly_usd": 2.5,
+    "h200_hourly_usd": 3.5,
+    "spark_kw": 0.24,
+    "kwh_usd": 0.13,
+    "spark_capex_usd": 5000.0,
+    "spark_life_years": 1.5,
+    "iter_seconds": 88,
+    "campaign_iters": 100,
+    "final_node_hours": 168,
+    "spark_amortized_hourly": 0.3803,
+    "spark_electricity_hourly": 0.0312,
+    "spark_total_hourly": 0.4115,
+    "cloud_8xh100_hourly": 20.0
+  },
+  "per_iter_usd": {
+    "spark_electricity_only": 0.0008,
+    "spark_total_cost_of_use": 0.0101,
+    "h100_single": 0.061,
+    "h100_8gpu_node": 0.489,
+    "h200_single": 0.086,
+    "h100_8gpu_node_target_scale_60x": 29.33
+  },
+  "campaign_100_iters_usd": {
+    "spark_electricity_only": 0.08,
+    "spark_total_cost_of_use": 1.01,
+    "h100_single_proxy": 6.11,
+    "h100_8gpu_node_proxy": 48.89,
+    "h100_8gpu_node_target_scale": 2933.33
+  },
+  "final_pretrain_usd": {
+    "8xh100_one_week": 3360.0
+  },
+  "expected_value_argument": {
+    "wrong_pick_rate": 0.5,
+    "expected_loss_from_blind_booking_usd": 1680.0,
+    "spark_recipe_search_cost_usd": 1.01,
+    "expected_savings_per_campaign_usd": 1678.99,
+    "ratio_savings_to_spark_cost": 1669.3
+  },
+  "ratios": {
+    "h100_single_vs_spark_electricity": 80.1,
+    "h100_8gpu_vs_spark_total": 48.6,
+    "target_scale_8gpu_vs_spark_total": 2916.5
+  }
+}
