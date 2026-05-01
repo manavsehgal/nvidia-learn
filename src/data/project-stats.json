@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-05-01T02:27:26Z",
+  "generated_at": "2026-05-01T05:31:16Z",
   "articles": {
-    "total": 24,
-    "published": 24,
+    "total": 25,
+    "published": 25,
     "upcoming": 4,
     "drafts": 0
   },
   "words": {
-    "total": 60576,
-    "mean_per_article": 2524,
+    "total": 62989,
+    "mean_per_article": 2519,
     "longest": {
       "slug": "nim-first-inference-dgx-spark",
       "title": "Your First NIM on a DGX Spark \u2014 What 24.8 Tokens Per Second Doesn't Tell You",
@@ -17,11 +17,11 @@
   },
   "code": {
     "evidence_loc": 6970,
-    "src_loc": 6111,
-    "total_loc": 13081,
+    "src_loc": 6254,
+    "total_loc": 13224,
     "by_language": {
       "python": 6942,
-      "astro": 4014,
+      "astro": 4157,
       "css": 1907,
       "javascript": 112,
       "typescript": 78,
@@ -34,11 +34,11 @@
     }
   },
   "stages": {
-    "foundations": 10,
+    "foundations": 11,
     "training": 7,
     "fine-tuning": 4,
-    "inference": 9,
-    "deployment": 1,
+    "inference": 10,
+    "deployment": 2,
     "agentic": 8,
     "observability": 2,
     "dev-tools": 2
@@ -57,7 +57,7 @@
     {
       "id": "llama-3.1-8b-instruct",
       "label": "Llama 3.1 8B Instruct",
-      "articles": 15
+      "articles": 16
     },
     {
       "id": "nemotron-reranker-1b",
@@ -94,12 +94,12 @@
     {
       "id": "nim",
       "label": "NVIDIA NIM",
-      "articles": 23
+      "articles": 24
     },
     {
       "id": "dgx-spark",
       "label": "DGX Spark",
-      "articles": 23
+      "articles": 24
     },
     {
       "id": "nemo",
@@ -107,14 +107,14 @@
       "articles": 18
     },
     {
-      "id": "pgvector",
-      "label": "pgvector",
+      "id": "tensorrt-llm",
+      "label": "TensorRT-LLM",
       "articles": 12
     },
     {
-      "id": "tensorrt-llm",
-      "label": "TensorRT-LLM",
-      "articles": 11
+      "id": "pgvector",
+      "label": "pgvector",
+      "articles": 12
     },
     {
       "id": "nemo-retriever",
@@ -124,7 +124,7 @@
     {
       "id": "triton",
       "label": "Triton Inference Server",
-      "articles": 8
+      "articles": 9
     },
     {
       "id": "nemoclaw",

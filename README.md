@@ -18,7 +18,7 @@
 
 > One builder maximising the NVIDIA DGX Spark as a personal AI power user and edge AI rig. Every article is a session transcript turned into a deep-dive essay.
 
-<sub><b>22 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
+<sub><b>25 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
 
 ---
 
@@ -26,32 +26,32 @@
 
 | Articles | Words | Lines of code | Models | NVIDIA products |
 |:-:|:-:|:-:|:-:|:-:|
-| **22** *(+4 upcoming)* | **56,363** | **11,969** | **7** | **11** |
+| **25** *(+4 upcoming)* | **62,989** | **13,224** | **7** | **11** |
 
 ### Stages
 
 | Stage | Published | Upcoming |
 |---|:-:|:-:|
-| [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 10 | — |
-| [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | 6 | 1 |
-| [Fine-tuning](https://manavsehgal.github.io/ai-field-notes/stage/fine-tuning/) | 3 | 1 |
-| [Inference](https://manavsehgal.github.io/ai-field-notes/stage/inference/) | 9 | — |
-| [Deployment](https://manavsehgal.github.io/ai-field-notes/stage/deployment/) | 1 | — |
-| [Agentic](https://manavsehgal.github.io/ai-field-notes/stage/agentic/) | 6 | — |
-| [Observability](https://manavsehgal.github.io/ai-field-notes/stage/observability/) | 1 | 1 |
+| [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 11 | — |
+| [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | 7 | 1 |
+| [Fine-tuning](https://manavsehgal.github.io/ai-field-notes/stage/fine-tuning/) | 4 | 1 |
+| [Inference](https://manavsehgal.github.io/ai-field-notes/stage/inference/) | 10 | — |
+| [Deployment](https://manavsehgal.github.io/ai-field-notes/stage/deployment/) | 2 | — |
+| [Agentic](https://manavsehgal.github.io/ai-field-notes/stage/agentic/) | 8 | — |
+| [Observability](https://manavsehgal.github.io/ai-field-notes/stage/observability/) | 2 | 1 |
 | [Dev-tools](https://manavsehgal.github.io/ai-field-notes/stage/dev-tools/) | 2 | 1 |
 
 ### Products & frameworks
 
 | Product | Articles |
 |---|:-:|
-| DGX Spark | 22 |
-| NVIDIA NIM | 21 |
-| NeMo Framework | 17 |
+| NVIDIA NIM | 24 |
+| DGX Spark | 24 |
+| NeMo Framework | 18 |
+| TensorRT-LLM | 12 |
 | pgvector | 12 |
-| TensorRT-LLM | 10 |
 | NeMo Retriever | 10 |
-| Triton Inference Server | 8 |
+| Triton Inference Server | 9 |
 | NemoClaw | 8 |
 | NeMo Guardrails | 4 |
 | OpenClaw | 3 |
@@ -61,12 +61,12 @@
 
 | Model | Articles |
 |---|:-:|
-| Llama 3.1 8B Instruct | 14 |
+| Llama 3.1 8B Instruct | 16 |
 | Nemotron Reranker 1B | 6 |
+| Qwen2.5 3B Instruct | 4 |
 | Nemotron Super 49B | 4 |
 | Nemotron Embed 1B v2 | 4 |
 | Llama 3.3 70B Instruct | 3 |
-| Qwen2.5 3B Instruct | 2 |
 | Qwen2.5 7B Instruct | 1 |
 
 ---
@@ -77,6 +77,7 @@ Each article is a deep-dive essay grown from a single session transcript on the 
 
 ### Foundations
 
+- **[Looking Beyond Spark — KV-Cache Arithmetic at Inference](https://manavsehgal.github.io/ai-field-notes/articles/kv-cache-arithmetic-at-inference/)** — The serving memory bill is not weights. It's KV cache, and KV scales with concurrent users × context length, not parameters. Same four bills as training; different weights. A 70B at 32 users × 16k context wants 168 GB just for KV — and the Spark teaches you the per-token math.
 - **[What the Agent Actually Built — Five Articles in Plain English, and Why You Probably Don't Want to Train From Scratch](https://manavsehgal.github.io/ai-field-notes/articles/what-the-agent-actually-built/)** — Five technical articles in one day built an unattended AI research loop on a desk for $0.02 of electricity. The plain-English readout: what the agent built (not a usable model), what it changes for one person, and a four-tier roadmap from LoRA in minutes to from-scratch in weeks.
 - **[Looking Beyond Spark — Fine-Tuning a 100B Nemotron](https://manavsehgal.github.io/ai-field-notes/articles/gpu-sizing-math-for-fine-tuning/)** — A working answer to: how many GPUs to fine-tune a 100B Nemotron? Three methods, three memory footprints — full FT ≈ 1.6 TB needs 24× H100; LoRA ≈ 250 GB fits 8× H100; QLoRA ≈ 65 GB fits 1× H200. The Spark's 3B LoRA teaches the math.
 - **[One Substrate, Three Apps — Where the Foundation Forks](https://manavsehgal.github.io/ai-field-notes/articles/one-substrate-three-apps/)** — Seven articles installed one stack on the Spark — NIM, Embed, pgvector, RAG glue, reranker, generator A/B, Guardrails. This bridge retells that install as three different answers to one question — corpus plus 128 GB — and walks readers to the top of three tracks.
@@ -92,6 +93,7 @@ Each article is a deep-dive essay grown from a single session transcript on the 
 
 ### Fine-tuning
 
+- **[Distilling the Architect — A 3B LoRA Trained on the Agent's Own Trajectory](https://manavsehgal.github.io/ai-field-notes/articles/distill-architect-lora-from-trajectories/)** — A4's 50-iter trajectory becomes training data for a Qwen2.5-3B LoRA proposer. Holding out 8 iters, the 3B mode-collapses onto d_model=768 (the trajectory's most-frequent keep) and matches 0 / 8 exact; the 8B at T=0.5 matches 4 / 8 of its own past picks.
 - **[LoRA on Your Own Q&A — What 231 Pairs Actually Teach a 3B Model](https://manavsehgal.github.io/ai-field-notes/articles/lora-on-your-own-qa-pairs/)** — 231 own-voice Q&A pairs, a rank-16 LoRA, 69 s of training on a GB10 Spark. The adapter won't memorize your exact numbers, but it will take a model that refuses 61% of questions about your work and turn it into one that answers all of them in your voice. For facts you still need RAG.
 - 🔜 **[LoRA on Nemotron Nano — Fine-tuning a 9B Without Blowing Unified Memory](https://manavsehgal.github.io/ai-field-notes/articles/lora-fine-tune-nemotron-on-spark/)** *(planned 2026-05-14)* — A planned walk through LoRA fine-tuning on Nemotron Nano 9B with NeMo Customizer: rank and alpha sweeps, a tiny domain corpus, and the memory accounting that keeps a PEFT run from tripping the Spark's 128 GB unified-memory wall.
 
@@ -118,6 +120,7 @@ Each article is a deep-dive essay grown from a single session transcript on the 
 
 ### Observability
 
+- **[Was the Agent Researching, or Flailing? An Observability Pass on the Trajectory](https://manavsehgal.github.io/ai-field-notes/articles/trajectory-eval-is-the-agent-flailing/)** — A8 said the LoRA mode-collapsed because the trajectory was thin. This puts numbers on it: 6 of 13 knobs ever touched, 72% of proposals repeated a prior pair, and the proposer's k=5 history window is the structural cause.
 - **[Ragas, Reranked — What 44 Held-Out Questions Say About the Second Brain Stack](https://manavsehgal.github.io/ai-field-notes/articles/rag-eval-ragas-and-nemo-evaluator/)** — A Ragas-style harness written in 200 lines of stdlib Python, run locally on the DGX Spark, against four variants of the Second Brain RAG chain. Naive RAG scores 3.30 / 5. Rerank RAG scores 4.27. LoRA+RAG is a surprise — it does not beat naive. Retrieval is where the points come from.
 - 🔜 **[Watching the GPU — DCGM, Prometheus, and a Local Grafana for the Spark](https://manavsehgal.github.io/ai-field-notes/articles/spark-gpu-telemetry-prometheus-grafana/)** *(planned 2026-05-28)* — A planned setup of DCGM Exporter → Prometheus → Grafana entirely on the Spark itself. The goal is a single dashboard that tells the truth about GPU memory, SM occupancy, and per-container utilization for a rig that's running NIMs, pgvector, and an occasional training job at the same time.
 

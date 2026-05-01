@@ -66,7 +66,7 @@ const BAR_W = (BARS_W - BAR_GAP * (N_BARS - 1)) / N_BARS;
 <svg
   viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
   role="img"
-  aria-label={`Two-panel observability strip. Top: 13 knob cells with the 6 the agent proposed shown filled (d_model dominates with 24 of 50 proposals); 7 cells unfilled (never proposed). Bottom: five bars showing the repeat-proposal rate climbing from 50% in iterations 1-10 to 90% in iterations 41-50 as the proposer's 5-iteration history window forgets prior choices.`}
+  aria-label="Two-panel observability strip. Top: 13 knob cells with the 6 the agent proposed shown filled (d_model dominates with 24 of 50 proposals); 7 cells unfilled (never proposed). Bottom: five bars showing the repeat-proposal rate climbing from 50% in iterations 1-10 to 90% in iterations 41-50 as the proposer's 5-iteration history window forgets prior choices."
   data-svg-animate
   xmlns="http://www.w3.org/2000/svg"
 >
@@ -104,7 +104,7 @@ const BAR_W = (BARS_W - BAR_GAP * (N_BARS - 1)) / N_BARS;
             rx="2"
             fill={filled ? "url(#tf-fill)" : "transparent"}
             stroke="var(--svg-text-faint)"
-            stroke-width={filled ? 0 : 0.6}
+            stroke-width={filled ? 0 : 0.5}
             opacity={filled ? 1 : 0.5}
           />
           {filled && (
