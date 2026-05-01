@@ -67,20 +67,22 @@ const rigImage = `${import.meta.env.BASE_URL}dgx-rig.jpg`.replace(/\/+/g, '/');
 
   <nav class="filter-row" aria-label="Filter articles">
     <SeriesFilter current={null} />
-    <StageFilter current={null} />
-    {upcomingAsc.length > 0 && (
-      <button
-        type="button"
-        class="stage-filter__chip stage-filter__chip--toggle"
-        id="upcoming-toggle"
-        role="switch"
-        aria-pressed="false"
-        aria-controls="home-research-list"
-      >
-        <span class="stage-filter__chip-dot" aria-hidden="true"></span>
-        <span>+{upcomingAsc.length} Upcoming</span>
-      </button>
-    )}
+    <div class="filter-row__topics">
+      <StageFilter current={null} />
+      {upcomingAsc.length > 0 && (
+        <button
+          type="button"
+          class="stage-filter__chip stage-filter__chip--toggle"
+          id="upcoming-toggle"
+          role="switch"
+          aria-pressed="false"
+          aria-controls="home-research-list"
+        >
+          <span class="stage-filter__chip-dot" aria-hidden="true"></span>
+          <span>+{upcomingAsc.length} Upcoming</span>
+        </button>
+      )}
+    </div>
   </nav>
 
   <section class="research-list" id="home-research-list" data-show-upcoming="false">

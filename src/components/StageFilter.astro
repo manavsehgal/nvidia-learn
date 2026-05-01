@@ -19,13 +19,14 @@ const STAGE_LABELS: Record<string, string> = {
   'dev-tools': 'Dev-tools',
 };
 ---
-<nav class="stage-filter" aria-label="Filter by stage">
+<nav class="stage-filter" aria-label="Filter by topic">
+  <span class="stage-filter__label">Topics</span>
   <a
     class="stage-filter__chip"
     href={base}
     aria-current={current === null ? 'page' : undefined}
   >All</a>
-  {STAGES.map((stage) => (
+  {STAGES.filter((stage) => stage !== 'foundations').map((stage) => (
     <a
       class="stage-filter__chip"
       href={`${base}stage/${stage}/`}

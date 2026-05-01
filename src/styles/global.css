@@ -800,22 +800,33 @@ html[data-theme="light"] .masthead__plate-frame img {
   gap: 0.5rem;
 }
 
-/* Home-only wrapper: stage chips + upcoming toggle on one row. Gives
-   the filter strip symmetric padding between the stats divider and the
+/* Home-only wrapper: Series row stacked above Topics row. Gives the
+   filter strip symmetric padding between the stats divider and the
    first article card. */
 .filter-row {
   max-width: 72rem;
   margin-inline: auto;
   padding: 1.75rem 1.5rem;
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+/* Inside .filter-row, neutralize each filter's standalone outer padding —
+   the row itself owns the outer spacing. */
+.filter-row .series-filter,
+.filter-row .stage-filter {
+  padding: 0;
+  margin: 0;
+}
+/* Topics row: StageFilter chips flow as siblings of the upcoming toggle
+   so `margin-left: auto` can push the toggle to the right edge. */
+.filter-row__topics {
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
 }
-/* Let the stage-filter's chips flow as direct siblings of the toggle
-   inside .filter-row, so `margin-left: auto` can push the toggle to
-   the right edge of the same visual row. */
-.filter-row .stage-filter { display: contents; }
+.filter-row__topics .stage-filter { display: contents; }
 
 /* Upcoming toggle — same pill geometry and mono case as the stage chips,
    with a leading state dot. Pushed to the end of the row. */
@@ -901,8 +912,7 @@ html[data-theme="light"] .masthead__plate-frame img {
   align-items: center;
   gap: 0.5rem;
 }
-.filter-row .series-filter { display: contents; }
-
+.stage-filter__label,
 .series-filter__label {
   font-family: var(--font-mono);
   font-size: 0.65rem;
