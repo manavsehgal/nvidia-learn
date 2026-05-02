@@ -1,3 +1,8 @@
+> **FIELDKIT FIT (2026-05-02):** retro-annotation; eval predates the v0.1 template.
+> - **Would import:** `fieldkit.capabilities` (LoRA peak-memory math: weights × ~1.5; sandbox-pool sizing against the unified-memory landmine).
+> - **Would extend:** nothing in v0.1 — `fieldkit.ft` and `fieldkit.agents` are both deferred and ship empty today.
+> - **Would propose for v0.x:** `fieldkit.ft` — NeMo LoRA SFT wrapper (already on the v0.2 deferred list; this article validates the API). `fieldkit.agents` — parallel-rollout primitives over NemoClaw OpenShell sandboxes with the file-transfer workaround baked in (also v0.2; this article is the strongest reason to land it).
+
 # ClawGym: A Scalable Framework for Building Effective Claw Agents
 
 ## Hypothesis

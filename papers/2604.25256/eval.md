@@ -1,3 +1,8 @@
+> **FIELDKIT FIT (2026-05-02):** retro-annotation; eval predates the v0.1 template.
+> - **Would import:** `fieldkit.nim` (the bench reads `OPENAI_API_BASE` — drop in `NIMClient` + `wait_for_warm` for cold-start polling); `fieldkit.eval` (`Bench` for the 3-model NIM leaderboard; `is_refusal` for the search-tool fallback rate).
+> - **Would extend:** `fieldkit.eval` — `Trajectory.from_jsonl` covers the autoresearch-loop schema today; the bench's per-task search-tool trace has a different shape, so this article would either land a small parser variant or a `from_jsonl(schema=...)` parameter.
+> - **Would propose for v0.x:** none. The agent shell is the upstream AutoResearchBench repo, not a fieldkit responsibility.
+
 # AutoResearchBench: Benchmarking AI Agents on Complex Scientific Literature Discovery
 
 ## Hypothesis

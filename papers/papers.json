@@ -47,7 +47,12 @@
       "deep_eval": {
         "path": "papers/2604.27351/eval.md",
         "evaluated_at": "2026-05-02T06:42:58.803Z",
-        "verdict": "spark-feasible"
+        "verdict": "spark-feasible",
+        "fieldkit_fit_annotated_at": "2026-05-02T00:00:00Z",
+        "fieldkit_modules": [
+          "nim",
+          "capabilities"
+        ]
       },
       "promoted_to": {
         "article_slug": "scientific-foundation-models-as-tools",
@@ -127,7 +132,12 @@
       "deep_eval": {
         "path": "papers/2604.24927/eval.md",
         "evaluated_at": "2026-05-02T06:42:58.803Z",
-        "verdict": "spark-feasible"
+        "verdict": "spark-feasible",
+        "fieldkit_fit_annotated_at": "2026-05-02T00:00:00Z",
+        "fieldkit_modules": [
+          "capabilities",
+          "eval"
+        ]
       },
       "promoted_to": {
         "article_slug": "test-time-distilling-for-exploration",
@@ -174,7 +184,11 @@
       "deep_eval": {
         "path": "papers/2604.26904/eval.md",
         "evaluated_at": "2026-05-02T06:42:58.803Z",
-        "verdict": "spark-feasible"
+        "verdict": "spark-feasible",
+        "fieldkit_fit_annotated_at": "2026-05-02T00:00:00Z",
+        "fieldkit_modules": [
+          "capabilities"
+        ]
       },
       "promoted_to": {
         "article_slug": "clawgym-on-spark",
@@ -292,7 +306,12 @@
       "deep_eval": {
         "path": "papers/2604.25256/eval.md",
         "evaluated_at": "2026-05-02T06:42:58.803Z",
-        "verdict": "spark-feasible"
+        "verdict": "spark-feasible",
+        "fieldkit_fit_annotated_at": "2026-05-02T00:00:00Z",
+        "fieldkit_modules": [
+          "nim",
+          "eval"
+        ]
       },
       "promoted_to": {
         "article_slug": "autoresearchbench-on-spark",
@@ -382,7 +401,12 @@
       "deep_eval": {
         "path": "papers/2604.28139/eval.md",
         "evaluated_at": "2026-05-02T06:42:58.803Z",
-        "verdict": "spark-feasible"
+        "verdict": "spark-feasible",
+        "fieldkit_fit_annotated_at": "2026-05-02T00:00:00Z",
+        "fieldkit_modules": [
+          "nim",
+          "eval"
+        ]
       },
       "promoted_to": {
         "article_slug": "claw-eval-live-on-spark",

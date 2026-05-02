@@ -1,3 +1,8 @@
+> **FIELDKIT FIT (2026-05-02):** retro-annotation; eval predates the v0.1 template.
+> - **Would import:** `fieldkit.nim` (the planner-side 8B chat client + `wait_for_warm` for the ~90s NIM cold start); `fieldkit.capabilities` (joint envelope math for 8B planner + ≤3 specialist FMs + KV).
+> - **Would extend:** nothing in v0.1.
+> - **Would propose for v0.x:** `fieldkit.agents` — planner-and-tool-call routing primitives over NemoClaw, the canonical orchestration shape this paper needs (v0.2). `fieldkit.guardrails` — boundary-check policies at the planner edge so off-domain prompts route to refusal rather than calling specialists with garbage inputs (v0.2).
+
 # Heterogeneous Scientific Foundation Model Collaboration
 
 ## Hypothesis

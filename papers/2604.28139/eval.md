@@ -1,3 +1,8 @@
+> **FIELDKIT FIT (2026-05-02):** retro-annotation; eval predates the v0.1 template.
+> - **Would import:** `fieldkit.nim` (agent + judge chat clients); `fieldkit.eval` (`Judge` rubrics for the semantic-dimension grader, `Trajectory` for the audit-log analyzer, `is_refusal` for refusal-rate accounting).
+> - **Would extend:** `fieldkit.eval` — add a `HybridGrader` that fuses a deterministic-checker callable (file-state checksum, service-state assert, audit-log assertion) with a `Judge` semantic call and returns a single score. The current `Judge` is judge-only; this paper is the canonical reason to lift hybrid grading.
+> - **Would propose for v0.x:** `fieldkit.agents` — sandbox-per-task orchestration over NemoClaw + workspace-snapshot fixtures (v0.2; concludes the v0.2 scope alongside ClawGym and Eywa).
+
 # Claw-Eval-Live: A Live Agent Benchmark for Evolving Real-World Workflows
 
 ## Hypothesis

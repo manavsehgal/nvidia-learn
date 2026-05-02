@@ -1,3 +1,8 @@
+> **FIELDKIT FIT (2026-05-02):** retro-annotation; eval predates the v0.1 template.
+> - **Would import:** `fieldkit.capabilities` (envelope math for the ~20 GB working point — Qwen 7B + 1 GB Distiller + KV); `fieldkit.eval` (`Bench` for tok/s deltas; `Judge.parse` for the Pass@k correctness extractor).
+> - **Would extend:** `fieldkit.eval` — add a `PassAtKBench` (n-sample-per-prompt loop with verifier callback). Trivially generalizes today's single-shot `Bench`.
+> - **Would propose for v0.x:** `fieldkit.inference` — vLLM-flavored OpenAI-compat client + cold-start polling, since `fieldkit.nim` codifies NIM-specific behavior (8192 ctx ceiling, container `wait_for_warm`) that doesn't apply to a vLLM fork. Candidate for v0.2 alongside `fieldkit.retriever`. Stretch: `fieldkit.distill` (test-time-training distiller wrapping a shallow→deep MLP probe) for v0.3 — outside the current deferred-modules list.
+
 # Large Language Models Explore by Latent Distilling
 
 ## Hypothesis
