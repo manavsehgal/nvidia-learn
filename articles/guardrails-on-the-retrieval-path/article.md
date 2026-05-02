@@ -13,6 +13,8 @@ signature: RetrievalGuardrails
 series: Foundations
 ---
 
+> **Update — `fieldkit.rag`:** This article predates the `fieldkit.rag` module. The same ingest → retrieve → rerank → fuse path now lives behind [`fieldkit.rag.Pipeline`](https://github.com/manavsehgal/ai-field-notes/tree/main/fieldkit) — `pip install` the package and skip the boilerplate. The evidence below is preserved as the original derivation.
+
 Article #8 closed with a finding and a queue: bigger generators over-refuse on perfect retrieval, and the next rung is the *policy* gate — the one that fires between "we have an answer" and "we hand it to the user or the agent." That's the rung where a Second Brain has to scrub personal identifiers out of a draft before it goes back to the user; where an LLM Wiki has to enforce house style on every page it writes; where an Autoresearch agent has to refuse to run `rm -rf` even when its planner confidently suggested it.
 
 One product covers all three on the NVIDIA stack: **NeMo Guardrails**. It is deliberately positioned as scaffolding — an input-rail, retrieval-rail, output-rail framework — not a detector. You bring the detectors; the rail runs them. That shape is exactly what the shared-substrate arc has been asking for: **one rail, three policies, same retrieval chain from article #7**.
