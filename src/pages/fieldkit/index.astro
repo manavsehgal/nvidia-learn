@@ -1,8 +1,16 @@
 ---
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { FIELDKIT_MODULES } from '../../content.config.ts';
 import { publishOrdinals } from '../../lib/article-order.mjs';
+
+// Read fieldkit's version from its single-source-of-truth file at build time
+// so the landing page tracks `fieldkit/src/fieldkit/_version.py` automatically.
+const versionFile = resolve(process.cwd(), 'fieldkit/src/fieldkit/_version.py');
+const versionMatch = readFileSync(versionFile, 'utf8').match(/__version__\s*=\s*"([^"]+)"/);
+const fieldkitVersion = versionMatch ? versionMatch[1] : 'unreleased';
 
 const docs = (await getCollection('fieldkit_docs')).sort(
   (a, b) => a.data.order - b.data.order,
@@ -23,7 +31,9 @@ const articleHref = (slug: string) => `${base}articles/${slug}/`.replace(/\/+/g,
   description="A small Python package lifting recurring abstractions from the ai-field-notes blog into one importable surface."
 >
   <header class="stage-header">
-    <p class="stage-header__label">Package</p>
+    <p class="stage-header__label">
+      Package · <span class="fk-version">v{fieldkitVersion}</span>
+    </p>
     <h1 class="stage-header__title">fieldkit</h1>
     <p class="stage-header__blurb">
       Verified-on-Spark patterns from the ai-field-notes blog, lifted into one importable Python package.
@@ -36,10 +46,10 @@ const articleHref = (slug: string) => `${base}articles/${slug}/`.replace(/\/+/g,
   <section class="fk-section">
     <h2 class="fk-section__title">Install</h2>
     <div class="fk-code">
-      <pre><code>pip install "git+https://github.com/manavsehgal/ai-field-notes.git#subdirectory=fieldkit"</code></pre>
+      <pre><code>{`pip install "git+https://github.com/manavsehgal/ai-field-notes.git@fieldkit/v${fieldkitVersion}#subdirectory=fieldkit"`}</code></pre>
     </div>
     <p class="fk-section__note">
-      Tagged releases use <code>@fieldkit/v0.1.0</code> instead of <code>main</code>. Apache-2.0; Python 3.11+.
+      Pin to a tagged release as above, or use <code>main</code> for the latest unreleased work. Apache-2.0; Python 3.11+.
       The <code>fieldkit</code> CLI is on <code>$PATH</code> after install.
     </p>
   </section>
@@ -127,6 +137,11 @@ $ fieldkit bench rag --table fieldkit_cli_bench_rag --out /tmp/bench.json`}</cod
 </BaseLayout>
 
 <style>
+  .fk-version {
+    font-family: var(--font-mono);
+    color: var(--color-primary);
+    letter-spacing: 0.04em;
+  }
   .fk-section {
     max-width: 80rem;
     margin: 0 auto;
