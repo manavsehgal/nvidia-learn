@@ -31,3 +31,15 @@ HANDOFF.md
 /*.png
 
 __pycache__/
+
+# fieldkit Python build / venv detritus (keep alongside the package, not committed)
+fieldkit/build/
+fieldkit/dist/
+fieldkit/*.egg-info/
+fieldkit/.pytest_cache/
+fieldkit/.mypy_cache/
+fieldkit/.ruff_cache/
+fieldkit/.venv/
+fieldkit/src/fieldkit.egg-info/
+*.pyc
+
