@@ -8,7 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [0.1.0] — 2026-05-02
 
-First public release. Four library modules + a CLI + a docs site section, lifted from 25+ articles in [ai-field-notes](https://manavsehgal.github.io/ai-field-notes/).
+First public release. Four library modules + a CLI + a docs site section, lifted from 25+ articles in [ai-field-notes](https://ainative.business/field-notes/).
 
 ### Added
 

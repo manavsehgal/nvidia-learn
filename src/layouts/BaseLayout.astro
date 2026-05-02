@@ -18,7 +18,7 @@ const { title, description } = Astro.props;
 const desc = description ?? 'Field notes on maximising the NVIDIA DGX Spark as a personal AI power user and edge AI builder.';
 const base = import.meta.env.BASE_URL.replace(/\/+$/, '/') || '/';
 const asset = (path: string) => `${base}${path}`.replace(/\/+/g, '/');
-const ogImageUrl = `https://manavsehgal.github.io${asset('og-image.png')}`;
+const ogImageUrl = `https://ainative.business${asset('og-image.png')}`;
 ---
 <!doctype html>
 <html lang="en">

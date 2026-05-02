@@ -1,6 +1,6 @@
 # fieldkit
 
-> Verified-on-Spark patterns lifted from the [ai-field-notes](https://manavsehgal.github.io/ai-field-notes/) blog into one importable Python package.
+> Verified-on-Spark patterns lifted from the [ai-field-notes](https://ainative.business/field-notes/) blog into one importable Python package.
 
 Every essay in `ai-field-notes` ends with `evidence/` — a folder of working code that produced the article's numbers. After 25+ articles the same patterns kept reappearing: the same NIM client wrapper, the same chunk-embed-store dance, the same bench harness. `fieldkit` is what those `evidence/` folders look like once the boilerplate is lifted into a real package.
 
@@ -45,7 +45,7 @@ Apache-2.0. See [`LICENSE`](LICENSE).
 
 ## Links
 
-- **Blog:** https://manavsehgal.github.io/ai-field-notes/
-- **Docs:** https://manavsehgal.github.io/ai-field-notes/fieldkit/
+- **Blog:** https://ainative.business/field-notes/
+- **Docs:** https://ainative.business/fieldkit/
 - **Source:** https://github.com/manavsehgal/ai-field-notes/tree/main/fieldkit
 - **Changelog:** [`CHANGELOG.md`](CHANGELOG.md)

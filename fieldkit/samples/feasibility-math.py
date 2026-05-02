@@ -5,7 +5,7 @@
 
 Walks the same KV-cache and weight equations the article walks, but using the
 package's typed API instead of paste-and-edit math. Output should match the
-article's table at https://manavsehgal.github.io/ai-field-notes/articles/kv-cache-arithmetic-at-inference/.
+article's table at https://ainative.business/field-notes/articles/kv-cache-arithmetic-at-inference/.
 
 Run:
     python samples/feasibility-math.py

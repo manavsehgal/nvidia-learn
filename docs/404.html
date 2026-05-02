@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirecting to ainative.business/field-notes/ …</title>
+  <meta name="description" content="AI Field Notes is now published at ainative.business/field-notes/. Redirecting to the matching path on the new site." />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://ainative.business/field-notes/" />
+  <script>
+    (function () {
+      var rest = location.pathname.replace(/^\/ai-field-notes\//, '');
+      var target = 'https://ainative.business/field-notes/' + rest + location.search + location.hash;
+      location.replace(target);
+    })();
+  </script>
+  <meta http-equiv="refresh" content="2; url=https://ainative.business/field-notes/" />
+  <style>
+    :root {
+      --bg:        oklch(16% 0.012 250);
+      --bg-elev:   oklch(20% 0.014 250);
+      --fg:        oklch(96% 0.005 250);
+      --fg-muted:  oklch(72% 0.012 250);
+      --fg-dim:    oklch(54% 0.012 250);
+      --accent:    oklch(76% 0.14 250);
+      --accent-em: oklch(86% 0.16 250);
+      --rule:      oklch(28% 0.014 250);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg:        oklch(98% 0.004 250);
+        --bg-elev:   oklch(96% 0.006 250);
+        --fg:        oklch(20% 0.014 250);
+        --fg-muted:  oklch(38% 0.012 250);
+        --fg-dim:    oklch(54% 0.010 250);
+        --accent:    oklch(48% 0.18 250);
+        --accent-em: oklch(40% 0.20 250);
+        --rule:      oklch(88% 0.008 250);
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    main {
+      max-width: 38rem;
+      padding: 2rem 1.5rem;
+      text-align: left;
+    }
+    .meta {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      line-height: 1.2;
+      margin: 0 0 1rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+    h1 em { color: var(--accent-em); font-style: italic; }
+    p {
+      color: var(--fg-muted);
+      margin: 0 0 1.25rem;
+    }
+    a {
+      color: var(--accent-em);
+      text-decoration: none;
+      border-bottom: 1px dotted currentColor;
+    }
+    a:hover { color: var(--fg); }
+    code {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92em;
+      color: var(--fg);
+      background: var(--bg-elev);
+      border: 1px solid var(--rule);
+      border-radius: 0.25rem;
+      padding: 0.05rem 0.35rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="meta">AI Native Business · ainative</p>
+    <h1>Redirecting to <em>ainative.business/field-notes/</em>…</h1>
+    <p>
+      AI Field Notes is now published at <a href="https://ainative.business/field-notes/">ainative.business/field-notes/</a>.
+      We're forwarding you to the matching page now.
+    </p>
+    <p>
+      If your browser doesn't redirect automatically, follow the link above. The companion Python package
+      <code>fieldkit</code> moved to <a href="https://ainative.business/fieldkit/">ainative.business/fieldkit/</a>.
+    </p>
+  </main>
+</body>
+</html>

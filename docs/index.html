@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Field Notes — moved to ainative.business/field-notes/</title>
+  <meta name="description" content="AI Field Notes is now published at ainative.business/field-notes/. One builder's running log on agent orchestration, governed inference, RAG patterns, training economics, and the deep-dive papers behind the AI Native Platform." />
+  <meta name="author" content="Manav Sehgal" />
+  <meta name="theme-color" content="#0f141c" />
+  <link rel="canonical" href="https://ainative.business/field-notes/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI Field Notes — ainative" />
+  <meta property="og:description" content="Field notes on building AI-native businesses. Now published at ainative.business/field-notes/." />
+  <meta property="og:url" content="https://ainative.business/field-notes/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root {
+      --bg:        oklch(16% 0.012 250);
+      --bg-elev:   oklch(20% 0.014 250);
+      --fg:        oklch(96% 0.005 250);
+      --fg-muted:  oklch(72% 0.012 250);
+      --fg-dim:    oklch(54% 0.012 250);
+      --accent:    oklch(76% 0.14 250);
+      --accent-em: oklch(86% 0.16 250);
+      --rule:      oklch(28% 0.014 250);
+      --measure:   38rem;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg:        oklch(98% 0.004 250);
+        --bg-elev:   oklch(96% 0.006 250);
+        --fg:        oklch(20% 0.014 250);
+        --fg-muted:  oklch(38% 0.012 250);
+        --fg-dim:    oklch(54% 0.010 250);
+        --accent:    oklch(48% 0.18 250);
+        --accent-em: oklch(40% 0.20 250);
+        --rule:      oklch(88% 0.008 250);
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      font-feature-settings: "ss01", "ss03", "cv11";
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .moved-strip {
+      background: var(--bg-elev);
+      border-bottom: 1px solid var(--rule);
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+    }
+    .moved-strip__inner {
+      max-width: 64rem;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .moved-strip__dot {
+      width: 0.45rem; height: 0.45rem;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0.4rem var(--accent);
+    }
+    .moved-strip a {
+      color: var(--accent-em);
+      text-decoration: none;
+      border-bottom: 1px dotted currentColor;
+    }
+    .moved-strip a:hover { color: var(--fg); }
+
+    main {
+      max-width: 64rem;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 5rem;
+    }
+    .meta {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 1.25rem;
+    }
+    h1 {
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      line-height: 1.1;
+      margin: 0 0 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      max-width: var(--measure);
+    }
+    h1 em {
+      color: var(--accent-em);
+      font-style: italic;
+      font-weight: 600;
+    }
+    .lede {
+      font-size: 1.125rem;
+      color: var(--fg-muted);
+      max-width: var(--measure);
+      margin: 0 0 1rem;
+    }
+    .tertiary {
+      font-size: 1rem;
+      color: var(--fg-dim);
+      max-width: var(--measure);
+      margin: 0 0 2.25rem;
+    }
+    .ctas {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.1rem;
+      border: 1px solid var(--rule);
+      border-radius: 0.4rem;
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: var(--fg);
+      background: var(--bg-elev);
+      transition: border-color 120ms ease, color 120ms ease, background 120ms ease;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent-em);
+    }
+    .btn--primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+    .btn--primary:hover {
+      background: var(--accent-em);
+      border-color: var(--accent-em);
+      color: var(--bg);
+    }
+    .btn .arrow { font-family: ui-monospace, monospace; opacity: 0.85; }
+
+    .rule {
+      border: 0;
+      border-top: 1px solid var(--rule);
+      margin: 0 0 3rem;
+    }
+
+    .panel {
+      border: 1px solid var(--rule);
+      border-radius: 0.5rem;
+      padding: 1.75rem 1.75rem 1.5rem;
+      background: var(--bg-elev);
+      max-width: 44rem;
+    }
+    .panel__kicker {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin: 0 0 0.5rem;
+    }
+    .panel h2 {
+      font-size: 1.4rem;
+      margin: 0 0 0.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .panel h2 .accent { color: var(--accent-em); }
+    .panel p {
+      color: var(--fg-muted);
+      margin: 0 0 1.25rem;
+      font-size: 0.98rem;
+    }
+    .panel a.btn { background: transparent; }
+
+    footer {
+      max-width: 64rem;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3rem;
+      border-top: 1px solid var(--rule);
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      color: var(--fg-dim);
+      letter-spacing: 0.04em;
+    }
+    footer a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px dotted currentColor; }
+    footer a:hover { color: var(--fg); }
+  </style>
+</head>
+<body>
+  <div class="moved-strip" role="status">
+    <div class="moved-strip__inner">
+      <span class="moved-strip__dot" aria-hidden="true"></span>
+      <span>This site has moved &nbsp;→&nbsp; <a href="https://ainative.business/field-notes/">ainative.business/field-notes/</a></span>
+    </div>
+  </div>
+
+  <main>
+    <p class="meta">AI Native Business · ainative</p>
+
+    <h1>Field notes on building <em>AI-native</em> businesses.</h1>
+
+    <p class="lede">
+      One builder's running log — articles on agent orchestration, governed inference, RAG patterns,
+      training economics, and the deep-dive papers that anchor the AI Native Platform series.
+    </p>
+
+    <p class="tertiary">
+      Every post is a session transcript turned into an essay.
+    </p>
+
+    <div class="ctas">
+      <a class="btn btn--primary" href="https://ainative.business/field-notes/">
+        Read AI Field Notes <span class="arrow">→</span>
+      </a>
+      <a class="btn" href="https://ainative.business/">
+        AI Native Business <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <hr class="rule" />
+
+    <section class="panel" aria-labelledby="fieldkit-heading">
+      <p class="panel__kicker">Companion Python package</p>
+      <h2 id="fieldkit-heading"><span class="accent">fieldkit</span> — verified-on-Spark patterns</h2>
+      <p>
+        Verified-on-Spark patterns from AI Native Field Notes, lifted into one importable Python package —
+        the NIM client with its 8192-token preflight, the strict-context RAG pipeline, the eval harness behind
+        the article evidence files.
+      </p>
+      <a class="btn" href="https://ainative.business/fieldkit/">
+        Open fieldkit docs <span class="arrow">→</span>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    Source repo: <a href="https://github.com/manavsehgal/ai-field-notes">github.com/manavsehgal/ai-field-notes</a>
+    &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by Manav Sehgal
+  </footer>
+</body>
+</html>

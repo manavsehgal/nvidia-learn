@@ -44,7 +44,7 @@ dev = [
 fieldkit = "fieldkit.cli:app"
 
 [project.urls]
-Homepage = "https://manavsehgal.github.io/ai-field-notes/fieldkit/"
+Homepage = "https://ainative.business/fieldkit/"
 Source = "https://github.com/manavsehgal/ai-field-notes/tree/main/fieldkit"
 Changelog = "https://github.com/manavsehgal/ai-field-notes/blob/main/fieldkit/CHANGELOG.md"
 Issues = "https://github.com/manavsehgal/ai-field-notes/issues"
