@@ -26,7 +26,7 @@
 
 | Articles | Words | Lines of code | Models | NVIDIA products |
 |:-:|:-:|:-:|:-:|:-:|
-| **25** *(+4 upcoming)* | **62,989** | **13,224** | **7** | **11** |
+| **25** *(+4 upcoming)* | **63,630** | **37,441** | **7** | **11** |
 
 ### Stages
 
@@ -45,8 +45,8 @@
 
 | Product | Articles |
 |---|:-:|
-| NVIDIA NIM | 24 |
 | DGX Spark | 24 |
+| NVIDIA NIM | 24 |
 | NeMo Framework | 18 |
 | TensorRT-LLM | 12 |
 | pgvector | 12 |

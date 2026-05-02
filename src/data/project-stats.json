@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-02T11:13:57Z",
+  "generated_at": "2026-05-02T11:23:47Z",
   "articles": {
     "total": 25,
     "published": 25,
@@ -17,11 +17,11 @@
   },
   "code": {
     "evidence_loc": 30658,
-    "src_loc": 6769,
-    "total_loc": 37427,
+    "src_loc": 6783,
+    "total_loc": 37441,
     "by_language": {
       "python": 30528,
-      "astro": 4623,
+      "astro": 4637,
       "css": 1932,
       "shell": 115,
       "javascript": 112,
@@ -92,13 +92,13 @@
   ],
   "products": [
     {
-      "id": "nim",
-      "label": "NVIDIA NIM",
+      "id": "dgx-spark",
+      "label": "DGX Spark",
       "articles": 24
     },
     {
-      "id": "dgx-spark",
-      "label": "DGX Spark",
+      "id": "nim",
+      "label": "NVIDIA NIM",
       "articles": 24
     },
     {
