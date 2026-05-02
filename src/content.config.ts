@@ -28,6 +28,7 @@ export const SERIES = [
   'LLM Wiki',
   'Autoresearch',
   'Looking Beyond Spark',
+  'Frontier Scout',
 ] as const;
 
 // Slug-safe form for series, used in /series/<slug>/ URLs and the filter
@@ -38,6 +39,7 @@ export const SERIES_SLUGS: Record<(typeof SERIES)[number], string> = {
   'LLM Wiki': 'llm-wiki',
   'Autoresearch': 'autoresearch',
   'Looking Beyond Spark': 'looking-beyond-spark',
+  'Frontier Scout': 'frontier-scout',
 };
 
 export const SERIES_BY_SLUG: Record<string, (typeof SERIES)[number]> =

@@ -1,0 +1,169 @@
+---
+import FeasibilityBadge from './FeasibilityBadge.astro';
+import { SERIES_SLUGS } from '../content.config.ts';
+
+interface Props {
+  paper: any;
+}
+
+const { paper } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '/') || '/';
+const href = `${base}papers/${paper.arxiv_id}/`.replace(/\/+/g, '/');
+
+const verdict = paper.deep_eval?.verdict || paper.classify?.fast_verdict || 'unevaluated';
+const stage = paper.classify?.suggested_stage || 'unsorted';
+const series = paper.classify?.suggested_series || null;
+const seriesSlug = series && SERIES_SLUGS[series as keyof typeof SERIES_SLUGS] || '';
+const tags = (paper.classify?.topic_tags || []).slice(0, 4);
+const stack = (paper.classify?.nvidia_stack || []).slice(0, 4);
+
+const repo = (paper.repos || [])[0] || null;
+const stars = repo?.stars || 0;
+const lastCommit = repo?.last_commit ? repo.last_commit.slice(0, 10) : null;
+const isActive = repo && lastCommit
+  ? (Date.now() - new Date(lastCommit).getTime() < 30 * 86400_000) ? 'active' : 'has-code'
+  : 'none';
+
+const popularity = paper.popularity_score ?? 0;
+const published = paper.published ? paper.published.slice(0, 10) : '';
+const publishedNum = paper.published ? new Date(paper.published).getTime() : 0;
+const relevance = paper.classify?.relevance_score ?? 0;
+const promoted = paper.promoted_to?.article_slug || null;
+---
+<article
+  class="paper-card"
+  data-stage={stage}
+  data-series={seriesSlug}
+  data-feasibility={verdict}
+  data-evaluated={paper.deep_eval ? 'true' : 'false'}
+  data-code={isActive}
+  data-popularity={popularity}
+  data-published={publishedNum}
+  data-relevance={relevance}
+>
+  <a class="paper-card__link" href={href}>
+    <header class="paper-card__head">
+      <div class="paper-card__meta">
+        <span class="paper-card__id">arXiv:{paper.arxiv_id}</span>
+        {published && <time>{published}</time>}
+        <span class="paper-card__pop">pop {popularity}</span>
+      </div>
+      <FeasibilityBadge verdict={verdict} evaluated={!!paper.deep_eval} />
+    </header>
+    <h2 class="paper-card__title">{paper.title}</h2>
+    <p class="paper-card__abstract">{paper.abstract.slice(0, 320)}{paper.abstract.length > 320 ? '…' : ''}</p>
+    <footer class="paper-card__foot">
+      <div class="paper-card__chips">
+        <span class="paper-card__chip paper-card__chip--stage">{stage}</span>
+        {series && <span class="paper-card__chip paper-card__chip--series" data-series-slug={seriesSlug}>{series}</span>}
+        {tags.map((t: string) => <span class="paper-card__chip">{t}</span>)}
+      </div>
+      <div class="paper-card__signals">
+        {paper.hf_upvotes != null && paper.hf_upvotes > 0 && (
+          <span title="HuggingFace daily-paper upvotes">▲ {paper.hf_upvotes}</span>
+        )}
+        {repo && <span title="Top GitHub repo">★ {stars}{lastCommit ? ` · ${lastCommit}` : ''}</span>}
+        {paper.citations != null && paper.citations > 0 && (
+          <span title="Semantic Scholar citations">{paper.citations} cites</span>
+        )}
+        {stack.length > 0 && (
+          <span class="paper-card__stack" title="Suggested NVIDIA stack">{stack.join(' · ')}</span>
+        )}
+        {promoted && <span class="paper-card__promoted">→ {promoted}</span>}
+      </div>
+    </footer>
+  </a>
+</article>
+
+<style>
+.paper-card {
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: color-mix(in oklch, var(--paper) 98%, var(--ink) 2%);
+  margin: 0.75rem 0;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.paper-card:hover { border-color: color-mix(in oklch, var(--ink) 35%, transparent); }
+.paper-card[data-feasibility="out-of-envelope"] { opacity: 0.62; }
+.paper-card[data-evaluated="true"] {
+  background: color-mix(in oklch, var(--paper) 95%, var(--ink) 5%);
+}
+.paper-card__link {
+  display: block;
+  padding: 1rem 1.1rem;
+  color: inherit;
+  text-decoration: none;
+}
+.paper-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+.paper-card__meta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in oklch, var(--ink) 65%, var(--paper));
+}
+.paper-card__id { font-weight: 600; }
+.paper-card__pop { font-weight: 600; }
+.paper-card__title {
+  font-family: var(--font-serif, var(--font-sans));
+  font-size: 1.15rem;
+  line-height: 1.32;
+  margin: 0.1rem 0 0.45rem;
+}
+.paper-card__abstract {
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: color-mix(in oklch, var(--ink) 80%, var(--paper));
+  margin: 0;
+}
+.paper-card__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-top: 0.65rem;
+}
+.paper-card__chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.paper-card__chip {
+  padding: 0.1rem 0.55rem;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: color-mix(in oklch, var(--ink) 75%, var(--paper));
+}
+.paper-card__chip--stage {
+  background: color-mix(in oklch, var(--ink) 6%, transparent);
+}
+.paper-card__chip--series {
+  font-weight: 600;
+  border-color: color-mix(in oklch, var(--ink) 35%, transparent);
+}
+.paper-card__signals {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: color-mix(in oklch, var(--ink) 65%, var(--paper));
+}
+.paper-card__stack { font-weight: 600; }
+.paper-card__promoted {
+  color: var(--ink);
+  font-weight: 600;
+}
+</style>

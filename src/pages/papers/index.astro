@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StageFilter from '../../components/StageFilter.astro';
+import SeriesFilter from '../../components/SeriesFilter.astro';
+import PaperFilters from '../../components/PaperFilters.astro';
+import PaperCard from '../../components/PaperCard.astro';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+const DATA_PATH = join(process.cwd(), 'src', 'data', 'papers.json');
+
+let payload: any = { generated_at: null, papers: [] };
+if (existsSync(DATA_PATH)) {
+  try { payload = JSON.parse(readFileSync(DATA_PATH, 'utf-8')); } catch {}
+}
+
+const papers = payload.papers || [];
+const generatedAt = payload.generated_at ? new Date(payload.generated_at) : null;
+const generatedFmt = generatedAt
+  ? new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(generatedAt)
+  : null;
+---
+<BaseLayout title="Papers — Frontier Scout — ai-field-notes" description="Latest AI papers triaged for DGX Spark feasibility by an agent that reads them so you don't have to.">
+  <header class="stage-header">
+    <p class="stage-header__label">Frontier Scout</p>
+    <h1 class="stage-header__title">Papers</h1>
+    <p class="stage-header__blurb">
+      Fresh AI research, triaged against a 128 GB DGX Spark. Each paper is scored for popularity, code-availability, and how plausibly its core hypothesis can be reproduced on the rig — by an agent grounded in the project's own capability map. Click into any paper for the full classification; click "Evaluate on Spark" on the detail page to ask the agent for a deep verdict + Spark recipe.
+    </p>
+    {generatedFmt && (
+      <p class="stage-header__meta">
+        <span>Last refresh: <strong>{generatedFmt}</strong></span>
+        <span>·</span>
+        <span><strong>{papers.length}</strong> papers · {papers.filter((p: any) => p.deep_eval).length} deep-evaluated · {papers.filter((p: any) => p.promoted_to).length} promoted to articles</span>
+      </p>
+    )}
+  </header>
+
+  <SeriesFilter current={null} />
+  <StageFilter current={null} />
+  <PaperFilters />
+
+  <section class="paper-list" id="paper-list">
+    {papers.length === 0 ? (
+      <p class="research-list__empty">No papers yet. Run <code>npm run papers:refresh</code> on the Spark to populate.</p>
+    ) : (
+      papers.map((p: any) => <PaperCard paper={p} />)
+    )}
+  </section>
+
+  <script is:inline>
+    (() => {
+      const list = document.getElementById('paper-list');
+      if (!list) return;
+      const cards = Array.from(list.querySelectorAll('.paper-card'));
+      const state = { feasibility: 'any', code: 'any', sort: 'popularity', stage: null, series: null };
+
+      // Pull stage/series selection from the existing chip filters when present.
+      const wireRowToggle = (selector, attr, key, multi = false) => {
+        document.querySelectorAll(selector).forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const v = btn.getAttribute(attr);
+            // Single-select per row: clear siblings.
+            document.querySelectorAll(selector).forEach((sib) => sib.setAttribute('aria-pressed', 'false'));
+            btn.setAttribute('aria-pressed', 'true');
+            state[key] = v;
+            apply();
+          });
+        });
+      };
+      wireRowToggle('[data-feasibility-chip]', 'data-feasibility-chip', 'feasibility');
+      wireRowToggle('[data-code-chip]', 'data-code-chip', 'code');
+      wireRowToggle('[data-sort-chip]', 'data-sort-chip', 'sort');
+
+      // Stage + series chips are <a> links to /stage/<x>/ pages — let them
+      // navigate normally; we don't intercept them here. (Future: add /papers/?stage= deep-link parsing.)
+
+      function apply() {
+        // Filter visibility
+        for (const c of cards) {
+          let show = true;
+          if (state.feasibility !== 'any') {
+            if (state.feasibility === 'unevaluated') {
+              show = c.getAttribute('data-evaluated') !== 'true' && c.getAttribute('data-feasibility') !== 'spark-feasible' && c.getAttribute('data-feasibility') !== 'borderline' && c.getAttribute('data-feasibility') !== 'out-of-envelope';
+              // Treat fast verdict as "evaluated by classifier"; truly-unevaluated means no classify either.
+              show = c.getAttribute('data-feasibility') === 'unevaluated';
+            } else {
+              show = c.getAttribute('data-feasibility') === state.feasibility;
+            }
+          }
+          if (show && state.code !== 'any') {
+            const code = c.getAttribute('data-code');
+            if (state.code === 'has-code') show = code === 'has-code' || code === 'active';
+            else if (state.code === 'active') show = code === 'active';
+          }
+          c.style.display = show ? '' : 'none';
+        }
+        // Re-sort visible cards
+        const visible = cards.filter((c) => c.style.display !== 'none');
+        visible.sort((a, b) => {
+          const ka = parseFloat(a.getAttribute('data-' + (state.sort === 'recency' ? 'published' : state.sort)) || '0');
+          const kb = parseFloat(b.getAttribute('data-' + (state.sort === 'recency' ? 'published' : state.sort)) || '0');
+          return kb - ka;
+        });
+        for (const c of visible) list.appendChild(c);
+      }
+    })();
+  </script>
+
+  <style>
+    .paper-list {
+      max-width: 80rem;
+      margin: 1rem auto 4rem;
+      padding: 0 var(--page-px, 1.5rem);
+    }
+    .stage-header__meta {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: color-mix(in oklch, var(--ink) 60%, var(--paper));
+      display: inline-flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 0.3rem;
+    }
+  </style>
+</BaseLayout>

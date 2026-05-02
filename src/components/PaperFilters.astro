@@ -1,0 +1,83 @@
+---
+// Two extra chip rows specific to /papers/: feasibility and has-code.
+// Visual language matches StageFilter.astro so /papers/ feels like the rest
+// of the site. Filtering is client-side via data-* attrs (see /papers/index.astro).
+---
+<nav class="paper-filters" aria-label="Filter papers">
+  <div class="paper-filters__row">
+    <span class="stage-filter__label">Feasibility</span>
+    {[
+      ['any', 'Any'],
+      ['spark-feasible', 'Spark-feasible'],
+      ['borderline', 'Borderline'],
+      ['out-of-envelope', 'Out of envelope'],
+      ['unevaluated', 'Unevaluated'],
+    ].map(([value, label]) => (
+      <button
+        type="button"
+        class="stage-filter__chip"
+        data-feasibility-chip={value}
+        aria-pressed={value === 'any' ? 'true' : 'false'}
+      >{label}</button>
+    ))}
+  </div>
+  <div class="paper-filters__row">
+    <span class="stage-filter__label">Code</span>
+    {[
+      ['any', 'Any'],
+      ['has-code', 'Has repo'],
+      ['active', 'Active repo'],
+    ].map(([value, label]) => (
+      <button
+        type="button"
+        class="stage-filter__chip"
+        data-code-chip={value}
+        aria-pressed={value === 'any' ? 'true' : 'false'}
+      >{label}</button>
+    ))}
+  </div>
+  <div class="paper-filters__row">
+    <span class="stage-filter__label">Sort</span>
+    {[
+      ['popularity', 'Popularity'],
+      ['recency', 'Recency'],
+      ['relevance', 'Relevance'],
+    ].map(([value, label]) => (
+      <button
+        type="button"
+        class="stage-filter__chip"
+        data-sort-chip={value}
+        aria-pressed={value === 'popularity' ? 'true' : 'false'}
+      >{label}</button>
+    ))}
+  </div>
+</nav>
+
+<style>
+.paper-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin: 1rem auto 0;
+  padding: 0 var(--page-px, 1.5rem);
+  max-width: 80rem;
+}
+.paper-filters__row {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.paper-filters .stage-filter__chip {
+  cursor: pointer;
+  border: 1px solid var(--rule);
+  background: transparent;
+  font: inherit;
+  color: inherit;
+}
+.paper-filters .stage-filter__chip[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+</style>
