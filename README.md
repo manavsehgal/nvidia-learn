@@ -18,7 +18,7 @@
 
 > One builder maximising the NVIDIA DGX Spark as a personal AI power user and edge AI rig. Every article is a session transcript turned into a deep-dive essay.
 
-<sub><b>25 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
+<sub><b>26 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
 
 ---
 
@@ -26,7 +26,7 @@
 
 | Articles | Words | Lines of code | Models | NVIDIA products |
 |:-:|:-:|:-:|:-:|:-:|
-| **25** *(+4 upcoming)* | **63,630** | **37,441** | **7** | **11** |
+| **26** *(+4 upcoming)* | **65,913** | **38,296** | **8** | **11** |
 
 ### Stages
 
@@ -35,38 +35,39 @@
 | [Foundations](https://manavsehgal.github.io/ai-field-notes/stage/foundations/) | 11 | — |
 | [Training](https://manavsehgal.github.io/ai-field-notes/stage/training/) | 7 | 1 |
 | [Fine-tuning](https://manavsehgal.github.io/ai-field-notes/stage/fine-tuning/) | 4 | 1 |
-| [Inference](https://manavsehgal.github.io/ai-field-notes/stage/inference/) | 10 | — |
+| [Inference](https://manavsehgal.github.io/ai-field-notes/stage/inference/) | 11 | — |
 | [Deployment](https://manavsehgal.github.io/ai-field-notes/stage/deployment/) | 2 | — |
-| [Agentic](https://manavsehgal.github.io/ai-field-notes/stage/agentic/) | 8 | — |
-| [Observability](https://manavsehgal.github.io/ai-field-notes/stage/observability/) | 2 | 1 |
+| [Agentic](https://manavsehgal.github.io/ai-field-notes/stage/agentic/) | 9 | — |
+| [Observability](https://manavsehgal.github.io/ai-field-notes/stage/observability/) | 3 | 1 |
 | [Dev-tools](https://manavsehgal.github.io/ai-field-notes/stage/dev-tools/) | 2 | 1 |
 
 ### Products & frameworks
 
 | Product | Articles |
 |---|:-:|
-| DGX Spark | 24 |
-| NVIDIA NIM | 24 |
+| DGX Spark | 25 |
+| NVIDIA NIM | 25 |
 | NeMo Framework | 18 |
-| TensorRT-LLM | 12 |
+| TensorRT-LLM | 13 |
 | pgvector | 12 |
 | NeMo Retriever | 10 |
 | Triton Inference Server | 9 |
 | NemoClaw | 8 |
+| Ollama | 4 |
 | NeMo Guardrails | 4 |
 | OpenClaw | 3 |
-| Ollama | 3 |
 
 ### Models
 
 | Model | Articles |
 |---|:-:|
-| Llama 3.1 8B Instruct | 16 |
+| Llama 3.1 8B Instruct | 17 |
 | Nemotron Reranker 1B | 6 |
+| Nemotron Super 49B | 5 |
 | Qwen2.5 3B Instruct | 4 |
-| Nemotron Super 49B | 4 |
 | Nemotron Embed 1B v2 | 4 |
 | Llama 3.3 70B Instruct | 3 |
+| Nemotron Nano 9B v2 | 1 |
 | Qwen2.5 7B Instruct | 1 |
 
 ---
@@ -120,6 +121,7 @@ Each article is a deep-dive essay grown from a single session transcript on the 
 
 ### Observability
 
+- **[AutoResearchBench on Spark — Two NIMs, One Bench, Two Failure Modes](https://manavsehgal.github.io/ai-field-notes/articles/autoresearchbench-on-spark/)** — Two Spark-tuned NIMs run AutoResearchBench's three Deep-Research example questions. Llama-3.1-8B crashes by turn 5-6 on its 8K context; Nemotron-Nano-9B-v2 finishes cleanly at 128K. Both score 0% Accuracy@1 — for completely different reasons.
 - **[Was the Agent Researching, or Flailing? An Observability Pass on the Trajectory](https://manavsehgal.github.io/ai-field-notes/articles/trajectory-eval-is-the-agent-flailing/)** — A8 said the LoRA mode-collapsed because the trajectory was thin. This puts numbers on it: 6 of 13 knobs ever touched, 72% of proposals repeated a prior pair, and the proposer's k=5 history window is the structural cause.
 - **[Ragas, Reranked — What 44 Held-Out Questions Say About the Second Brain Stack](https://manavsehgal.github.io/ai-field-notes/articles/rag-eval-ragas-and-nemo-evaluator/)** — A Ragas-style harness written in 200 lines of stdlib Python, run locally on the DGX Spark, against four variants of the Second Brain RAG chain. Naive RAG scores 3.30 / 5. Rerank RAG scores 4.27. LoRA+RAG is a surprise — it does not beat naive. Retrieval is where the points come from.
 - 🔜 **[Watching the GPU — DCGM, Prometheus, and a Local Grafana for the Spark](https://manavsehgal.github.io/ai-field-notes/articles/spark-gpu-telemetry-prometheus-grafana/)** *(planned 2026-05-28)* — A planned setup of DCGM Exporter → Prometheus → Grafana entirely on the Spark itself. The goal is a single dashboard that tells the truth about GPU memory, SM occupancy, and per-container utilization for a rig that's running NIMs, pgvector, and an occasional training job at the same time.

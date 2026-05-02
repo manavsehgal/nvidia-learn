@@ -1,0 +1,189 @@
+{
+  "label": "nemotron-nano-9b-v2",
+  "n_questions": 3,
+  "status_counts": {
+    "finished": 3
+  },
+  "wall_seconds": {
+    "n": 3,
+    "mean": 363.51,
+    "median": 329.99,
+    "min": 327.73,
+    "max": 432.82
+  },
+  "turns": {
+    "n": 3,
+    "mean": 2.33,
+    "median": 2,
+    "min": 2,
+    "max": 3
+  },
+  "candidates": {
+    "n": 3,
+    "mean": 0.0,
+    "median": 0,
+    "min": 0,
+    "max": 0
+  },
+  "per_question": [
+    {
+      "q_index": 0,
+      "arxiv_id": "2204.05525",
+      "truth_title": "TopFormer: Token Pyramid Transformer for Mobile Semantic Segmentation",
+      "status": "finished",
+      "wall_seconds": 327.73,
+      "turns": 3,
+      "candidates": 0,
+      "tool_format_errors": 1,
+      "tool_calls": 1,
+      "papers_retrieved_total": 1,
+      "turn_detail": [
+        {
+          "turn": 1,
+          "action": "error",
+          "duration_s": 117.32,
+          "input_tokens": 1718,
+          "output_tokens": 1124,
+          "papers_retrieved": 0
+        },
+        {
+          "turn": 2,
+          "action": "tool",
+          "duration_s": 167.54,
+          "input_tokens": 3003,
+          "output_tokens": 619,
+          "papers_retrieved": 1
+        },
+        {
+          "turn": 3,
+          "action": "finish",
+          "duration_s": 42.87,
+          "input_tokens": 4617,
+          "output_tokens": 435,
+          "papers_retrieved": 0
+        }
+      ]
+    },
+    {
+      "q_index": 1,
+      "arxiv_id": "2011.04709",
+      "truth_title": "f-IRL: Inverse Reinforcement Learning via State Marginal Matching",
+      "status": "finished",
+      "wall_seconds": 432.82,
+      "turns": 2,
+      "candidates": 0,
+      "tool_format_errors": 0,
+      "tool_calls": 1,
+      "papers_retrieved_total": 10,
+      "turn_detail": [
+        {
+          "turn": 1,
+          "action": "tool",
+          "duration_s": 363.76,
+          "input_tokens": 1713,
+          "output_tokens": 1063,
+          "papers_retrieved": 10
+        },
+        {
+          "turn": 2,
+          "action": "finish",
+          "duration_s": 69.06,
+          "input_tokens": 12589,
+          "output_tokens": 706,
+          "papers_retrieved": 0
+        }
+      ]
+    },
+    {
+      "q_index": 2,
+      "arxiv_id": "2011.03802",
+      "truth_title": "Symmetric Parallax Attention for Stereo Image Super-Resolution",
+      "status": "finished",
+      "wall_seconds": 329.99,
+      "turns": 2,
+      "candidates": 0,
+      "tool_format_errors": 0,
+      "tool_calls": 1,
+      "papers_retrieved_total": 10,
+      "turn_detail": [
+        {
+          "turn": 1,
+          "action": "tool",
+          "duration_s": 262.25,
+          "input_tokens": 1710,
+          "output_tokens": 918,
+          "papers_retrieved": 10
+        },
+        {
+          "turn": 2,
+          "action": "finish",
+          "duration_s": 67.73,
+          "input_tokens": 11740,
+          "output_tokens": 794,
+          "papers_retrieved": 0
+        }
+      ]
+    }
+  ],
+  "fieldkit_bench": {
+    "summary": {
+      "name": "autoresearchbench/nemotron-nano-9b-v2",
+      "n": 3,
+      "n_success": 0,
+      "n_failure": 3,
+      "latency_ms": {
+        "n": 0
+      },
+      "turns": {
+        "n": 0
+      },
+      "candidates": {
+        "n": 0
+      }
+    },
+    "calls": [
+      {
+        "input": "2204.05525",
+        "latency_ms": 327732.7320575714,
+        "success": false,
+        "error": null,
+        "metrics": {
+          "turns": 3.0,
+          "candidates": 0.0
+        },
+        "tags": {
+          "q_index": 0,
+          "model": "nemotron-nano-9b-v2"
+        }
+      },
+      {
+        "input": "2011.04709",
+        "latency_ms": 432821.0632801056,
+        "success": false,
+        "error": null,
+        "metrics": {
+          "turns": 2.0,
+          "candidates": 0.0
+        },
+        "tags": {
+          "q_index": 1,
+          "model": "nemotron-nano-9b-v2"
+        }
+      },
+      {
+        "input": "2011.03802",
+        "latency_ms": 329985.1999282837,
+        "success": false,
+        "error": null,
+        "metrics": {
+          "turns": 2.0,
+          "candidates": 0.0
+        },
+        "tags": {
+          "q_index": 2,
+          "model": "nemotron-nano-9b-v2"
+        }
+      }
+    ]
+  }
+}

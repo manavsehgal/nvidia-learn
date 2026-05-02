@@ -30,6 +30,9 @@ HANDOFF.md
 .playwright-mcp/
 /*.png
 
+# bench-run outputs land inside articles/<slug>/evidence/runs/ — bulky, not for git
+articles/*/evidence/runs/
+
 __pycache__/
 
 # fieldkit Python build / venv detritus (keep alongside the package, not committed)

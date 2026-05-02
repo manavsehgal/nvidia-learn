@@ -1,0 +1,115 @@
+{
+  "models": [
+    "llama-3.1-8b",
+    "nemotron-nano-9b-v2"
+  ],
+  "n_questions": 3,
+  "by_model": {
+    "llama-3.1-8b": {
+      "status_counts": {
+        "context_length_exceeded": 2,
+        "finished": 1
+      },
+      "wall_seconds": {
+        "n": 3,
+        "mean": 252.99,
+        "median": 257.16,
+        "min": 115.31,
+        "max": 386.49
+      },
+      "turns": {
+        "n": 3,
+        "mean": 4.0,
+        "median": 5,
+        "min": 1,
+        "max": 6
+      },
+      "candidates": {
+        "n": 3,
+        "mean": 0.0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "nemotron-nano-9b-v2": {
+      "status_counts": {
+        "finished": 3
+      },
+      "wall_seconds": {
+        "n": 3,
+        "mean": 363.51,
+        "median": 329.99,
+        "min": 327.73,
+        "max": 432.82
+      },
+      "turns": {
+        "n": 3,
+        "mean": 2.33,
+        "median": 2,
+        "min": 2,
+        "max": 3
+      },
+      "candidates": {
+        "n": 3,
+        "mean": 0.0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  "per_question": [
+    {
+      "q_index": 0,
+      "arxiv_id": "2011.04709",
+      "truth_title": "f-IRL: Inverse Reinforcement Learning via State Marginal Matching",
+      "llama-3.1-8b": {
+        "status": "finished",
+        "wall_seconds": 115.31,
+        "turns": 1,
+        "candidates": 0
+      },
+      "nemotron-nano-9b-v2": {
+        "status": "finished",
+        "wall_seconds": 327.73,
+        "turns": 3,
+        "candidates": 0
+      }
+    },
+    {
+      "q_index": 1,
+      "arxiv_id": "2204.05525",
+      "truth_title": "TopFormer: Token Pyramid Transformer for Mobile Semantic Segmentation",
+      "llama-3.1-8b": {
+        "status": "context_length_exceeded",
+        "wall_seconds": 257.16,
+        "turns": 5,
+        "candidates": 0
+      },
+      "nemotron-nano-9b-v2": {
+        "status": "finished",
+        "wall_seconds": 432.82,
+        "turns": 2,
+        "candidates": 0
+      }
+    },
+    {
+      "q_index": 2,
+      "arxiv_id": "2011.03802",
+      "truth_title": "Symmetric Parallax Attention for Stereo Image Super-Resolution",
+      "llama-3.1-8b": {
+        "status": "context_length_exceeded",
+        "wall_seconds": 386.49,
+        "turns": 6,
+        "candidates": 0
+      },
+      "nemotron-nano-9b-v2": {
+        "status": "finished",
+        "wall_seconds": 329.99,
+        "turns": 2,
+        "candidates": 0
+      }
+    }
+  ]
+}

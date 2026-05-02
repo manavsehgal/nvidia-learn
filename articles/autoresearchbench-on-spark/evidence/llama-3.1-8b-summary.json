@@ -1,0 +1,230 @@
+{
+  "label": "llama-3.1-8b",
+  "n_questions": 3,
+  "status_counts": {
+    "context_length_exceeded": 2,
+    "finished": 1
+  },
+  "wall_seconds": {
+    "n": 3,
+    "mean": 252.99,
+    "median": 257.16,
+    "min": 115.31,
+    "max": 386.49
+  },
+  "turns": {
+    "n": 3,
+    "mean": 4.0,
+    "median": 5,
+    "min": 1,
+    "max": 6
+  },
+  "candidates": {
+    "n": 3,
+    "mean": 0.0,
+    "median": 0,
+    "min": 0,
+    "max": 0
+  },
+  "per_question": [
+    {
+      "q_index": 0,
+      "arxiv_id": "2011.04709",
+      "truth_title": "f-IRL: Inverse Reinforcement Learning via State Marginal Matching",
+      "status": "finished",
+      "wall_seconds": 115.31,
+      "turns": 1,
+      "candidates": 0,
+      "tool_format_errors": 0,
+      "tool_calls": 0,
+      "papers_retrieved_total": 0,
+      "turn_detail": [
+        {
+          "turn": 1,
+          "action": "finish",
+          "duration_s": 115.31,
+          "input_tokens": 1713,
+          "output_tokens": 1253,
+          "papers_retrieved": 0
+        }
+      ]
+    },
+    {
+      "q_index": 1,
+      "arxiv_id": "2204.05525",
+      "truth_title": "TopFormer: Token Pyramid Transformer for Mobile Semantic Segmentation",
+      "status": "context_length_exceeded",
+      "wall_seconds": 257.16,
+      "turns": 5,
+      "candidates": 0,
+      "tool_format_errors": 5,
+      "tool_calls": 0,
+      "papers_retrieved_total": 0,
+      "turn_detail": [
+        {
+          "turn": 1,
+          "action": "error",
+          "duration_s": 37.92,
+          "input_tokens": 1718,
+          "output_tokens": 550,
+          "papers_retrieved": 0
+        },
+        {
+          "turn": 2,
+          "action": "error",
+          "duration_s": 65.45,
+          "input_tokens": 2394,
+          "output_tokens": 597,
+          "papers_retrieved": 0
+        },
+        {
+          "turn": 3,
+          "action": "error",
+          "duration_s": 77.13,
+          "input_tokens": 3163,
+          "output_tokens": 615,
+          "papers_retrieved": 0
+        },
+        {
+          "turn": 4,
+          "action": "error",
+          "duration_s": 76.62,
+          "input_tokens": 3970,
+          "output_tokens": 579,
+          "papers_retrieved": 0
+        },
+        {
+          "turn": 5,
+          "action": "error",
+          "duration_s": 0.03,
+          "input_tokens": 4705,
+          "output_tokens": 0,
+          "papers_retrieved": 0
+        }
+      ]
+    },
+    {
+      "q_index": 2,
+      "arxiv_id": "2011.03802",
+      "truth_title": "Symmetric Parallax Attention for Stereo Image Super-Resolution",
+      "status": "context_length_exceeded",
+      "wall_seconds": 386.49,
+      "turns": 6,
+      "candidates": 0,
+      "tool_format_errors": 6,
+      "tool_calls": 0,
+      "papers_retrieved_total": 0,
+      "turn_detail": [
+        {
+          "turn": 1,
+          "action": "error",
+          "duration_s": 71.13,
+          "input_tokens": 1710,
+          "output_tokens": 485,
+          "papers_retrieved": 0
+        },
+        {
+          "turn": 2,
+          "action": "error",
+          "duration_s": 84.73,
+          "input_tokens": 2326,
+          "output_tokens": 432,
+          "papers_retrieved": 0
+        },
+        {
+          "turn": 3,
+          "action": "error",
+          "duration_s": 82.03,
+          "input_tokens": 2891,
+          "output_tokens": 445,
+          "papers_retrieved": 0
+        },
+        {
+          "turn": 4,
+          "action": "error",
+          "duration_s": 77.67,
+          "input_tokens": 3471,
+          "output_tokens": 510,
+          "papers_retrieved": 0
+        },
+        {
+          "turn": 5,
+          "action": "error",
+          "duration_s": 70.79,
+          "input_tokens": 4127,
+          "output_tokens": 535,
+          "papers_retrieved": 0
+        },
+        {
+          "turn": 6,
+          "action": "error",
+          "duration_s": 0.13,
+          "input_tokens": 4810,
+          "output_tokens": 0,
+          "papers_retrieved": 0
+        }
+      ]
+    }
+  ],
+  "fieldkit_bench": {
+    "summary": {
+      "name": "autoresearchbench/llama-3.1-8b",
+      "n": 3,
+      "n_success": 0,
+      "n_failure": 3,
+      "latency_ms": {
+        "n": 0
+      },
+      "turns": {
+        "n": 0
+      },
+      "candidates": {
+        "n": 0
+      }
+    },
+    "calls": [
+      {
+        "input": "2011.04709",
+        "latency_ms": 115307.52110481262,
+        "success": false,
+        "error": null,
+        "metrics": {
+          "turns": 1.0,
+          "candidates": 0.0
+        },
+        "tags": {
+          "q_index": 0,
+          "model": "llama-3.1-8b"
+        }
+      },
+      {
+        "input": "2204.05525",
+        "latency_ms": 257160.38632392883,
+        "success": false,
+        "error": "context_length_exceeded",
+        "metrics": {
+          "turns": 5.0,
+          "candidates": 0.0
+        },
+        "tags": {
+          "q_index": 1,
+          "model": "llama-3.1-8b"
+        }
+      },
+      {
+        "input": "2011.03802",
+        "latency_ms": 386494.5275783539,
+        "success": false,
+        "error": "context_length_exceeded",
+        "metrics": {
+          "turns": 6.0,
+          "candidates": 0.0
+        },
+        "tags": {
+          "q_index": 2,
+          "model": "llama-3.1-8b"
+        }
+      }
+    ]
+  }
+}
