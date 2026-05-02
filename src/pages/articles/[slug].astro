@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FieldkitCTA from '../../components/FieldkitCTA.astro';
 import { publishOrdinals } from '../../lib/article-order.mjs';
 import { SERIES_SLUGS } from '../../content.config.ts';
 
@@ -58,6 +59,8 @@ const seriesHref = series ? `${base}series/${SERIES_SLUGS[series]}/`.replace(/\/
     <div class="prose">
       <Content />
     </div>
+
+    <FieldkitCTA slug={article.id} />
   </article>
 
   <script>

@@ -1383,6 +1383,11 @@ html[data-theme="light"] .masthead__plate-frame img {
   transition: color 0.15s;
 }
 .nav__links a:hover { color: var(--color-primary); }
+.nav__links a.nav__links-fk {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+.nav__links a.nav__links-fk:hover { color: var(--color-primary-glow); }
 @media (max-width: 640px) {
   .nav__links { display: none; }
 }

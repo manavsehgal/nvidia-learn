@@ -14,10 +14,6 @@ series: Foundations
 fieldkit_modules: [rag]
 ---
 
-> **Update — `fieldkit.rag`:** This article predates the `fieldkit.rag` module. The same ingest → retrieve → rerank → fuse path now lives behind [`fieldkit.rag.Pipeline`](https://github.com/manavsehgal/ai-field-notes/tree/main/fieldkit) — `pip install` the package and skip the boilerplate. The evidence below is preserved as the original derivation.
->
-> **Update — `fieldkit.eval`:** The 8B / 49B / 70B A/B harness below predates `fieldkit.eval`. The same `Bench` aggregation + `is_refusal` regex now live in [`fieldkit.eval`](https://github.com/manavsehgal/ai-field-notes/tree/main/fieldkit) — one `Bench(name="…")` per generator + a refusal-rate roll-up reproduces the table in this article.
-
 Article #7 ended with a bet. Four retrieval configurations had fed perfect chunks to the 8B generator on *"Did Google have an IPO in 2004?"* All four got back *"The provided context does not contain the answer."* The retrieval had the right facts at rank 1. The grounding didn't commit. The closing line queued the obvious fix: swap the 8B for Llama 3.3 70B or Nemotron-Super-49B and measure whether the bigger model's grounding circuit answers where the smaller one refused.
 
 This article ran that experiment across three generator sizes — the existing 8B-local NIM from article #3, Nemotron-Super-49B served from `integrate.api.nvidia.com`, and Llama 3.3 70B from the same hosted endpoint — on the same thirty-query qrels set, the same rerank retrieval chain, the same strict-context scaffold. Ninety LLM calls. One retrieval pipeline held constant. The bet lost. The 49B refuses *more* than the 8B on perfect-retrieval queries (18.2% vs. 9.1%). The 70B narrows the refusal gap a little, not a lot, and pays 2× to 12× latency for the privilege. And re-inspecting the IPO chunks shows why — the passages discuss the IPO but don't state the year 2004 anywhere. The 8B refusal article #6 framed as a bruise was the scaffold doing its job, and three generators across a ten-times parameter range agree.

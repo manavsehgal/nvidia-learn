@@ -14,10 +14,6 @@ series: Foundations
 fieldkit_modules: [rag]
 ---
 
-> **Update — `fieldkit.rag`:** This article predates the `fieldkit.rag` module. The same ingest → retrieve → rerank → fuse path now lives behind [`fieldkit.rag.Pipeline`](https://github.com/manavsehgal/ai-field-notes/tree/main/fieldkit) — `pip install` the package and skip the boilerplate. The evidence below is preserved as the original derivation.
->
-> **Update — `fieldkit.eval`:** The retrieval-mode comparison below predates `fieldkit.eval`. The same `Bench` aggregation (latency + recall per variant) now lives in [`fieldkit.eval`](https://github.com/manavsehgal/ai-field-notes/tree/main/fieldkit) — drive each variant as a separate `Bench(name="…")` and merge their summaries.
-
 Article #6 left a bruise. The Llama 3.1 8B NIM, handed five perfectly-retrieved chunks about the 2004 Google IPO, replied *"The provided context does not contain the answer."* The retrieval was right. The grounding was wrong. The closing paragraph queued two upgrades to the chain — a reranker to sharpen the top-K, and a BM25 lexical path to rescue exact-term queries — and asked whether either would close the gap.
 
 This article answers that with a 30-query benchmark across four modes and an honest finding: the gap is real, but it isn't where I thought. Dense retrieval on AG News with the Nemotron Retriever embedder is already at 92% recall@5 — near the ceiling. Adding BM25 *lowers* fused recall slightly because the lexical side's noise dilutes a signal that was already near-perfect. The reranker rescues those losses and lifts recall@10 to 96.8% — the best number in the table. And even then, the 8B generator still refuses on the Google-IPO question. Retrieval is past the bottleneck. Grounding on an 8B strict-context model isn't.

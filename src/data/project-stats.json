@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-02T11:23:47Z",
+  "generated_at": "2026-05-02T12:06:10Z",
   "articles": {
     "total": 25,
     "published": 25,
@@ -7,8 +7,8 @@
     "drafts": 0
   },
   "words": {
-    "total": 63630,
-    "mean_per_article": 2545,
+    "total": 62989,
+    "mean_per_article": 2519,
     "longest": {
       "slug": "nim-first-inference-dgx-spark",
       "title": "Your First NIM on a DGX Spark \u2014 What 24.8 Tokens Per Second Doesn't Tell You",
@@ -17,15 +17,15 @@
   },
   "code": {
     "evidence_loc": 30658,
-    "src_loc": 6783,
-    "total_loc": 37441,
+    "src_loc": 7520,
+    "total_loc": 38178,
     "by_language": {
       "python": 30528,
-      "astro": 4637,
-      "css": 1932,
+      "astro": 4936,
+      "css": 1937,
+      "typescript": 535,
       "shell": 115,
       "javascript": 112,
-      "typescript": 102,
       "sql": 15
     },
     "data_lines": {

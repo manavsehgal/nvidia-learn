@@ -25,6 +25,14 @@ const usingFieldkit = articles
 const base = import.meta.env.BASE_URL.replace(/\/+$/, '/') || '/';
 const moduleHref = (m: string) => `${base}fieldkit/api/${m}/`.replace(/\/+/g, '/');
 const articleHref = (slug: string) => `${base}articles/${slug}/`.replace(/\/+/g, '/');
+
+const capabilities: Array<{ module: string; tagline: string }> = [
+  { module: 'capabilities', tagline: 'KV-cache + weight memory arithmetic for any model size' },
+  { module: 'nim',          tagline: 'OpenAI-compatible NIM client with retries + 8192-tok preflight' },
+  { module: 'rag',          tagline: 'Ingest → retrieve → rerank → fuse pipeline on pgvector' },
+  { module: 'eval',         tagline: 'Bench, Judge, refusal detector, and trajectory analyzer' },
+  { module: 'cli',          tagline: 'Smoke checks + RAG benchmarks without writing Python' },
+];
 ---
 <BaseLayout
   title="fieldkit — verified-on-Spark Python patterns"
@@ -42,6 +50,41 @@ const articleHref = (slug: string) => `${base}articles/${slug}/`.replace(/\/+/g,
       and the eval harness behind the article evidence files.
     </p>
   </header>
+
+  <section class="fk-section fk-glance" aria-labelledby="fk-glance-title">
+    <h2 id="fk-glance-title" class="fk-section__title">At a glance</h2>
+
+    <div class="fk-glance__kpis" role="list">
+      <article class="fk-kpi" role="listitem">
+        <div class="fk-kpi__value">{capabilities.length}</div>
+        <div class="fk-kpi__label">Modules</div>
+      </article>
+      <article class="fk-kpi" role="listitem">
+        <div class="fk-kpi__value">{usingFieldkit.length}</div>
+        <div class="fk-kpi__label">Articles using fieldkit</div>
+      </article>
+      <article class="fk-kpi" role="listitem">
+        <div class="fk-kpi__value">v{fieldkitVersion}</div>
+        <div class="fk-kpi__label">Latest release</div>
+      </article>
+      <article class="fk-kpi" role="listitem">
+        <div class="fk-kpi__value">Apache-2.0</div>
+        <div class="fk-kpi__label">Python 3.11+</div>
+      </article>
+    </div>
+
+    <div class="fk-glance__caps">
+      <div class="fk-glance__caps-label">Capabilities</div>
+      <div class="fk-glance__caps-grid">
+        {capabilities.map((c) => (
+          <a class="fk-cap" href={moduleHref(c.module)}>
+            <span class="fk-cap__id">fieldkit.{c.module}</span>
+            <span class="fk-cap__tag">{c.tagline}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <section class="fk-section">
     <h2 class="fk-section__title">Install</h2>
@@ -279,5 +322,98 @@ $ fieldkit bench rag --table fieldkit_cli_bench_rag --out /tmp/bench.json`}</cod
   }
   .fk-chip:hover {
     background: color-mix(in oklch, var(--color-primary-dim) 32%, transparent);
+  }
+
+  .fk-glance__kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0 0 2rem;
+  }
+  .fk-kpi {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.1rem;
+    background: var(--color-surface-overlay);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+  }
+  .fk-kpi__value {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .fk-kpi__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-dim);
+  }
+
+  .fk-glance__caps {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .fk-glance__caps-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-dim);
+    padding-top: 0.6rem;
+  }
+  .fk-glance__caps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 0.6rem;
+  }
+  .fk-cap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.7rem 0.9rem;
+    background: color-mix(in oklch, var(--color-primary-dim) 8%, var(--color-surface-overlay));
+    border: 1px solid color-mix(in oklch, var(--color-primary-dim) 30%, transparent);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+  }
+  .fk-cap:hover {
+    border-color: var(--color-primary);
+    background: color-mix(in oklch, var(--color-primary-dim) 16%, var(--color-surface-overlay));
+    transform: translateY(-1px);
+  }
+  .fk-cap__id {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    letter-spacing: -0.01em;
+  }
+  .fk-cap__tag {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 48rem) {
+    .fk-glance__kpis {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .fk-glance__caps {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+    }
+    .fk-glance__caps-label {
+      padding-top: 0;
+    }
   }
 </style>

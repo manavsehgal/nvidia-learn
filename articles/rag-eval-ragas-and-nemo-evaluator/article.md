@@ -15,8 +15,6 @@ series: Second Brain
 fieldkit_modules: [eval]
 ---
 
-> **Update — `fieldkit.eval`:** This article is the canonical source for the `fieldkit.eval` rubrics — the 0-5 correctness, 0-1 faithfulness, and 0-1 relevance system prompts in `evidence/grade.py` were lifted verbatim into [`fieldkit.eval.RUBRIC_CORRECTNESS / RUBRIC_FAITHFULNESS / RUBRIC_RELEVANCE`](https://github.com/manavsehgal/ai-field-notes/tree/main/fieldkit). The full grader loop is now `Judge.builtin(NIMClient(...), "correctness").grade(question=..., reference=..., prediction=...)` per rubric; the per-variant tables below are still the original derivation.
-
 The previous article closed with a promise: the LoRA on 231 of my own Q&A pairs taught the model *voice, not facts* — and the fact layer was about to come back in the form of RAG. One article later, with a retrieval chain bolted on and four variants benchmarked against 44 held-out questions, the scoreboard is here and the sharper finding is not where I expected it.
 
 On correctness scored 0–5 by a Llama 3.1 8B judge against the reference answers:

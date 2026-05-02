@@ -14,8 +14,6 @@ series: Second Brain
 fieldkit_modules: [eval]
 ---
 
-> **Update — `fieldkit.eval`:** The LLM-as-judge grader (`evidence/judge.py`) and refusal-rate detector below predate the `fieldkit.eval` module. The same `Judge` (with the built-in 0-5 correctness rubric) and top-level `is_refusal` helper now live in [`fieldkit.eval`](https://github.com/manavsehgal/ai-field-notes/tree/main/fieldkit) — `pip install fieldkit` and replace the hand-rolled grading loop with `Judge.builtin(NIMClient(...), "correctness").grade(...)`. The evidence below is preserved as the original derivation.
-
 Everyone's first question about fine-tuning is the same: *"can I teach the model my stuff?"* The honest answer is that it depends entirely on what you mean by "teach". A rank-16 LoRA on 231 Q&A pairs of your own writing, trained for 69 seconds of GB10 wall clock, will change the model's behaviour measurably. It will not change the model's knowledge. The distinction matters — and it is also exactly the distinction the Second Brain arc has been circling since the very first RAG article.
 
 This piece ran the experiment honestly. A Qwen2.5-3B-Instruct base. Two hundred and thirty-one Q&A pairs generated from the eleven published [nvidia-learn](/articles/) articles by NIM Llama 3.1 8B. Fourty-four held-out pairs, stratified across articles, for the eval. Forty-four tiny low-rank matrices added to the attention and MLP layers of a 3 billion parameter language model, trained for three epochs against the user's own voice. An LLM-as-judge grader on the held-out set. The numbers that came out told a story sharper than I expected.
