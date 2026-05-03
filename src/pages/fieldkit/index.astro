@@ -89,12 +89,15 @@ const capabilities: Array<{ module: string; tagline: string }> = [
   <section class="fk-section">
     <h2 class="fk-section__title">Install</h2>
     <div class="fk-code">
-      <pre><code>{`pip install "git+https://github.com/manavsehgal/ai-field-notes.git@fieldkit/v${fieldkitVersion}#subdirectory=fieldkit"`}</code></pre>
+      <pre><code>pip install fieldkit</code></pre>
     </div>
     <p class="fk-section__note">
-      Pin to a tagged release as above, or use <code>main</code> for the latest unreleased work. Apache-2.0; Python 3.11+.
-      The <code>fieldkit</code> CLI is on <code>$PATH</code> after install.
+      Apache-2.0; Python 3.11+. The <code>fieldkit</code> CLI is on <code>$PATH</code> after install.
+      For unreleased commits between tags, install from the git tag instead:
     </p>
+    <div class="fk-code">
+      <pre><code>{`pip install "git+https://github.com/manavsehgal/ai-field-notes.git@fieldkit/v${fieldkitVersion}#subdirectory=fieldkit"`}</code></pre>
+    </div>
   </section>
 
   <section class="fk-section">
