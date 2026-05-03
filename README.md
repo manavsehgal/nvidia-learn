@@ -18,7 +18,7 @@
 
 > One builder maximising the NVIDIA DGX Spark as a personal AI power user and edge AI rig. Every article is a session transcript turned into a deep-dive essay.
 
-<sub><b>28 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
+<sub><b>29 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
 
 ---
 
@@ -26,7 +26,7 @@
 
 | Articles | Words | Lines of code | Models | NVIDIA products |
 |:-:|:-:|:-:|:-:|:-:|
-| **28** *(+4 upcoming)* | **72,585** | **41,179** | **8** | **11** |
+| **29** *(+4 upcoming)* | **75,613** | **41,307** | **8** | **11** |
 
 ### Stages
 
@@ -35,10 +35,10 @@
 | [Foundations](https://ainative.business/field-notes/stage/foundations/) | 11 | — |
 | [Training](https://ainative.business/field-notes/stage/training/) | 7 | 1 |
 | [Fine-tuning](https://ainative.business/field-notes/stage/fine-tuning/) | 4 | 1 |
-| [Inference](https://ainative.business/field-notes/stage/inference/) | 13 | — |
+| [Inference](https://ainative.business/field-notes/stage/inference/) | 14 | — |
 | [Deployment](https://ainative.business/field-notes/stage/deployment/) | 2 | — |
 | [Agentic](https://ainative.business/field-notes/stage/agentic/) | 9 | — |
-| [Observability](https://ainative.business/field-notes/stage/observability/) | 5 | 1 |
+| [Observability](https://ainative.business/field-notes/stage/observability/) | 6 | 1 |
 | [Dev-tools](https://ainative.business/field-notes/stage/dev-tools/) | 2 | 1 |
 
 ### Products & frameworks
@@ -47,7 +47,7 @@
 |---|:-:|
 | NVIDIA NIM | 27 |
 | DGX Spark | 26 |
-| NeMo Framework | 20 |
+| NeMo Framework | 21 |
 | TensorRT-LLM | 14 |
 | pgvector | 12 |
 | Triton Inference Server | 10 |
@@ -66,8 +66,8 @@
 | Nemotron Super 49B | 5 |
 | Qwen2.5 3B Instruct | 4 |
 | Nemotron Embed 1B v2 | 4 |
+| Qwen2.5 7B Instruct | 4 |
 | Llama 3.3 70B Instruct | 3 |
-| Qwen2.5 7B Instruct | 2 |
 | Nemotron Nano 9B v2 | 1 |
 
 ---
@@ -101,6 +101,7 @@ Each article is a deep-dive essay grown from a single session transcript on the 
 ### Inference
 
 - **[Two Patches Were Six — ESamp Lands at 97.4% on a Patched Spark](https://ainative.business/field-notes/articles/runtime-frontier-six-patches-on-spark/)** — Article #2 closed at two patches. Applying them surfaced six — including the silent return-shape adapter that broke the consumer's port. Once cleared, ESamp lands at 97.4% of baseline on patched Qwen 2.5 7B, within 1.4 pp of the paper's reference.
+- **[Pass@k After the Seventh Patch — Three Shapes ESamp Takes on Spark](https://ainative.business/field-notes/articles/pass-at-k-after-the-seventh-patch/)** — Patches were six. The Pass@k harness surfaced a seventh — a one-line slice in the residual tap that only fires once batches shrink mid-run. Once cleared, ESamp takes three shapes: flat on saturated cells, lifting both rates on instruct headroom, and +6.67pp pass@8 on the unsaturated reasoning cell.
 - **[Test-Time Distilling on Spark — Same Compute Envelope, Wider Semantic Reach](https://ainative.business/field-notes/articles/test-time-distilling-for-exploration/)** — ESamp adds a tiny test-time-trained probe to vLLM that converts decoding from lexical resampling into semantic exploration. The runtime is vLLM-native — and that is a Spark catalog-gap story before it is a benchmark.
 - **[Hybrid Retrieval on the Spark — BM25, Dense, Fusion, Rerank](https://ainative.business/field-notes/articles/rerank-fusion-retrieval-on-spark/)** — Four retrieval modes on one corpus — naive dense, BM25, Reciprocal Rank Fusion, Nemotron rerank. Dense is already 92% recall@5; rerank adds a point at K=10 and reorders the top. The 8B generator still refuses where retrieval is perfect — grounding, not retrieval, is the new bottleneck.
 - **[Where Your Vectors Live — pgvector on a DGX Spark](https://ainative.business/field-notes/articles/pgvector-on-spark/)** — The substrate between the embed call and the retrieve call — pgvector 0.8.2 running as a Postgres 16 container on GB10, with 1000 Nemotron vectors, HNSW and ivfflat both indexed, and a planner that prefers seq scan until you tell it otherwise.

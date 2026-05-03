@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-05-03T17:04:53Z",
+  "generated_at": "2026-05-03T22:53:31Z",
   "articles": {
-    "total": 28,
-    "published": 28,
+    "total": 29,
+    "published": 29,
     "upcoming": 4,
     "drafts": 0
   },
   "words": {
-    "total": 72585,
-    "mean_per_article": 2592,
+    "total": 75613,
+    "mean_per_article": 2607,
     "longest": {
       "slug": "nim-first-inference-dgx-spark",
       "title": "Your First NIM on a DGX Spark \u2014 What 24.8 Tokens Per Second Doesn't Tell You",
@@ -17,11 +17,11 @@
   },
   "code": {
     "evidence_loc": 33301,
-    "src_loc": 7878,
-    "total_loc": 41179,
+    "src_loc": 8006,
+    "total_loc": 41307,
     "by_language": {
       "python": 33171,
-      "astro": 5294,
+      "astro": 5422,
       "css": 1937,
       "typescript": 535,
       "shell": 115,
@@ -29,7 +29,7 @@
       "sql": 15
     },
     "data_lines": {
-      "json": 11340,
+      "json": 14077,
       "yaml": 165
     }
   },
@@ -37,10 +37,10 @@
     "foundations": 11,
     "training": 7,
     "fine-tuning": 4,
-    "inference": 13,
+    "inference": 14,
     "deployment": 2,
     "agentic": 9,
-    "observability": 5,
+    "observability": 6,
     "dev-tools": 2
   },
   "stages_upcoming": {
@@ -80,13 +80,13 @@
       "articles": 4
     },
     {
-      "id": "llama-3.3-70b-instruct",
-      "label": "Llama 3.3 70B Instruct",
-      "articles": 3
-    },
-    {
       "id": "qwen-2.5-7b-instruct",
       "label": "Qwen2.5 7B Instruct",
+      "articles": 4
+    },
+    {
+      "id": "llama-3.3-70b-instruct",
+      "label": "Llama 3.3 70B Instruct",
       "articles": 3
     },
     {
@@ -109,7 +109,7 @@
     {
       "id": "nemo",
       "label": "NeMo Framework",
-      "articles": 20
+      "articles": 21
     },
     {
       "id": "tensorrt-llm",
