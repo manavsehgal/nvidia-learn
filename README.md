@@ -18,7 +18,7 @@
 
 > One builder maximising the NVIDIA DGX Spark as a personal AI power user and edge AI rig. Every article is a session transcript turned into a deep-dive essay.
 
-<sub><b>26 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
+<sub><b>27 articles published</b> &nbsp;·&nbsp; Apache 2.0 &nbsp;·&nbsp; by <a href="https://github.com/manavsehgal">Manav Sehgal</a></sub>
 
 ---
 
@@ -26,7 +26,7 @@
 
 | Articles | Words | Lines of code | Models | NVIDIA products |
 |:-:|:-:|:-:|:-:|:-:|
-| **26** *(+4 upcoming)* | **65,913** | **38,296** | **8** | **11** |
+| **27** *(+4 upcoming)* | **68,725** | **38,421** | **8** | **11** |
 
 ### Stages
 
@@ -35,23 +35,23 @@
 | [Foundations](https://ainative.business/field-notes/stage/foundations/) | 11 | — |
 | [Training](https://ainative.business/field-notes/stage/training/) | 7 | 1 |
 | [Fine-tuning](https://ainative.business/field-notes/stage/fine-tuning/) | 4 | 1 |
-| [Inference](https://ainative.business/field-notes/stage/inference/) | 11 | — |
+| [Inference](https://ainative.business/field-notes/stage/inference/) | 12 | — |
 | [Deployment](https://ainative.business/field-notes/stage/deployment/) | 2 | — |
 | [Agentic](https://ainative.business/field-notes/stage/agentic/) | 9 | — |
-| [Observability](https://ainative.business/field-notes/stage/observability/) | 3 | 1 |
+| [Observability](https://ainative.business/field-notes/stage/observability/) | 4 | 1 |
 | [Dev-tools](https://ainative.business/field-notes/stage/dev-tools/) | 2 | 1 |
 
 ### Products & frameworks
 
 | Product | Articles |
 |---|:-:|
-| DGX Spark | 25 |
-| NVIDIA NIM | 25 |
-| NeMo Framework | 18 |
-| TensorRT-LLM | 13 |
+| DGX Spark | 26 |
+| NVIDIA NIM | 26 |
+| NeMo Framework | 20 |
+| TensorRT-LLM | 14 |
 | pgvector | 12 |
+| Triton Inference Server | 10 |
 | NeMo Retriever | 10 |
-| Triton Inference Server | 9 |
 | NemoClaw | 8 |
 | Ollama | 4 |
 | NeMo Guardrails | 4 |
@@ -100,6 +100,7 @@ Each article is a deep-dive essay grown from a single session transcript on the 
 
 ### Inference
 
+- **[Test-Time Distilling on Spark — Same Compute Envelope, Wider Semantic Reach](https://ainative.business/field-notes/articles/test-time-distilling-for-exploration/)** — ESamp adds a tiny test-time-trained probe to vLLM that converts decoding from lexical resampling into semantic exploration. The runtime is vLLM-native — and that is a Spark catalog-gap story before it is a benchmark.
 - **[Hybrid Retrieval on the Spark — BM25, Dense, Fusion, Rerank](https://ainative.business/field-notes/articles/rerank-fusion-retrieval-on-spark/)** — Four retrieval modes on one corpus — naive dense, BM25, Reciprocal Rank Fusion, Nemotron rerank. Dense is already 92% recall@5; rerank adds a point at K=10 and reorders the top. The 8B generator still refuses where retrieval is perfect — grounding, not retrieval, is the new bottleneck.
 - **[Where Your Vectors Live — pgvector on a DGX Spark](https://ainative.business/field-notes/articles/pgvector-on-spark/)** — The substrate between the embed call and the retrieve call — pgvector 0.8.2 running as a Postgres 16 container on GB10, with 1000 Nemotron vectors, HNSW and ivfflat both indexed, and a planner that prefers seq scan until you tell it otherwise.
 - **[Your First NIM on a DGX Spark — What 24.8 Tokens Per Second Doesn't Tell You](https://ainative.business/field-notes/articles/nim-first-inference-dgx-spark/)** — First-contact notes on NVIDIA's DGX-Spark-specific Llama 3.1 8B NIM. 9.4 GB image, ~108 s warm-cache cold-start, 24.8 tok/s steady, OpenAI-compatible on :8000 — and a confidently wrong Python one-liner that clarifies what small-model FP8 buys and what it costs.
